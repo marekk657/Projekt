@@ -13,14 +13,16 @@ import javax.persistence.TypedQuery;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AmetDaoImpl implements AmetDao {
 
-	private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Projekt");
+	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("Projekt");
 
 	@Override
 	public void addAmet(Amet amet) {
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		EntityManager em = emf.createEntityManager();
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String createdby = auth.getName();
@@ -33,19 +35,19 @@ public class AmetDaoImpl implements AmetDao {
 		amet.setCreatedon(new Timestamp(c1.getTimeInMillis()));
 		
 		try {
-			entityManager.getTransaction().begin();
+			em.getTransaction().begin();
 			
-			entityManager.persist(amet);
-//			
-//			entityManager.getTransaction().commit();
+			em.persist(amet);
+			
+			em.getTransaction().commit();
 		} finally {
-			entityManager.close();
+			em.close();
 		}
 	}
 
 	@Override
 	public List<Amet> ametid() {
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		EntityManager entityManager = emf.createEntityManager();
 		
 		try {
 			TypedQuery<Amet> q = entityManager.createNamedQuery("Amet.findAll", Amet.class);

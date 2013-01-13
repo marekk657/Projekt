@@ -9,7 +9,6 @@ import java.util.List;
     @NamedQuery(name="Amet.findAll", query="SELECT a FROM Amet a")
 })
 
-
 /**
  * The persistent class for the AMET database table.
  * 
