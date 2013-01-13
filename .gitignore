@@ -1,0 +1,12 @@
+/ivy
+/.project
+/.classpath
+/.settings
+/bin
+/dist
+*.class
+
+# Package Files #
+
+*.war
+*.ear
