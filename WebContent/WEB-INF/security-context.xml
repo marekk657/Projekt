@@ -22,6 +22,10 @@ http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 		<security:intercept-url pattern="/Piirivalvur" access="hasRole('ROLE_EDIT') or hasRole('ROLE_ADD') or hasRole('ROLE_DEL')" />
 		<security:intercept-url pattern="/Vaeosa" access="hasRole('ROLE_EDIT') or hasRole('ROLE_ADD') or hasRole('ROLE_DEL')" />		
 		<security:intercept-url pattern="/PiirivalvurVaeosas" access="hasRole('ROLE_EDIT') or hasRole('ROLE_ADD') or hasRole('ROLE_DEL')" />
+		<security:intercept-url pattern="/AddAmet" access="hasRole('ROLE_ADD')" />
+		<security:intercept-url pattern="/DeleteAmet" access="hasRole('ROLE_DEL')" />
+		<security:intercept-url pattern="/ModifyAmet" access="hasRole('ROLE_EDIT')" />
+		<security:intercept-url pattern="/Ametid" access="hasRole('ROLE_VIEW') or hasRole('ROLE_USER')" />
 		<security:logout/>
 	</security:http>
 
