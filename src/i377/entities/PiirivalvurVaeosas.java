@@ -176,7 +176,9 @@ public class PiirivalvurVaeosas implements Serializable {
 	
 	@PreUpdate
 	public void recordModified() {
-		setModifiedby("");
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		
+		setModifiedby(auth.getName());
 		setModifiedon(new Date());
 	}
 

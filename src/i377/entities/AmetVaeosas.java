@@ -3,6 +3,9 @@ package i377.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
@@ -174,4 +177,24 @@ public class AmetVaeosas implements Serializable {
 		this.piirivalvurvaeosas = piirivalvurvaeosas;
 	}
 
+	@PrePersist
+	public void recordCreated() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+		setCreatedby(auth.getName());
+		setCreatedon(new Date());
+	}
+	
+	@PreUpdate
+	public void recordModified() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		
+		setModifiedby(auth.getName());
+		setModifiedon(new Date());
+	}
+
+	@PreRemove
+	public void recordDeleted() {
+		throw new SecurityException("Removing entity is prohibited!");
+	}
 }
