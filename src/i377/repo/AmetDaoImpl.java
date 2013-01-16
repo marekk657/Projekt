@@ -2,6 +2,7 @@ package i377.repo;
 
 import i377.entities.Amet;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -9,22 +10,22 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class AmetDaoImpl implements AmetDao {
+public class AmetDaoImpl implements RecordDao<Amet> {
 
 	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("Projekt");
 
 	@Override
-	public void addAmet(Amet amet) {
+	public void addRecord(Amet record) {
 		EntityManager em = emf.createEntityManager();
 		
-		try {	
-			em.getTransaction().begin();
-			
-			em.persist(amet);
-			
+		try {		
+			em.getTransaction().begin();			
+			em.persist(em.merge(record));
 			em.getTransaction().commit();
 		} finally {
 			em.close();
@@ -32,26 +33,27 @@ public class AmetDaoImpl implements AmetDao {
 	}
 
 	@Override
-	public List<Amet> ametid() {
+	public List<Amet> records() {
 		EntityManager entityManager = emf.createEntityManager();
 		
 		try {
 			TypedQuery<Amet> q = entityManager.createNamedQuery("Amet.findAll", Amet.class);
 			List<Amet> ametid = q.getResultList();
 			return ametid;
-		}
-		finally {
+		} finally {
 			entityManager.close();
 		}
 	}
 
 	@Override
-	public List<Amet> aktiivsedAmetid() {
+	public List<Amet> activeRecords() {
 		EntityManager entityManager = emf.createEntityManager();
 		
 		try {
 			TypedQuery<Amet> q = entityManager.createNamedQuery("Amet.findActiveRecords", Amet.class);
+			
 			List<Amet> actives = q.getResultList();
+			
 			return actives;
 		} finally {
 			entityManager.close();
@@ -59,17 +61,23 @@ public class AmetDaoImpl implements AmetDao {
 	}
 
 	@Override
-	public void deleteAmet(Amet amet, long Id) {
+	public void deleteRecord(Amet record) {
 		EntityManager em = emf.createEntityManager();
-	
 		
-		// TODO: kustutamise loogika
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		
 		try {
+			Amet a = getRecordById(record.getId());
+			
+			record.setClosedby(auth.getName());
+			record.setClosedon(new Date());
+			record.setCreatedby(a.getCreatedby());
+			record.setCreatedon(a.getCreatedon());
+			record.setVersion(a.getVersion());
+			record.setAmetvaeosas(a.getAmetvaeosas());
+			
 			em.getTransaction().begin();
-			
-			em.merge(amet);
-			
+			em.persist(em.merge(record));
 			em.getTransaction().commit();
 		} finally {
 			em.close();
@@ -77,16 +85,39 @@ public class AmetDaoImpl implements AmetDao {
 	}
 
 	@Override
-	public void modifyAmet(Amet amet, long Id) {
+	public Amet getRecordById(long id) {
 		EntityManager em = emf.createEntityManager();
 		
-		
-		// TODO: muutmise loogika.
+		try {
+			
+			TypedQuery<Amet> q = em.createNamedQuery("Amet.findById", Amet.class);
+			q.setParameter("id", id);
+			Amet a = q.getSingleResult();
+			
+			return a;
+		} catch (Exception ex) {
+			return null;
+		} finally {
+			em.close();
+		}
+
+	}
+
+	@Override
+	public void modifyRecord(Amet amet) {
+		EntityManager em = emf.createEntityManager();
 		
 		try {
+			Amet a = getRecordById(amet.getId());
+
+			amet.setCreatedby(a.getCreatedby());
+			amet.setCreatedon(a.getCreatedon());
+			amet.setVersion(a.getVersion());
+			amet.setAmetvaeosas(a.getAmetvaeosas());
+			
 			em.getTransaction().begin();
 			
-			em.merge(amet);
+			em.persist(em.merge(amet));
 			
 			em.getTransaction().commit();
 		} finally {

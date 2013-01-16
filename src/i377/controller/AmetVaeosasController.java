@@ -1,6 +1,9 @@
 package i377.controller;
 
+import javax.annotation.Resource;
+
 import i377.entities.Amet;
+import i377.repo.AmetVaeosasDaoImpl;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class AmetVaeosasController {
+	
+	@Resource
+	private AmetVaeosasDaoImpl amv;
 
 	@RequestMapping(value="/AmetVaeosas")
 	public String AmetVaeosas() {

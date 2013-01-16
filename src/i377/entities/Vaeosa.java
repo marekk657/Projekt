@@ -11,7 +11,8 @@ import java.util.List;
 
 @NamedQueries({
     @NamedQuery(name="Vaeosa.findAll", query="SELECT vo FROM Vaeosa vo"),
-    @NamedQuery(name="Vaeosa.findActiveRecords", query="SELECT vo FROM Vaeosa vo WHERE vo.closedon IS NULL")
+    @NamedQuery(name="Vaeosa.findActiveRecords", query="SELECT vo FROM Vaeosa vo WHERE vo.closedon IS NULL"),
+    @NamedQuery(name="Vaeosa.findById", query="SELECT vo FROM Vaeosa vo WHERE vo.id = :id")
 })
 
 /**

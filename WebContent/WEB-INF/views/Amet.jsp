@@ -10,10 +10,28 @@
 td {text-align:left;}
 .buttons {margin-top:30px; height: 35px;}
 </style>
+<script type="text/javascript" >
+function deleteRecord() {
+	document.amet.action="<%=request.getContextPath()%>/DeleteAmet";  
+	document.amet.method="POST";  
+	document.amet.submit();
+}
+function addRecord(id) {
+	if (id != -1) {
+		document.amet.action="<%=request.getContextPath()%>/ModifyAmet";
+		document.amet.method="POST";
+		document.amet.submit();
+	} else {
+		document.amet.action="<%=request.getContextPath()%>/AddAmet";  
+		document.amet.method="POST";  
+		document.amet.submit();
+	}
+}
+</script>
 <title>Ameti vorm</title>
 </head>
 <body>
-	<form:form action="AddAmet" method="POST" modelAttribute="ametform">
+	<form:form name="amet" method="POST" modelAttribute="ametform">
 		<table width="400" border="0" cellspacing="0" cellpadding="0" style="margin-left:50px;">
 	  
 		  <tr>
@@ -22,29 +40,37 @@ td {text-align:left;}
 		      	<form:input path="iscokood" />
 		        <form:label path="nimetus" >Nimetus:</form:label>
 		      	<form:input path="nimetus" />
+		      	<form:input type="hidden" path="id"  />
 		    </td>
 		    <td>
-		    	<p><form:label path="kommentaar" >Kommentaar:</form:label>
+		    	<p>
+		    		<form:label path="kommentaar" >Kommentaar:</form:label>
 		        	<form:textarea path="kommentaar" />
 		      	</p>
 		    </td>
 		  </tr>
 		   
 		  <tr>
-		    <td ><input name="Salvesta" type="submit" value="Salvesta" class="buttons" style="float:right;"></td>
-		    <td >
+		    <td><input onclick="addRecord(${ametform.id})" name="Salvesta" type="submit" value="Salvesta" class="buttons" style="float:right;"></td>
+		    <td>
 		    	<input name="Katkesta" type="reset" value="Katkesta" class="buttons">
-		 		<input name="Kustuta" type="submit" value="Kustuta" class="buttons">   
+		 		<input onclick="deleteRecord()" name="Kustuta" type="submit" value="Kustuta" class="buttons">   
 		    </td>
 		  </tr>
+		  
 		</table>
 	</form:form>
-	
+
 	<c:if test="${ametAdded == true }">
-		<br/><br/><div>Uus amet on lisatud. Vaata <a href="Ametid">kõiki ameteid</a></div>
+		<br/><br/><div>Uus amet on lisatud. Vaata <a href="Ametid">kõiki ameteid</a></div><br />
+		<div><a href="Navigation">Menüü</a></div>
 	</c:if>
-	<c:if test="${ametDeleted == true }">
-		<br/><br/><div>Uus amet kustutatud. Vaata <a href="Ametid">kõiki ameteid</a></div>
+	<c:if test="${ametModified == true }">
+		<br/><br/><div>Amet muudetud. Vaata <a href="Ametid">kõiki ameteid</a></div><br />
+		<div><a href="Navigation">Menüü</a></div>
+	</c:if>
+	<c:if test="${deleteAmet == true }">
+		<c:redirect url="Ametid" />
 	</c:if>
 	
 </body>

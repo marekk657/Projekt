@@ -11,7 +11,8 @@ import java.util.List;
 
 @NamedQueries({
     @NamedQuery(name="Piirivalvur.findAll", query="SELECT pv FROM Piirivalvur pv"),
-    @NamedQuery(name="Piirivalvur.findActiveRecords", query="SELECT pv FROM Piirivalvur pv WHERE pv.closedon IS NULL")
+    @NamedQuery(name="Piirivalvur.findActiveRecords", query="SELECT pv FROM Piirivalvur pv WHERE pv.closedon IS NULL"),
+    @NamedQuery(name="Piirivalvur.findById", query="SELECT pv FROM Piirivalvur pv WHERE pv.id = :id")
 })
 
 /**

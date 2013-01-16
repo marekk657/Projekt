@@ -8,11 +8,14 @@
 <title>Ametid</title>
 </head>
 <body>
+	<a href="Navigation">Menüü</a><br />
+	<a href="Amet">Lisa Amet</a><br /><br /><br />
+	
 	<c:if test="${not empty Ametid}">
 
 		<table>
 			<tr>
-				<th>ID</th>
+				<!-- <th>ID</th> -->
 				<th>Name</th>
 				<th>Isco kood</th>
 				<th>Kommentaar</th>
@@ -26,7 +29,7 @@
 			
 			<c:forEach items="${Ametid}" var="amet"> 
 				<tr>
-					<td>${amet.id}</td>
+					<!-- <td>${amet.id}</td> -->
 					<td>${amet.nimetus}</td>
 					<td>${amet.iscokood}</td>
 					<td>${amet.kommentaar}</td>
@@ -36,12 +39,15 @@
 					<td>${amet.modifiedby}</td>
 					<td>${amet.closedon}</td>
 					<td>${amet.closedby}</td>
-					<td><a href=""> Edit </a></td>
-					<td><a href=""> Delete </a></td>
+					<c:if test="${empty amet.closedon}">
+						<td><a href="Amet/${amet.id}/"> Edit </a></td>
+						<td><a href="Amet/${amet.id}/"> Delete </a></td>
+					</c:if>
 				</tr>
 			</c:forEach>
 		</table>
 		
 	</c:if>
+
 </body>
 </html>

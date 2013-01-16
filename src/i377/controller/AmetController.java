@@ -1,4 +1,5 @@
 package i377.controller;
+
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -6,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -20,35 +22,51 @@ public class AmetController {
 	
 	@RequestMapping(value = "/Amet")
 	public String NewAmet(Model model) {
-		model.addAttribute("ametform", new Amet());
+		Amet a = new Amet();
+		a.setId(-1);
+		model.addAttribute("ametform", a);
 		return "Amet";
 	}
 	
-	@RequestMapping(value = "/ModifyAmet")
+	@RequestMapping(value = "/Amet/{userId}/", method = RequestMethod.GET)
+	public String AmetById(@PathVariable("userId") long id, Model model) {
+		Amet a = ametDao.getRecordById(id);
+		if (a != null)
+			model.addAttribute("ametform", a);
+		else
+			model.addAttribute("ametform", new Amet());
+		
+		return "Amet";
+	}
+	
+	@RequestMapping(value = "/ModifyAmet", method = RequestMethod.POST)
 	public String ModifyAmet(@ModelAttribute Amet amet, Model model) {
-		model.addAttribute("ametform", amet); // TODO:!!
-//		ametDao.modifyAmet(amet, 0L);
+		model.addAttribute("ametform", amet);
+		ametDao.modifyRecord(amet);
+		model.addAttribute("ametModified", true);
 		return "Amet";
 	}
 	
 	@RequestMapping(value = "/AddAmet", method = RequestMethod.POST)
 	public String LisaAmet(@ModelAttribute Amet amet, Model model) {
 		model.addAttribute("ametform", amet);
-		ametDao.addAmet(amet);
+		ametDao.addRecord(amet);
 		model.addAttribute("ametAdded", true);
 		return "Amet";
 	}
 	
-	@RequestMapping(value = "/DeleteAmet", method = RequestMethod.GET)
+	@RequestMapping(value = "/DeleteAmet", method = RequestMethod.POST)
 	public String DeleteAmet(@ModelAttribute Amet amet, Model model) {
+		model.addAttribute("ametform", amet);
 		model.addAttribute("deleteAmet", true);
-//		ametDao.deleteAmet(amet, 0L);
+		ametDao.deleteRecord(amet);
 		return "Amet";
 	}
 	
+	
 	@RequestMapping(value = "/Ametid")
 	public String AllAmetid(Model model) {
-		List<Amet> ametid = ametDao.ametid();
+		List<Amet> ametid = ametDao.records();
 		model.addAttribute("Ametid", ametid);
 		return "Ametid";
 	}

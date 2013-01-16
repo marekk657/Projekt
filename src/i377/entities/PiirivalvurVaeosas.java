@@ -10,7 +10,8 @@ import java.util.Date;
 
 @NamedQueries({
     @NamedQuery(name="PiirivalvurVaeosas.findAll", query="SELECT pva FROM PiirivalvurVaeosas pva"),
-    @NamedQuery(name="PiirivalvurVaeosas.findActiveRecords", query="SELECT pva FROM PiirivalvurVaeosas pva WHERE pva.closedon IS NULL")
+    @NamedQuery(name="PiirivalvurVaeosas.findActiveRecords", query="SELECT pva FROM PiirivalvurVaeosas pva WHERE pva.closedon IS NULL"),
+    @NamedQuery(name="PiirivalvurVaeosas.findById", query="SELECT pvv FROM PiirivalvurVaeosas pvv WHERE pvv.id = :id")
 })
 
 /**
