@@ -2,9 +2,17 @@ package i377.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.sql.Timestamp;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
+import java.util.Date;
 import java.util.List;
 
+@NamedQueries({
+    @NamedQuery(name="Vaeosa.findAll", query="SELECT vo FROM Vaeosa vo"),
+    @NamedQuery(name="Vaeosa.findActiveRecords", query="SELECT vo FROM Vaeosa vo WHERE vo.closedon IS NULL")
+})
 
 /**
  * The persistent class for the VAEOSA database table.
@@ -15,16 +23,18 @@ public class Vaeosa implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private long id;
 
 	private String closedby;
 
-	private Timestamp closedon;
+	@Temporal(TemporalType.DATE)
+	private Date closedon;
 
 	private String createdby;
 
-	private Timestamp createdon;
+	@Temporal(TemporalType.DATE)
+	private Date createdon;
 
 	private String kommentaar;
 
@@ -32,7 +42,8 @@ public class Vaeosa implements Serializable {
 
 	private String modifiedby;
 
-	private Timestamp modifiedon;
+	@Temporal(TemporalType.DATE)
+	private Date modifiedon;
 
 	private String nimetus;
 
@@ -65,11 +76,11 @@ public class Vaeosa implements Serializable {
 		this.closedby = closedby;
 	}
 
-	public Timestamp getClosedon() {
+	public Date getClosedon() {
 		return this.closedon;
 	}
 
-	public void setClosedon(Timestamp closedon) {
+	public void setClosedon(Date closedon) {
 		this.closedon = closedon;
 	}
 
@@ -81,11 +92,11 @@ public class Vaeosa implements Serializable {
 		this.createdby = createdby;
 	}
 
-	public Timestamp getCreatedon() {
+	public Date getCreatedon() {
 		return this.createdon;
 	}
 
-	public void setCreatedon(Timestamp createdon) {
+	public void setCreatedon(Date createdon) {
 		this.createdon = createdon;
 	}
 
@@ -113,11 +124,11 @@ public class Vaeosa implements Serializable {
 		this.modifiedby = modifiedby;
 	}
 
-	public Timestamp getModifiedon() {
+	public Date getModifiedon() {
 		return this.modifiedon;
 	}
 
-	public void setModifiedon(Timestamp modifiedon) {
+	public void setModifiedon(Date modifiedon) {
 		this.modifiedon = modifiedon;
 	}
 
@@ -153,4 +164,22 @@ public class Vaeosa implements Serializable {
 		this.piirivalvurvaeosas = piirivalvurvaeosas;
 	}
 
+	@PrePersist
+	public void recordCreated() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+		setCreatedby(auth.getName());
+		setCreatedon(new Date());
+	}
+	
+	@PreUpdate
+	public void recordModified() {
+		setModifiedby("");
+		setModifiedon(new Date());
+	}
+
+	@PreRemove
+	public void recordDeleted() {
+		throw new SecurityException("Removing entity is prohibited!");
+	}
 }

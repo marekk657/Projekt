@@ -12,6 +12,7 @@
 <li><a href="Piirivalvur">Piirivalvuri vorm</a></li>
 <li><a href="Vaeosa">Väeosa vorm</a></li>
 <li><a href="Amet">Ameti vorm</a></li>
+<li><a href="Ametid">Kõik ametid</a></li>
 <li><a href="AmetVaeosas">Amet väeosas</a></li>
 <li><a href="PiirivalvurVaeosas">Piirivalvur väeosas</a></li>
 <li><a href="j_spring_security_logout">Välju</a></li>

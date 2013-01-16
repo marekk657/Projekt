@@ -2,9 +2,15 @@ package i377.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
+@NamedQueries({
+    @NamedQuery(name="AmetVaeosas.findAll", query="SELECT avs FROM AmetVaeosas avs"),
+    @NamedQuery(name="AmetVaeosas.findActiveRecords", query="SELECT avs FROM AmetVaeosas avs WHERE avs.closedon IS NULL")
+})
 
 /**
  * The persistent class for the AMETVAEOSAS database table.
@@ -15,18 +21,20 @@ public class AmetVaeosas implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private long id;
 
 	private Timestamp alates;
 
 	private String closedby;
 
-	private Timestamp closedon;
+	@Temporal(TemporalType.DATE)
+	private Date closedon;
 
 	private String createdby;
 
-	private Timestamp createdon;
+	@Temporal(TemporalType.DATE)
+	private Date createdon;
 
 	private String kommentaar;
 
@@ -34,7 +42,8 @@ public class AmetVaeosas implements Serializable {
 
 	private String modifiedby;
 
-	private Timestamp modifiedon;
+	@Temporal(TemporalType.DATE)
+	private Date modifiedon;
 
 	private int version;
 
@@ -77,11 +86,11 @@ public class AmetVaeosas implements Serializable {
 		this.closedby = closedby;
 	}
 
-	public Timestamp getClosedon() {
+	public Date getClosedon() {
 		return this.closedon;
 	}
 
-	public void setClosedon(Timestamp closedon) {
+	public void setClosedon(Date closedon) {
 		this.closedon = closedon;
 	}
 
@@ -93,11 +102,11 @@ public class AmetVaeosas implements Serializable {
 		this.createdby = createdby;
 	}
 
-	public Timestamp getCreatedon() {
+	public Date getCreatedon() {
 		return this.createdon;
 	}
 
-	public void setCreatedon(Timestamp createdon) {
+	public void setCreatedon(Date createdon) {
 		this.createdon = createdon;
 	}
 
@@ -125,11 +134,11 @@ public class AmetVaeosas implements Serializable {
 		this.modifiedby = modifiedby;
 	}
 
-	public Timestamp getModifiedon() {
+	public Date getModifiedon() {
 		return this.modifiedon;
 	}
 
-	public void setModifiedon(Timestamp modifiedon) {
+	public void setModifiedon(Date modifiedon) {
 		this.modifiedon = modifiedon;
 	}
 

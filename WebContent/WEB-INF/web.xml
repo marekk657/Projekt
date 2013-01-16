@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app id="Praks1"  xmlns="http://java.sun.com/xml/ns/javaee" version="3.0">
 
-	<display-name>Projekt</display-name>
+
+	<display-name>Projekt Team 06</display-name>
 	<!--  
 	<listener>
       <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

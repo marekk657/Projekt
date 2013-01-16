@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,27 +13,39 @@ td {text-align:left;}
 <title>Ameti vorm</title>
 </head>
 <body>
- <FORM ACTION="AddAmet" METHOD="POST">
-      <table width="400" border="0" cellspacing="0" cellpadding="0" style="margin-left:50px;">
-  
-  <tr>
-    <td>Isco kood:<br>
-      <INPUT TYPE="TEXT" NAME="Isco_kood">
-            Nimetus:
-      <INPUT TYPE="TEXT" NAME="Nimetus"></td>
-    <td><p>Kommentaar:
-             
-        <textarea name="" cols="" rows="" NAME="coms"></textarea>
-      </p></td>
-  </tr>
-   
-  <tr>
-    <td ><input name="Salvesta" type="submit" value="Salvesta" class="buttons" style="float:right;"></td>
-    <td > <input name="Katkesta" type="reset" value="Katkesta" class="buttons">
-    <input name="Kustuta" type="button" value="Kustuta" class="buttons">
-    </td>
-  </tr>
-</table>
- </FORM>
+	<form:form action="AddAmet" method="POST" modelAttribute="ametform">
+		<table width="400" border="0" cellspacing="0" cellpadding="0" style="margin-left:50px;">
+	  
+		  <tr>
+		    <td>
+		    	<form:label path="iscokood" >Isco kood:</form:label>
+		      	<form:input path="iscokood" />
+		        <form:label path="nimetus" >Nimetus:</form:label>
+		      	<form:input path="nimetus" />
+		    </td>
+		    <td>
+		    	<p><form:label path="kommentaar" >Kommentaar:</form:label>
+		        	<form:textarea path="kommentaar" />
+		      	</p>
+		    </td>
+		  </tr>
+		   
+		  <tr>
+		    <td ><input name="Salvesta" type="submit" value="Salvesta" class="buttons" style="float:right;"></td>
+		    <td >
+		    	<input name="Katkesta" type="reset" value="Katkesta" class="buttons">
+		 		<input name="Kustuta" type="submit" value="Kustuta" class="buttons">   
+		    </td>
+		  </tr>
+		</table>
+	</form:form>
+	
+	<c:if test="${ametAdded == true }">
+		<br/><br/><div>Uus amet on lisatud. Vaata <a href="Ametid">kõiki ameteid</a></div>
+	</c:if>
+	<c:if test="${ametDeleted == true }">
+		<br/><br/><div>Uus amet kustutatud. Vaata <a href="Ametid">kõiki ameteid</a></div>
+	</c:if>
+	
 </body>
 </html>

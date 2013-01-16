@@ -4,17 +4,16 @@
 		<class>i377.entities.Amet</class>
 		<class>i377.entities.AmetVaeosas</class>
 		<class>i377.entities.Piirivalvur</class>
-		<class>i377.entities.PiirivalvurVaeosas</class>
 		<class>i377.entities.Vaeosa</class>
+		<class>i377.entities.PiirivalvurVaeosas</class>
 		<properties>
-			<property name="javax.persistence.jdbc.user" value="sa"/>
-			<property name="javax.persistence.jdbc.password" value=""/>
-			<property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
-			<property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:file:${user.home}/i377/Team06/db;shutdown=true"/>
 			
 			<property name="hibernate.show_sql" value="true"/>
 			<property name="hibernate.format_sql" value="true"/>
 			<property name="hibernate.hbm2ddl.auto" value="update"/>
+			<property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:file:${user.home}/i377/Team06/db;shutdown=true"/>
+			<property name="javax.persistence.jdbc.user" value="sa"/>
+			<property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
 		</properties>
 	</persistence-unit>
 </persistence>
