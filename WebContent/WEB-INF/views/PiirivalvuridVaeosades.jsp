@@ -5,13 +5,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Piirivalvur väeossad</title>
+<title>Piirivalvurid väeosades</title>
 </head>
 <body>
 	<a href="Navigation">Menüü</a><br />
 	<a href="PiirivalvurVaeosas">Lisa Piirivalvur väeossa</a><br /><br /><br />
 	
-	<c:if test="${not empty All-Info-Piirivalvurid}">
+	<c:if test="${not empty PiirivalvuridVaeosades}">
 
 		<table>
 			<tr>
@@ -24,7 +24,7 @@
                 <th>Kommentaar</th>
 			</tr>
 			
-			<c:forEach items="${All-Info-Piirivalvurid}" var="piirivalvurvaeosas"> 
+			<c:forEach items="${PiirivalvuridVaeosades}" var="piirivalvurvaeosas"> 
 				<tr>
 					<!-- <td>${piirivalvurvaeosas.id}</td> -->
 					<td>${piirivalvurvaeosas.piirivalvur}</td>

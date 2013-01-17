@@ -91,7 +91,7 @@ function addRecord(id) {
 <br /><p>Sugu on ${piirivalvurform.sugu}</p> <br />
 
 	<div>
-		<a href="Navigation">Menüü</a>
+		<a href="<%=request.getContextPath()%>/Navigation">Menüü</a>
 	</div>
 
 	<c:if test="${piirivalvurAdded == true }">

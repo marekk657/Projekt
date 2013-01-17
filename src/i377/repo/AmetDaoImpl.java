@@ -104,20 +104,20 @@ public class AmetDaoImpl implements RecordDao<Amet> {
 	}
 
 	@Override
-	public void modifyRecord(Amet amet) {
+	public void modifyRecord(Amet record) {
 		EntityManager em = emf.createEntityManager();
 		
 		try {
-			Amet a = getRecordById(amet.getId());
+			Amet a = getRecordById(record.getId());
 
-			amet.setCreatedby(a.getCreatedby());
-			amet.setCreatedon(a.getCreatedon());
-			amet.setVersion(a.getVersion());
-			amet.setAmetvaeosas(a.getAmetvaeosas());
+			record.setCreatedby(a.getCreatedby());
+			record.setCreatedon(a.getCreatedon());
+			record.setVersion(a.getVersion());
+			record.setAmetvaeosas(a.getAmetvaeosas());
 			
 			em.getTransaction().begin();
 			
-			em.persist(em.merge(amet));
+			em.persist(em.merge(record));
 			
 			em.getTransaction().commit();
 		} finally {

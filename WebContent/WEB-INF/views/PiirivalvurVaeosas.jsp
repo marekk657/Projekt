@@ -1,29 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <style>
-td {text-align:left;}
-.buttons {margin-top:30px; height: 35px;}
+td {
+	text-align: left;
+}
+
+.buttons {
+	margin-top: 30px;
+	height: 35px;
+}
 </style>
-<script type="text/javascript" >
+<script type="text/javascript">
 function deleteRecord() {
-	document.piirivalvurvaeosas.action="<%=request.getContextPath()%>/DeleteAmet";  
+	document.piirivalvurvaeosas.action="<%=request.getContextPath()%>/DeletePiirivalvurVaeosas";  
 	document.piirivalvurvaeosas.method="POST";  
 	document.piirivalvurvaeosas.submit();
 }
 function addRecord(id) {
 	if (id != -1) {
-		document.piirivalvurvaeosas.action="<%=request.getContextPath()%>/ModifyAmet";
+		document.piirivalvurvaeosas.action="<%=request.getContextPath()%>/ModifyPiirivalvurVaeosas";
 		document.piirivalvurvaeosas.method="POST";
 		document.piirivalvurvaeosas.submit();
 	} else {
-		document.piirivalvurvaeosas.action="<%=request.getContextPath()%>/AddAmet";  
+		document.piirivalvurvaeosas.action="<%=request.getContextPath()%>/AddPiirivalvurVaeosas";  
 		document.piirivalvurvaeosas.method="POST";  
 		document.piirivalvurvaeosas.submit();
 	}
@@ -44,12 +50,10 @@ function addRecord(id) {
 			</tr>
 
 			<tr>
-				<td>
-					<form:select path="piirivalvur">
-					<!-- Testandmete jaoks -->
-						<form:option value="piirivalvur" label="${piirivalvurvaeosasform.piirivalvur.eesnimi}"></form:option>
-					</form:select>
-				</td>
+				<td><form:select path="piirivalvur">
+						<!-- Testandmete jaoks 
+						<form:option value="piirivalvur" label="${piirivalvurvaeosasform.piirivalvur.eesnimi}"></form:option>-->
+					</form:select></td>
 				<td><form:input path="" /></td>
 			</tr>
 
@@ -59,12 +63,10 @@ function addRecord(id) {
 			</tr>
 
 			<tr>
-				<td>
-					<form:select path="vaeosa">
-					<!-- Testandmete jaoks -->
-						<form:option value="vaeosa" label="${piirivalvurvaeosasform.vaeosa.nimetus}"></form:option>
-					</form:select>
-				</td>
+				<td><form:select path="vaeosa">
+						<!-- Testandmete jaoks 
+						<form:option  value="vaeosa" label="${piirivalvurvaeosasform.vaeosa.nimetus}"></form:option>-->
+					</form:select></td>
 				<td><form:input path="" /></td>
 			</tr>
 
@@ -75,12 +77,10 @@ function addRecord(id) {
 			</tr>
 
 			<tr>
-				<td colspan="2">
-					<form:select path="ametvaeosa">
-					<!-- Testandmete jaoks -->
-						<form:option value="ametvaeosa" label="${piirivalvurvaeosasform.ametvaeosa.amet.nimetus}"></form:option>
-					</form:select>
-				</td>
+				<td colspan="2"><form:select path="ametvaeosa">
+						<!-- Testandmete jaoks 
+						<form:option value="ametvaeosa" label="${piirivalvurvaeosasform.ametvaeosa.amet.nimetus}"></form:option>-->
+					</form:select></td>
 			</tr>
 
 			<tr>
@@ -103,39 +103,33 @@ function addRecord(id) {
 			</tr>
 		</table>
 
+
+		<br /><br />
 		<div>
-			<a href="Navigation">Menüü</a>
+			<a href="<%=request.getContextPath()%>/Navigation">Menüü</a>
 		</div>
 
 
 	</form:form>
 
-	<c:if test="${piirivalvurvaeosasAdded == true }">
+	<c:if test="${piirivalvurVaeosasAdded == true }">
 		<br />
 		<br />
 		<div>
-			Uus Piirivalvuri väeosa on lisatud. Vaata <a
-				href="All-Info-Piirivalvurid">kõiki Piirivalvuri väeosasi</a>
-		</div>
-		<br />
-		<div>
-			<a href="Navigation">Menüü</a>
+			Uus piirivalvur väeosas on lisatud. Vaata <a
+				href="PiirivalvuridVaeosades">kõiki Piirivalvuri väeosasi</a>
 		</div>
 	</c:if>
 	<c:if test="${piirivalvurvaeosastModified == true }">
 		<br />
 		<br />
 		<div>
-			Piirivalvuri väeosa muudetud. Vaata <a href="All-Info-Piirivalvurid">kõiki
-				Piirivalvuri väeosasi</a>
-		</div>
-		<br />
-		<div>
-			<a href="Navigation">Menüü</a>
+			Piirivalvur väeosas on muudetud. Vaata <a
+				href="PiirivalvuridVaeosades">kõiki Piirivalvureid väeosades</a>
 		</div>
 	</c:if>
-	<c:if test="${deletepiirivalvurvaeosas == true }">
-		<c:redirect url="All-Info-Piirivalvurid" />
+	<c:if test="${deletePiirivalvurVaeosas == true }">
+		<c:redirect url="PiirivalvuridVaeosades" />
 	</c:if>
 
 

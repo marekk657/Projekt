@@ -1,5 +1,7 @@
 package i377.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import i377.entities.Vaeosa;
@@ -8,6 +10,7 @@ import i377.repo.VaeosaDaoImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -18,13 +21,53 @@ public class VaeosaController {
 	private VaeosaDaoImpl voDao;
 
 	@RequestMapping(value="/Vaeosa")
-	public String Vaeosa() {
+	public String vaeosa(Model model) {
+		Vaeosa vo = new Vaeosa();
+		vo.setId(-1);
+		model.addAttribute("vaeosaform", vo);
+		return "Vaeosa";
+	}
+	
+	@RequestMapping(value="/Vaeosa/{userId}/", method = RequestMethod.GET)
+	public String vaeosaById(@PathVariable("userId") long id, Model model) {
+		Vaeosa vo = voDao.getRecordById(id);
+		
+		if (vo != null)
+			model.addAttribute("vaeosaform", vo);
+		else
+			model.addAttribute("vaeosaform", new Vaeosa());
+		
 		return "Vaeosa";
 	}
 	
 	@RequestMapping(value="/AddVaeosa", method = RequestMethod.POST)
 	public String addVaeosa(@ModelAttribute Vaeosa vo, Model model) {
+		model.addAttribute("vaeosaform", vo);
+		// here comes logic
+		model.addAttribute("VaeosaAdded", true);
 		return "Vaeosa";
 	}
 	
+	@RequestMapping(value="/ModifyVaeosa", method = RequestMethod.POST)
+	public String modifyVaeosa(@ModelAttribute Vaeosa vo, Model model) {
+		model.addAttribute("vaeosaform", vo);
+		// here comes logic
+		model.addAttribute("VaeosaModified", true);
+		return "Vaeosa";
+	}
+	
+	@RequestMapping(value="/DeleteVaeosa", method = RequestMethod.POST)
+	public String deleteVaeosa(@ModelAttribute Vaeosa vo, Model model) {
+//		model.addAttribute("vaeosaform", vo);
+		// here comes logic
+		model.addAttribute("deleteVaeosa", true);
+		return "Vaeosa";
+	}
+	
+	@RequestMapping(value="/Vaeosad")
+	public String allVaeosad(Model model) {
+		List<Vaeosa> vaeosad = voDao.records();
+		model.addAttribute("Vaeosad", vaeosad);
+		return "Vaeosad";
+	}
 }

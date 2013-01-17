@@ -66,7 +66,7 @@ function addRecord(id) {
 
 
 		<div>
-			<a href="Navigation">Menüü</a>
+			<a href="<%=request.getContextPath()%>/Navigation">Menüü</a>
 		</div>
 
 	</form:form>
@@ -76,20 +76,12 @@ function addRecord(id) {
 		<div>
 			Uus Väeosa on lisatud. Vaata <a href="Vaeosad">kõiki Väeosasi.</a>
 		</div>
-		<br />
-		<div>
-			<a href="Navigation">Menüü</a>
-		</div>
 	</c:if>
 	<c:if test="${VaeosaModified == true }">
 		<br />
 		<br />
 		<div>
 			Väeosa muudetud. Vaata <a href="Vaeosad">kõiki Väeosai.</a>
-		</div>
-		<br />
-		<div>
-			<a href="Navigation">Menüü</a>
 		</div>
 	</c:if>
 	<c:if test="${deleteVaeosa == true }">
