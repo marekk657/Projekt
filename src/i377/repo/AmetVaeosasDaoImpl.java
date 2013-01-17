@@ -10,9 +10,9 @@ import org.springframework.stereotype.Repository;
 public class AmetVaeosasDaoImpl implements RecordDao<AmetVaeosas> {
 
 	@Override
-	public void addRecord(AmetVaeosas record) {
+	public AmetVaeosas addRecord(AmetVaeosas record) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 	@Override

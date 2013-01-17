@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface RecordDao<T>{
 	
-	void addRecord(T record);
+	T addRecord(T record);
 	List<T> records();
 	void deleteRecord(T record);
 	List<T> activeRecords();

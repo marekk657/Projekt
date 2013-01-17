@@ -24,9 +24,9 @@
 			<c:forEach items="${Vaeosad}" var="vaeosa"> 
 				<tr>
 					<!-- <td>${vaeosa.id}</td> -->
-					<td>${vaeosa.Kood}</td>
-					<td>${vaeosa.Nimetus}</td>
-					<td>${vaeosa.Kommentaar}</td>
+					<td>${vaeosa.kood}</td>
+					<td>${vaeosa.nimetus}</td>
+					<td>${vaeosa.kommentaar}</td>
 					
 					<c:if test="${empty vaeosa.closedon}">
 						<td><a href="Vaeosa/${vaeosa.id}/"> Edit </a></td>

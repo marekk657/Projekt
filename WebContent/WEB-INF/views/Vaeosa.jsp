@@ -13,17 +13,17 @@ td {text-align:left;}
 
 <script type="text/javascript" >
 function deleteRecord() {
-	document.vaeosa.action="<%=request.getContextPath()%>/DeleteAmet";  
+	document.vaeosa.action="<%=request.getContextPath()%>/DeleteVaeosa";  
 	document.vaeosa.method="POST";  
 	document.vaeosa.submit();
 }
 function addRecord(id) {
 	if (id != -1) {
-		document.vaeosa.action="<%=request.getContextPath()%>/ModifyAmet";
+		document.vaeosa.action="<%=request.getContextPath()%>/ModifyVaeosa";
 		document.vaeosa.method="POST";
 		document.vaeosa.submit();
 	} else {
-		document.vaeosa.action="<%=request.getContextPath()%>/AddAmet";  
+		document.vaeosa.action="<%=request.getContextPath()%>/AddVaeosa";  
 		document.vaeosa.method="POST";  
 		document.vaeosa.submit();
 	}

@@ -42,8 +42,7 @@ public class PiirivalvurController {
 	
 	@RequestMapping(value="/AddPiirivalvur", method = RequestMethod.POST)
 	public String addPiirivalvur(@ModelAttribute Piirivalvur valvur, Model model) {
-		model.addAttribute("piirivalvurform", valvur);
-		// here comes logic
+		model.addAttribute("piirivalvurform", pvDao.addRecord(valvur));
 		model.addAttribute("piirivalvurAdded", true);
 		return "Piirivalvur";
 	}
@@ -51,15 +50,15 @@ public class PiirivalvurController {
 	@RequestMapping(value="/ModifyPiirivalvur", method = RequestMethod.POST)
 	public String modifyPiirivalvur(@ModelAttribute Piirivalvur valvur, Model model) {
 		model.addAttribute("piirivalvurform", valvur);
-		// here comes logic
+		pvDao.modifyRecord(valvur);
 		model.addAttribute("piirivalvurModified", true);
 		return "Piirivalvur";
 	}
 	
 	@RequestMapping(value="/DeletePiirivalvur", method = RequestMethod.POST)
 	public String deletePiirivalvur(@ModelAttribute Piirivalvur valvur, Model model) {
-//		model.addAttribute("piirivalvurform", valvur);
-		// here comes logic
+		model.addAttribute("piirivalvurform", valvur);
+		pvDao.deleteRecord(valvur);
 		model.addAttribute("deletePiirivalvur", true);
 		return "Piirivalvur";
 	}

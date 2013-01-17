@@ -20,13 +20,15 @@ public class PiirivalvurDaoImpl implements RecordDao<Piirivalvur> {
 	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("Projekt");
 	
 	@Override
-	public void addRecord(Piirivalvur record) {
+	public Piirivalvur addRecord(Piirivalvur record) {
 		EntityManager em = emf.createEntityManager();
 
-		try {		
+		try {
+			Piirivalvur pv = em.merge(record);
 			em.getTransaction().begin();			
-			em.persist(em.merge(record));
+			em.persist(pv);
 			em.getTransaction().commit();
+			return pv;
 		} finally {
 			em.close();
 		}

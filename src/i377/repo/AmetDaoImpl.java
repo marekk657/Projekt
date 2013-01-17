@@ -20,13 +20,15 @@ public class AmetDaoImpl implements RecordDao<Amet> {
 	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("Projekt");
 
 	@Override
-	public void addRecord(Amet record) {
+	public Amet addRecord(Amet record) {
 		EntityManager em = emf.createEntityManager();
 		
-		try {		
+		try {
+			Amet a = em.merge(record);
 			em.getTransaction().begin();			
-			em.persist(em.merge(record));
+			em.persist(a);
 			em.getTransaction().commit();
+			return a;
 		} finally {
 			em.close();
 		}

@@ -10,9 +10,9 @@ import i377.entities.PiirivalvurVaeosas;
 public class PiirivalvurVaeosasDaoImpl implements RecordDao<PiirivalvurVaeosas> {
 
 	@Override
-	public void addRecord(PiirivalvurVaeosas record) {
+	public PiirivalvurVaeosas addRecord(PiirivalvurVaeosas record) {
 		// TODO Auto-generated method stub
-		
+		return null;		
 	}
 
 	@Override

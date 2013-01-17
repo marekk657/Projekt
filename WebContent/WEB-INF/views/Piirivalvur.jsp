@@ -88,8 +88,6 @@ function addRecord(id) {
 		</table>
 	</form:form>
 
-<br /><p>Sugu on ${piirivalvurform.sugu}</p> <br />
-
 	<div>
 		<a href="<%=request.getContextPath()%>/Navigation">Menüü</a>
 	</div>

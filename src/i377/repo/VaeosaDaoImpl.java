@@ -20,13 +20,15 @@ public class VaeosaDaoImpl implements RecordDao<Vaeosa> {
 	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("Projekt");
 
 	@Override
-	public void addRecord(Vaeosa record) {
+	public Vaeosa addRecord(Vaeosa record) {
 		EntityManager em = emf.createEntityManager();
 		
-		try {		
+		try {
+			Vaeosa vo = em.merge(record);
 			em.getTransaction().begin();			
-			em.persist(em.merge(record));
+			em.persist(vo);
 			em.getTransaction().commit();
+			return vo;
 		} finally {
 			em.close();
 		}

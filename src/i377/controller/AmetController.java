@@ -49,8 +49,7 @@ public class AmetController {
 	
 	@RequestMapping(value = "/AddAmet", method = RequestMethod.POST)
 	public String LisaAmet(@ModelAttribute Amet amet, Model model) {
-		model.addAttribute("ametform", amet);
-		ametDao.addRecord(amet);
+		model.addAttribute("ametform", ametDao.addRecord(amet));
 		model.addAttribute("ametAdded", true);
 		return "Amet";
 	}

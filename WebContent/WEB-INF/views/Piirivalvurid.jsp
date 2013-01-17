@@ -17,28 +17,45 @@
 			<tr>
 				<!-- <th>ID</th> -->
 				<th>Sõduri kood</th>
-				<th>E-mail</th>
 				<th>Isikukood</th>
-				<th>Telefon</th>
 				<th>Eesnimi</th>
-				<th>Aadress</th>
 				<th>Perekonnanimi</th>
-				<th>Kommentaar</th>
 				<th>Sugu</th>
+				<th>Telefon</th>
+				<th>E-mail</th>
+				<th>Aadress</th>
+				<th>Kommentaar</th>
+				<th>Created on</th>
+				<th>Created by</th>
+				<th>Modified on</th>
+				<th>Modified by</th>
+				<th>Closed on</th>
+				<th>Closed by</th>
 			</tr>
 			
 			<c:forEach items="${Piirivalvurid}" var="piirivalvur"> 
 				<tr>
 					<!-- <td>${piirivalvur.id}</td> -->
 					<td>${piirivalvur.sodurikood}</td>
+					<td>${piirivalvur.isikukood}</td>
+					<td>${piirivalvur.eesnimi}</td>
+					<td>${piirivalvur.perekonnanimi}</td>
+					<td>
+						<c:choose>
+							<c:when test="${piirivalvur.sugu == 0}">Mees</c:when>
+							<c:when test="${piirivalvur.sugu == 1}">Naine</c:when>
+						</c:choose>
+					</td>
+					<td>${piirivalvur.telefon}</td>
 					<td>${piirivalvur.email}</td>
-					<td>${piirivalvur.Isikukood}</td>
-					<td>${piirivalvur.Telefon}</td>
-					<td>${piirivalvur.Eesnimi}</td>
-					<td>${piirivalvur.Aadress}</td>
-					<td>${piirivalvur.Perekonnanimi}</td>
-					<td>${piirivalvur.Sugu}</td>
-					<td>${piirivalvur.Kommentaar}</td>
+					<td>${piirivalvur.aadress}</td>
+					<td>${piirivalvur.kommentaar}</td>
+					<td>${piirivalvur.createdon}</td>
+					<td>${piirivalvur.createdby}</td>
+					<td>${piirivalvur.modifiedon}</td>
+					<td>${piirivalvur.modifiedby}</td>
+					<td>${piirivalvur.closedon}</td>
+					<td>${piirivalvur.closeddby}</td>
 					<c:if test="${empty piirivalvur.closedon}">
 						<td><a href="Piirivalvur/${piirivalvur.id}/"> Edit </a></td>
 						<td><a href="Piirivalvur/${piirivalvur.id}/"> Delete </a></td>

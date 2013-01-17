@@ -42,8 +42,7 @@ public class VaeosaController {
 	
 	@RequestMapping(value="/AddVaeosa", method = RequestMethod.POST)
 	public String addVaeosa(@ModelAttribute Vaeosa vo, Model model) {
-		model.addAttribute("vaeosaform", vo);
-		// here comes logic
+		model.addAttribute("vaeosaform", voDao.addRecord(vo));
 		model.addAttribute("VaeosaAdded", true);
 		return "Vaeosa";
 	}
@@ -51,15 +50,15 @@ public class VaeosaController {
 	@RequestMapping(value="/ModifyVaeosa", method = RequestMethod.POST)
 	public String modifyVaeosa(@ModelAttribute Vaeosa vo, Model model) {
 		model.addAttribute("vaeosaform", vo);
-		// here comes logic
+		voDao.modifyRecord(vo);
 		model.addAttribute("VaeosaModified", true);
 		return "Vaeosa";
 	}
 	
 	@RequestMapping(value="/DeleteVaeosa", method = RequestMethod.POST)
 	public String deleteVaeosa(@ModelAttribute Vaeosa vo, Model model) {
-//		model.addAttribute("vaeosaform", vo);
-		// here comes logic
+		model.addAttribute("vaeosaform", vo);
+		voDao.deleteRecord(vo);
 		model.addAttribute("deleteVaeosa", true);
 		return "Vaeosa";
 	}
