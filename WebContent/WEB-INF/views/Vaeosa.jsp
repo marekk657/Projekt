@@ -8,30 +8,75 @@
 td {text-align:left;}
 .buttons {margin-top:30px; height: 35px;}
 </style>
+
+<script type="text/javascript" >
+function deleteRecord() {
+	document.vaeosa.action="<%=request.getContextPath()%>/DeleteAmet";  
+	document.vaeosa.method="POST";  
+	document.vaeosa.submit();
+}
+function addRecord(id) {
+	if (id != -1) {
+		document.vaeosa.action="<%=request.getContextPath()%>/ModifyAmet";
+		document.vaeosa.method="POST";
+		document.vaeosa.submit();
+	} else {
+		document.vaeosa.action="<%=request.getContextPath()%>/AddAmet";  
+		document.vaeosa.method="POST";  
+		document.vaeosa.submit();
+	}
+}
+</script>
+
 <title>Väeosa vorm</title>
 </head>
 <body>
- <FORM ACTION="AddVaeosa" METHOD="POST">
+	<form:form name="vaeosa" method="POST" modelAttribute="vaeosaform">
       <table width="400" border="0" cellspacing="0" cellpadding="0" style="margin-left:50px;">
-  
+  <form:input type="hidden" path="id"  />
   <tr>
-    <td>Kood:<br>
-      <INPUT TYPE="TEXT" NAME="Kood">
-            Nimetus:
-      <INPUT TYPE="TEXT" NAME="Nimetus"></td>
-    <td><p>Kommentaar:
-             
-        <textarea name="" cols="" rows="" NAME="coms"></textarea>
-      </p></td>
+    <td>
+    <form:label path="Kood" >Kood:</form:label>
+    <br>
+	<form:input path="Kood" />
+    
+    <form:label path="Nimetus" >Nimetus:</form:label>
+    <br>
+	<form:input path="Nimetus" />
+    </td>
+    <td>
+    <p>
+    <form:label path="Kommentaar" >Kommentaar:</form:label>
+    <br>
+	<form:textarea path="Kommentaar" />
+    </p>
+    </td>
   </tr>
    
   <tr>
-    <td ><input name="Salvesta" type="submit" value="Salvesta" class="buttons" style="float:right;"></td>
+    <td ><input name="Salvesta" onclick="addRecord(${vaeosaform.id})" type="submit" value="Salvesta" class="buttons" style="float:right;"></td>
     <td > <input name="Katkesta" type="reset" value="Katkesta" class="buttons">
-    <input name="Kustuta" type="button" value="Kustuta" class="buttons">
+    <input onclick="deleteRecord()" name="Kustuta" type="button" value="Kustuta" class="buttons">
     </td>
   </tr>
 </table>
  </FORM>
+ 
+ <div><a href="Navigation">Menüü</a></div>
+ 
+ </form:form>
+	<c:if test="${VaeosaAdded == true }">
+		<br/><br/><div>Uus Väeosa on lisatud. Vaata <a href="Vaeosad">kõiki Väeosasi.</a></div><br />
+		<div><a href="Navigation">Menüü</a></div>
+	</c:if>
+	<c:if test="${VaeosaModified == true }">
+		<br/><br/><div>Väeosa muudetud. Vaata <a href="Vaeosad">kõiki Väeosai.</a></div><br />
+		<div><a href="Navigation">Menüü</a></div>
+	</c:if>
+	<c:if test="${deleteVaeosa == true }">
+		<c:redirect url="Vaeosad" />
+	</c:if>
+    
+    
 </body>
 </html>

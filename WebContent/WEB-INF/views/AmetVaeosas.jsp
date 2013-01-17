@@ -8,32 +8,86 @@
 td {text-align:left;}
 .buttons {margin-top:30px; height: 35px;}
 </style>
-<title>Ameti väeosas</title>
+<script type="text/javascript" >
+function deleteRecord() {
+	document.ametvaeosas.action="<%=request.getContextPath()%>/DeleteAmetvaeosas";  
+	document.ametvaeosas.method="POST";  
+	document.ametvaeosas.submit();
+}
+function addRecord(id) {
+	if (id != -1) {
+		document.ametvaeosas.action="<%=request.getContextPath()%>/ModifyAmetvaeosas";
+		document.ametvaeosas.method="POST";
+		document.ametvaeosas.submit();
+	} else {
+		document.ametvaeosas.action="<%=request.getContextPath()%>/AddAmetvaeosas";  
+		document.ametvaeosas.method="POST";  
+		document.ametvaeosas.submit();
+	}
+}
+</script>
+<title>Amet väeosas</title>
 </head>
 <body>
-<!--  PEAN UUESTI TEGEMA
-	FORM ACTION="out.jsp" METHOD="POST">
+<form:form name="ametvaeosas" method="POST" modelAttribute="ametvaeosasform">
+
       <table width="400" border="0" cellspacing="0" cellpadding="0" style="margin-left:50px;">
   
   <tr>
-    <td>Isco kood:<br>
-      <INPUT TYPE="TEXT" NAME="Perekonnanimi">
-            Nimetus:
-      <INPUT TYPE="TEXT" NAME="Perekonnanimi"></td>
-    <td><p>Kommentaar:
-             
-        <textarea name="" cols="" rows="" NAME="coms"></textarea>
-      </p></td>
+        <td><form:label path="Piirivalvur" >Piirivalvur:</form:label> </td>
+        <td><form:label path="Alates" >Alates:</form:label>   </td>
   </tr>
-   
+  
   <tr>
-    <td ><input name="Salvesta" type="button" value="Salvesta" class="buttons" style="float:right;"></td>
-    <td > <input name="Katkesta" type="button" value="Katkesta" class="buttons">
-    <input name="Kustuta" type="button" value="Kustuta" class="buttons">
+        <td> <form:input path="Piirivalvur" />  </td>
+        <td> <form:input path="Alates" /> </td>
+  </tr> 
+   
+  <tr>    
+        <td> <form:label path="Vaeosa" >Väeosa:</form:label></td>
+        <td> <form:label path="Kuni" >Kuni:</form:label></td>
+  </tr>
+  
+ 	<tr>
+        <td> <form:input path="Vaeosa" /> </td>
+        <td> <form:input path="Kuni" /> </td>
+   </tr> 
+    
+    
+  
+     
+     <tr>
+     <td> <form:label path="Kommentaar" >Kommentaar:</form:label></td>
+      <td></td>
+   </tr>  
+    <tr>
+     <td colspan="2"> <form:textarea path="Kommentaar" /></td>
+      </tr> 
+     
+      
+      
+  <tr>
+    <td ><input onclick="addRecord(${ametvaeosasform.id})" name="Salvesta" type="button" value="Salvesta" class="buttons">
+   <input name="Katkesta" type="reset" value="Katkesta" class="buttons">
+    <input onclick="deleteRecord()" name="Kustuta" type="button" value="Kustuta" class="buttons">
     </td>
   </tr>
 </table>
- </FORM>  -->
+</form:form>
+ <div><a href="Navigation">Menüü</a></div> 
+ 
+ <c:if test="${ametvaeosaAdded == true }">
+		<br/><br/><div>Uus Amet Väeossa on lisatud. Vaata <a href="Ametidvaeosas">kõiki ameteid väeosas</a></div><br />
+		<div><a href="Navigation">Menüü</a></div>
+	</c:if>
+	<c:if test="${ametvaeosaModified == true }">
+		<br/><br/><div>Amet Väeossa muudetud. Vaata <a href="Ametidvaeosas">kõiki ameteid väeosas</a></div><br />
+		<div><a href="Navigation">Menüü</a></div>
+	</c:if>
+	<c:if test="${deleteametvaeosa == true }">
+		<c:redirect url="Ametidvaeosas" />
+	</c:if>
+    
  
 </body>
 </html>

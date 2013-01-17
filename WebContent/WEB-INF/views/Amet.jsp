@@ -60,6 +60,8 @@ function addRecord(id) {
 		  
 		</table>
 	</form:form>
+   
+   <div><a href="Navigation">Menüü</a></div> 
 
 	<c:if test="${ametAdded == true }">
 		<br/><br/><div>Uus amet on lisatud. Vaata <a href="Ametid">kõiki ameteid</a></div><br />
