@@ -10,11 +10,15 @@
 <div style="float:left; border:1px solid grey; padding-right:15px;">
 <ul>
 <li><a href="Piirivalvur">Piirivalvuri vorm</a></li>
+<li><a href="Piirivalvurid">Kõik piirivalvurid</a></li>
 <li><a href="Vaeosa">Väeosa vorm</a></li>
+<li><a href="Vaeosad">Kõik väeosad</a></li>
 <li><a href="Amet">Ameti vorm</a></li>
 <li><a href="Ametid">Kõik ametid</a></li>
 <li><a href="AmetVaeosas">Amet väeosas</a></li>
+<li><a href="AmetidVaeosas">Kõik ametid väeosades</a></li>
 <li><a href="PiirivalvurVaeosas">Piirivalvur väeosas</a></li>
+<li><a href="PiirivalvuridVaeosades">Kõik piirivalvurid väeosades</a></li>
 <li><a href="j_spring_security_logout">Välju</a></li>
 </ul>
 </div>

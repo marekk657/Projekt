@@ -19,7 +19,6 @@
 				<th>Kood</th>
 				<th>Nimetus</th>
 				<th>Kommentaar</th>
-				<
 			</tr>
 			
 			<c:forEach items="${Vaeosad}" var="vaeosa"> 

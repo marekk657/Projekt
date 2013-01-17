@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -29,65 +31,91 @@ function addRecord(id) {
 <title>Amet väeosas</title>
 </head>
 <body>
-<form:form name="ametvaeosas" method="POST" modelAttribute="ametvaeosasform">
+	<form:form name="ametvaeosas" method="POST" modelAttribute="ametvaeosasform">
 
-      <table width="400" border="0" cellspacing="0" cellpadding="0" style="margin-left:50px;">
-  
-  <tr>
-        <td><form:label path="Piirivalvur" >Piirivalvur:</form:label> </td>
-        <td><form:label path="Alates" >Alates:</form:label>   </td>
-  </tr>
-  
-  <tr>
-        <td> <form:input path="Piirivalvur" />  </td>
-        <td> <form:input path="Alates" /> </td>
-  </tr> 
-   
-  <tr>    
-        <td> <form:label path="Vaeosa" >Väeosa:</form:label></td>
-        <td> <form:label path="Kuni" >Kuni:</form:label></td>
-  </tr>
-  
- 	<tr>
-        <td> <form:input path="Vaeosa" /> </td>
-        <td> <form:input path="Kuni" /> </td>
-   </tr> 
-    
-    
-  
-     
-     <tr>
-     <td> <form:label path="Kommentaar" >Kommentaar:</form:label></td>
-      <td></td>
-   </tr>  
-    <tr>
-     <td colspan="2"> <form:textarea path="Kommentaar" /></td>
-      </tr> 
-     
-      
-      
-  <tr>
-    <td ><input onclick="addRecord(${ametvaeosasform.id})" name="Salvesta" type="button" value="Salvesta" class="buttons">
-   <input name="Katkesta" type="reset" value="Katkesta" class="buttons">
-    <input onclick="deleteRecord()" name="Kustuta" type="button" value="Kustuta" class="buttons">
-    </td>
-  </tr>
-</table>
-</form:form>
- <div><a href="Navigation">Menüü</a></div> 
- 
- <c:if test="${ametvaeosaAdded == true }">
-		<br/><br/><div>Uus Amet Väeossa on lisatud. Vaata <a href="Ametidvaeosas">kõiki ameteid väeosas</a></div><br />
-		<div><a href="Navigation">Menüü</a></div>
+		<table width="400" border="0" cellspacing="0" cellpadding="0"
+			style="margin-left: 50px;">
+
+			<tr>
+				<td><form:label path="amet">Amet:</form:label></td>
+				<td><form:label path="alates">Alates:</form:label></td>
+			</tr>
+
+			<tr>
+				<td>
+					<form:select path="amet">
+					<!-- Testandmete jaoks -->
+						<form:option value="amet" label="${ametvaeosasform.amet.nimetus}"></form:option>
+					</form:select>
+				</td>
+				<td><form:input path="alates" /></td>
+			</tr>
+
+			<tr>
+				<td><form:label path="vaeosa">Väeosa:</form:label></td>
+				<td><form:label path="kuni">Kuni:</form:label></td>
+			</tr>
+
+			<tr>
+				<td>
+					<form:select path="vaeosa">
+					<!-- Testandmete jaoks -->
+						<form:option value="amet" label="${ametvaeosasform.vaeosa.nimetus}"></form:option>
+					</form:select>
+				</td>
+				<td><form:input path="kuni" /></td>
+			</tr>
+
+			<tr>
+				<td><form:label path="kommentaar">Kommentaar:</form:label></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td colspan="2"><form:textarea path="kommentaar" /></td>
+			</tr>
+
+			<tr>
+				<td><input onclick="addRecord(${ametvaeosasform.id})"
+					name="Salvesta" type="button" value="Salvesta" class="buttons">
+					<input name="Katkesta" type="reset" value="Katkesta"
+					class="buttons"> <input onclick="deleteRecord()"
+					name="Kustuta" type="button" value="Kustuta" class="buttons">
+				</td>
+			</tr>
+		</table>
+	</form:form>
+	<div>
+		<a href="Navigation">Menüü</a>
+	</div>
+
+	<c:if test="${ametvaeosaAdded == true }">
+		<br />
+		<br />
+		<div>
+			Uus Amet Väeossa on lisatud. Vaata <a href="Ametidvaeosas">kõiki
+				ameteid väeosas</a>
+		</div>
+		<br />
+		<div>
+			<a href="Navigation">Menüü</a>
+		</div>
 	</c:if>
 	<c:if test="${ametvaeosaModified == true }">
-		<br/><br/><div>Amet Väeossa muudetud. Vaata <a href="Ametidvaeosas">kõiki ameteid väeosas</a></div><br />
-		<div><a href="Navigation">Menüü</a></div>
+		<br />
+		<br />
+		<div>
+			Amet Väeossa muudetud. Vaata <a href="Ametidvaeosas">kõiki
+				ameteid väeosas</a>
+		</div>
+		<br />
+		<div>
+			<a href="Navigation">Menüü</a>
+		</div>
 	</c:if>
 	<c:if test="${deleteametvaeosa == true }">
 		<c:redirect url="Ametidvaeosas" />
 	</c:if>
-    
- 
+
+
 </body>
 </html>

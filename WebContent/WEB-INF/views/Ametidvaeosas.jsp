@@ -27,7 +27,7 @@
 			<c:forEach items="${AmetidVaeosas}" var="ametvaeosas"> 
 				<tr>
 					<!-- <td>${amet.id}</td> -->
-					<td>${ametvaeosas.Piirivalvur}</td>
+					<td><a href="Piirivalvur/${ametvaeosas.piirivalvur.id}/">${ametvaeosas.Piirivalvur}</a></td>
 					<td>${ametvaeosas.Alates}</td>
 					<td>${ametvaeosas.Vaeosa}</td>
 					<td>${ametvaeosas.Kuni}</td>

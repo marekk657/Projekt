@@ -22,18 +22,17 @@
                 <th>Kuni</th>
                 <th>Amet</th>
                 <th>Kommentaar</th>
-				<
 			</tr>
 			
 			<c:forEach items="${All-Info-Piirivalvurid}" var="piirivalvurvaeosas"> 
 				<tr>
 					<!-- <td>${piirivalvurvaeosas.id}</td> -->
-					<td>${piirivalvurvaeosas.Piirivalvur}</td>
-					<td>${piirivalvurvaeosas.Alates}</td>
-					<td>${piirivalvurvaeosas.Vaeosa}</td>
-                    <td>${piirivalvurvaeosas.Kuni}</td>
-					<td>${piirivalvurvaeosas.Amet}</td>
-					<td>${piirivalvurvaeosas.v}</td>
+					<td>${piirivalvurvaeosas.piirivalvur}</td>
+					<td>${piirivalvurvaeosas.alates}</td>
+					<td>${piirivalvurvaeosas.vaeosa}</td>
+                    <td>${piirivalvurvaeosas.kuni}</td>
+					<td>${piirivalvurvaeosas.amet}</td>
+					<td>${piirivalvurvaeosas.kommentaar}</td>
 					
 					<c:if test="${empty piirivalvurvaeosas.closedon}">
 						<td><a href="PiirivalvurVaeosas/${piirivalvurvaeosas.id}/"> Edit </a></td>
