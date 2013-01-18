@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -18,23 +19,23 @@ td {
 </style>
 <script type="text/javascript">
 function deleteRecord() {
-	document.ametvaeosas.action="<%=request.getContextPath()%>/DeleteAmetVaeosas";  
+	document.ametvaeosas.action="<c:url value="/DeleteAmetVaeosas" />";  
 	document.ametvaeosas.method="POST";  
 	document.ametvaeosas.submit();
 }
 function addRecord(id) {
 	if (id != -1) {
-		document.ametvaeosas.action="<%=request.getContextPath()%>/ModifyAmetVaeosas";
+		document.ametvaeosas.action="<c:url value="/ModifyAmetVaeosas" />";
 		document.ametvaeosas.method="POST";
 		document.ametvaeosas.submit();
 	} else {
-		document.ametvaeosas.action="<%=request.getContextPath()%>/AddAmetVaeosas";  
+		document.ametvaeosas.action="<c:url value="/AddAmetVaeosas" />";  
 		document.ametvaeosas.method="POST";  
 		document.ametvaeosas.submit();
 	}
 }
 </script>
-<title>Amet väeosas</title>
+<title><spring:message code="ametvaeosas.title" /></title>
 </head>
 <body>
 	<form:form name="ametvaeosas" method="POST"
@@ -44,8 +45,8 @@ function addRecord(id) {
 			style="margin-left: 50px;">
 
 			<tr>
-				<td><form:label path="amet">Amet:</form:label></td>
-				<td><form:label path="alates">Alates:</form:label></td>
+				<td><form:label path="amet"><spring:message code="ametvaeosas.field.amet" /></form:label></td>
+				<td><form:label path="alates"><spring:message code="ametvaeosas.field.alates" /></form:label></td>
 			</tr>
 
 			<tr>
@@ -57,8 +58,8 @@ function addRecord(id) {
 			</tr>
 
 			<tr>
-				<td><form:label path="vaeosa">Väeosa:</form:label></td>
-				<td><form:label path="kuni">Kuni:</form:label></td>
+				<td><form:label path="vaeosa"><spring:message code="ametvaeosas.field.vaeosa" /></form:label></td>
+				<td><form:label path="kuni"><spring:message code="ametvaeosas.field.kuni" /></form:label></td>
 			</tr>
 
 			<tr>
@@ -71,7 +72,7 @@ function addRecord(id) {
 			</tr>
 
 			<tr>
-				<td><form:label path="kommentaar">Kommentaar:</form:label></td>
+				<td><form:label path="kommentaar"><spring:message code="entity.field.kommentaar" /></form:label></td>
 				<td></td>
 			</tr>
 			<tr>
@@ -79,35 +80,34 @@ function addRecord(id) {
 			</tr>
 
 			<tr>
-				<td><input onclick="addRecord(${ametvaeosasform.id})"
-					name="Salvesta" type="button" value="Salvesta" class="buttons">
-					<input name="Katkesta" type="reset" value="Katkesta"
+				<td><input onclick="addRecord(${ametvaeosasform.id})" type="button" value="<spring:message code="entity.btn.save" />" class="buttons">
+					<input name="Katkesta" type="reset" value="<spring:message code="entity.btn.cancel" />"
 					class="buttons"> <input onclick="deleteRecord()"
-					name="Kustuta" type="button" value="Kustuta" class="buttons">
+					name="Kustuta" type="button" value="<spring:message code="entity.btn.delete" />" class="buttons">
 				</td>
 			</tr>
 		</table>
 	</form:form>
-	
-	<br /><br />
+
 	<div>
-		<a href="<%=request.getContextPath()%>/Navigation">Menüü</a>
+		<a href="<c:url value="/Navigation" />"><spring:message
+				code="entity.nav.menu" /></a>
 	</div>
 
 	<c:if test="${ametvaeosaAdded == true }">
 		<br />
 		<br />
 		<div>
-			Uus amet väeossa on lisatud. Vaata <a href="AmetidVaeosas">kõiki
-				ameteid väeosas</a>
+			<spring:message code="ametvaeosas.notif.added" /> 
+			<a href="<c:url value="/AmetidVaeosas" />"><spring:message code="nav.link.plural.ametvaeosas" /></a>
 		</div>
 	</c:if>
 	<c:if test="${ametvaeosaModified == true }">
 		<br />
 		<br />
 		<div>
-			Amet väeosas muudetud. Vaata <a href="AmetidVaeosas">kõiki
-				ameteid väeosas</a>
+			<spring:message code="ametvaeosas.notif.modified" /> 
+			<a href="<c:url value="/AmetidVaeosas" />"><spring:message code="nav.link.plural.ametvaeosas" /></a>
 		</div>
 	</c:if>
 	<c:if test="${deleteametvaeosas == true }">

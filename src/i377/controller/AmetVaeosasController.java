@@ -1,21 +1,18 @@
 package i377.controller;
 
-//import java.util.ArrayList;
-
-
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
 import i377.entities.Amet;
 import i377.entities.AmetVaeosas;
-//import i377.entities.Piirivalvur;
-//import i377.entities.PiirivalvurVaeosas;
 import i377.entities.Vaeosa;
 import i377.repo.AmetVaeosasDaoImpl;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -61,7 +58,14 @@ public class AmetVaeosasController {
 	}
 	
 	@RequestMapping(value="/AddAmetVaeosas", method = RequestMethod.POST)
-	public String AddAmetVaeosas(@ModelAttribute AmetVaeosas av, Model model) {
+	public String AddAmetVaeosas(@ModelAttribute @Valid AmetVaeosas av, Model model, BindingResult result) {
+		
+		if (result.hasErrors()){
+			model.addAttribute("errors", true);
+			model.addAttribute("ametvaeosasform", av);
+			return "AmetVaeosas";
+		}
+		
 		model.addAttribute("ametvaeosasform", av);
 		// here comes logic
 		model.addAttribute("ametvaeosaAdded", true);
@@ -69,7 +73,14 @@ public class AmetVaeosasController {
 	}
 	
 	@RequestMapping(value="/ModifyAmetVaeosas", method = RequestMethod.POST)
-	public String modifyAmetVaeosas(@ModelAttribute AmetVaeosas av, Model model) {
+	public String modifyAmetVaeosas(@ModelAttribute @Valid AmetVaeosas av, Model model, BindingResult result) {
+		
+		if (result.hasErrors()){
+			model.addAttribute("errors", true);
+			model.addAttribute("ametvaeosasform", av);
+			return "AmetVaeosas";
+		}
+		
 		model.addAttribute("ametvaeosasform", av);
 		// here comes logic
 		model.addAttribute("ametvaeosaModified", true);
@@ -78,7 +89,7 @@ public class AmetVaeosasController {
 	
 	@RequestMapping(value="/DeleteAmetVaeosas", method = RequestMethod.POST)
 	public String deleteAmetVaeosas(@ModelAttribute AmetVaeosas av, Model model) {
-//		model.addAttribute("ametvaeosasform", av);
+		model.addAttribute("ametvaeosasform", av);
 		// here comes logic
 		model.addAttribute("deleteametvaeosas", true);
 		return "AmetVaeosas";

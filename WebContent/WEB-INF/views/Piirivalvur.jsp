@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -13,24 +14,24 @@ td {text-align:left;}
 
 <script type="text/javascript" >
 function deleteRecord() {
-	document.piirivalvur.action="<%=request.getContextPath()%>/DeletePiirivalvur";  
+	document.piirivalvur.action="<c:url value="/DeletePiirivalvur" />";  
 	document.piirivalvur.method="POST";  
 	document.piirivalvur.submit();
 }
 function addRecord(id) {
 	if (id != -1) {
-		document.piirivalvur.action="<%=request.getContextPath()%>/ModifyPiirivalvur";
+		document.piirivalvur.action="<c:url value="/ModifyPiirivalvur" />";
 		document.piirivalvur.method="POST";
 		document.piirivalvur.submit();
 	} else {
-		document.piirivalvur.action="<%=request.getContextPath()%>/AddPiirivalvur";  
+		document.piirivalvur.action="<c:url value="/AddPiirivalvur" />";  
 		document.piirivalvur.method="POST";  
 		document.piirivalvur.submit();
 	}
 }
 </script>
 
-<title>Piirivalvuri vorm</title>
+<title><spring:message code="piirivalvur.title" /></title>
 </head>
 <body>
 	<form:form name="piirivalvur" method="POST"
@@ -40,36 +41,37 @@ function addRecord(id) {
 			style="margin-left: 50px;">
 			<form:input type="hidden" path="id" />
 			<tr>
-				<td width="168"><form:label path="sodurikood">Sõduri kood:</form:label>
+				<td width="168"><form:label path="sodurikood"><spring:message code="piirivalvur.field.sodurikood" /></form:label>
 					<br /> <form:input path="sodurikood" /></td>
-				<td width="280"><form:label path="email">E-mail:</form:label>
+				<td width="280"><form:label path="email"><spring:message code="piirivalvur.field.email" /></form:label>
 					<br /> <form:input path="email" /></td>
 			</tr>
 			<tr>
-				<td><form:label path="isikukood">Isikukood:</form:label> <br />
+				<td><form:label path="isikukood"><spring:message code="piirivalvur.field.isikukood" /></form:label> <br />
 					<form:input path="isikukood" /></td>
-				<td><form:label path="telefon">Telefon:</form:label> <br />
+				<td><form:label path="telefon"><spring:message code="piirivalvur.field.telefon" /></form:label> <br />
 					<form:input path="telefon" /></td>
 			</tr>
 
 			<tr>
-				<td><form:label path="eesnimi">Eesnimi:</form:label> <br />
+				<td><form:label path="eesnimi"><spring:message code="piirivalvur.field.eesnimi" /></form:label> <br />
 					<form:input path="eesnimi" /></td>
-				<td><form:label path="aadress">Aadress:</form:label> <br />
+				<td><form:label path="aadress"><spring:message code="piirivalvur.field.aadress" /></form:label> <br />
 					<form:input path="aadress" /></td>
 			</tr>
 
 			<tr>
-				<td><form:label path="perekonnanimi">Perekonnanimi:</form:label>
+				<td><form:label path="perekonnanimi"><spring:message code="piirivalvur.field.perekonnanimi" /></form:label>
 					<br /> <form:input path="perekonnanimi" /> <form:label
-						path="sugu">Sugu:</form:label><br /> 
+						path="sugu"><spring:message code="piirivalvur.field.sugu" /></form:label><br /> 
 					<form:select path="sugu">
-						<form:option value="0" label="Mees"/>
-						<form:option value="1" label="Naine"/>
+						<form:option value="-1"><spring:message code="piirivalvur.field.sugu.value.default" /></form:option>
+						<form:option value="0"><spring:message code="piirivalvur.field.sugu.value.mees" /></form:option>
+						<form:option value="1"><spring:message code="piirivalvur.field.sugu.value.naine" /></form:option>
 					</form:select></td>
 				<td>
 					<p>
-						<form:label path="kommentaar">Kommentaar:</form:label>
+						<form:label path="kommentaar"><spring:message code="entity.field.kommentaar" /></form:label>
 						<br />
 						<form:textarea path="kommentaar" />
 					</p>
@@ -77,27 +79,25 @@ function addRecord(id) {
 			</tr>
 
 			<tr>
-				<td><input name="Salvesta"
-					onclick="addRecord(${piirivalvurform.id})" type="submit"
-					value="Salvesta" class="buttons" style="float: right;"></td>
-				<td><input name="Katkesta" type="reset" value="Katkesta"
-					class="buttons"> <input name="Kustuta"
-					onclick="deleteRecord()" type="button" value="Kustuta"
+				<td><input onclick="addRecord(${piirivalvurform.id})" type="submit"
+					value="<spring:message code="entity.btn.save" />" class="buttons" style="float: right;"></td>
+				<td><input type="reset" value="<spring:message code="entity.btn.cancel" />"
+					class="buttons"> <input onclick="deleteRecord()" type="button" value="<spring:message code="entity.btn.delete" />"
 					class="buttons"></td>
 			</tr>
 		</table>
 	</form:form>
 
 	<div>
-		<a href="<%=request.getContextPath()%>/Navigation">Menüü</a>
+		<a href="<c:url value="/Navigation" />"><spring:message code="entity.nav.menu" /></a>
 	</div>
 
 	<c:if test="${piirivalvurAdded == true }">
 		<br />
 		<br />
 		<div>
-			Uus Piirivalvur on lisatud. Vaata <a href="Piirivalvurid">kõiki
-				piirivalvureid</a>
+			<spring:message code="piirivalvur.notif.added" /> 
+			<a href="<c:url value="/Piirivalvurid" />"><spring:message code="nav.link.plural.piirivalvur" /></a>
 		</div>
 		<br />
 
@@ -106,8 +106,8 @@ function addRecord(id) {
 		<br />
 		<br />
 		<div>
-			Piirivalvur muudetud. Vaata <a href="Piirivalvurid">kõiki
-				piirivalvureid</a>
+			<spring:message code="vaeosa.notif.modified" />
+			<a href="<c:url value="/Piirivalvurid" />"><spring:message code="nav.link.plural.piirivalvur" /></a>
 		</div>
 		<br />
 

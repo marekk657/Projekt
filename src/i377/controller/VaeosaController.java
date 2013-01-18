@@ -3,12 +3,14 @@ package i377.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
 import i377.entities.Vaeosa;
 import i377.repo.VaeosaDaoImpl;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,9 +24,11 @@ public class VaeosaController {
 
 	@RequestMapping(value="/Vaeosa")
 	public String vaeosa(Model model) {
+				
 		Vaeosa vo = new Vaeosa();
 		vo.setId(-1);
 		model.addAttribute("vaeosaform", vo);
+		
 		return "Vaeosa";
 	}
 	
@@ -41,14 +45,27 @@ public class VaeosaController {
 	}
 	
 	@RequestMapping(value="/AddVaeosa", method = RequestMethod.POST)
-	public String addVaeosa(@ModelAttribute Vaeosa vo, Model model) {
+	public String addVaeosa(@ModelAttribute @Valid Vaeosa vo, Model model, BindingResult result) {
+		
+		if (result.hasErrors()){
+			model.addAttribute("errors", true);
+			return "Vaeosa";
+		}
+		
 		model.addAttribute("vaeosaform", voDao.addRecord(vo));
 		model.addAttribute("VaeosaAdded", true);
 		return "Vaeosa";
 	}
 	
 	@RequestMapping(value="/ModifyVaeosa", method = RequestMethod.POST)
-	public String modifyVaeosa(@ModelAttribute Vaeosa vo, Model model) {
+	public String modifyVaeosa(@ModelAttribute @Valid Vaeosa vo, Model model, BindingResult result) {
+		
+		if (result.hasErrors()){
+			model.addAttribute("errors", true);
+			model.addAttribute("vaeosaform", vo);
+			return "Vaeosa";
+		}
+		
 		model.addAttribute("vaeosaform", vo);
 		voDao.modifyRecord(vo);
 		model.addAttribute("VaeosaModified", true);

@@ -3,12 +3,14 @@ package i377.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
 import i377.entities.Piirivalvur;
 import i377.repo.PiirivalvurDaoImpl;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +26,7 @@ public class PiirivalvurController {
 	public String Piirivalvur(Model model) {
 		Piirivalvur pv = new Piirivalvur();
 		pv.setId(-1);
+		pv.setSugu(-1);
 		model.addAttribute("piirivalvurform", pv);
 		return "Piirivalvur";
 	}
@@ -41,14 +44,28 @@ public class PiirivalvurController {
 	}
 	
 	@RequestMapping(value="/AddPiirivalvur", method = RequestMethod.POST)
-	public String addPiirivalvur(@ModelAttribute Piirivalvur valvur, Model model) {
+	public String addPiirivalvur(@ModelAttribute @Valid Piirivalvur valvur, Model model, BindingResult result) {
+		
+		if (result.hasErrors()){
+			model.addAttribute("errors", true);
+			model.addAttribute("piirivalvurform", valvur);
+			return "Piirivalvur";
+		}
+		
 		model.addAttribute("piirivalvurform", pvDao.addRecord(valvur));
 		model.addAttribute("piirivalvurAdded", true);
 		return "Piirivalvur";
 	}
 	
 	@RequestMapping(value="/ModifyPiirivalvur", method = RequestMethod.POST)
-	public String modifyPiirivalvur(@ModelAttribute Piirivalvur valvur, Model model) {
+	public String modifyPiirivalvur(@ModelAttribute @Valid Piirivalvur valvur, Model model, BindingResult result) {
+		
+		if (result.hasErrors()){
+			model.addAttribute("errors", true);
+			model.addAttribute("piirivalvurform", valvur);
+			return "Piirivalvur";
+		}
+		
 		model.addAttribute("piirivalvurform", valvur);
 		pvDao.modifyRecord(valvur);
 		model.addAttribute("piirivalvurModified", true);

@@ -2,6 +2,8 @@
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -13,40 +15,53 @@ td {text-align:left;}
 
 <script type="text/javascript" >
 function deleteRecord() {
-	document.vaeosa.action="<%=request.getContextPath()%>/DeleteVaeosa";  
+	document.vaeosa.action="<c:url value="/DeleteVaeosa" />";  
 	document.vaeosa.method="POST";  
 	document.vaeosa.submit();
 }
 function addRecord(id) {
 	if (id != -1) {
-		document.vaeosa.action="<%=request.getContextPath()%>/ModifyVaeosa";
+		document.vaeosa.action="<c:url value="/ModifyVaeosa" />";
 		document.vaeosa.method="POST";
 		document.vaeosa.submit();
 	} else {
-		document.vaeosa.action="<%=request.getContextPath()%>/AddVaeosa";  
+		document.vaeosa.action="<c:url value="/AddVaeosa" />";  
 		document.vaeosa.method="POST";  
 		document.vaeosa.submit();
 	}
 }
 </script>
 
-<title>Väeosa vorm</title>
+<title><spring:message code="vaeosa.title" /></title>
 </head>
 <body>
+	<c:if test="${errors == true }">
+		<div>
+			<table>
+				<tr>
+					<td><form:errors path="kood"/></td>
+				</tr>
+				<tr>
+					<td><form:errors path="nimetus" /></td>
+				</tr>
+			</table>
+		</div>
+	</c:if>
+
 	<form:form name="vaeosa" method="POST" modelAttribute="vaeosaform">
 		<table width="400" border="0" cellspacing="0" cellpadding="0"
 			style="margin-left: 50px;">
 			<form:input type="hidden" path="id" />
 			<tr>
 				<td>
-					<form:label path="kood">Kood:</form:label><br />
+					<form:label path="kood"><spring:message code="vaeosa.field.kood" /></form:label><br />
 				 	<form:input path="kood" /> <br />
-					<form:label path="nimetus">Nimetus:</form:label><br />
+					<form:label path="nimetus"><spring:message code="vaeosa.field.nimetus" /></form:label><br />
 					<form:input path="nimetus" />
 				</td>
 				<td>
 					<p>
-						<form:label path="kommentaar">Kommentaar:</form:label>
+						<form:label path="kommentaar"><spring:message code="entity.field.kommentaar" /></form:label>
 						<br>
 						<form:textarea path="kommentaar" />
 					</p>
@@ -54,19 +69,18 @@ function addRecord(id) {
 			</tr>
 
 			<tr>
-				<td><input name="Salvesta"
-					onclick="addRecord(${vaeosaform.id})" type="submit"
-					value="Salvesta" class="buttons" style="float: right;"></td>
-				<td><input name="Katkesta" type="reset" value="Katkesta"
+				<td><input onclick="addRecord(${vaeosaform.id})" type="submit"
+					value="<spring:message code="entity.btn.save" />" class="buttons" style="float: right;"></td>
+				<td><input type="reset" value="<spring:message code="entity.btn.cancel" />"
 					class="buttons"> <input onclick="deleteRecord()"
-					name="Kustuta" type="button" value="Kustuta" class="buttons">
+					type="button" value="<spring:message code="entity.btn.delete" />" class="buttons">
 				</td>
 			</tr>
 		</table>
 
 
 		<div>
-			<a href="<%=request.getContextPath()%>/Navigation">Menüü</a>
+			<a href="<c:url value="/Navigation" />"><spring:message code="entity.nav.menu" /></a>
 		</div>
 
 	</form:form>
@@ -74,14 +88,14 @@ function addRecord(id) {
 		<br />
 		<br />
 		<div>
-			Uus Väeosa on lisatud. Vaata <a href="Vaeosad">kõiki Väeosasi.</a>
+			<spring:message code="vaeosa.notif.added" /> <a href="<c:url value="/Vaeosad" />"><spring:message code="nav.link.plural.vaeosa" /></a>
 		</div>
 	</c:if>
 	<c:if test="${VaeosaModified == true }">
 		<br />
 		<br />
 		<div>
-			Väeosa muudetud. Vaata <a href="Vaeosad">kõiki Väeosai.</a>
+			<spring:message code="vaeosa.notif.modified" /> <a href="<c:url value="/Vaeosad" />"><spring:message code="nav.link.plural.vaeosa" /></a>
 		</div>
 	</c:if>
 	<c:if test="${deleteVaeosa == true }">

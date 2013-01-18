@@ -2,7 +2,10 @@ package i377.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Range;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -27,6 +30,8 @@ public class Piirivalvur implements Serializable {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private long id;
 
+	@NotNull
+	@Size(min = 5, max = 25)
 	private String aadress;
 
 	private String closeddby;
@@ -39,12 +44,19 @@ public class Piirivalvur implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date createdon;
 
+	@NotNull
+	@Size(min = 2, max = 255)
 	private String eesnimi;
 
+	@NotNull
+	@Size(min = 6, max = 50)
 	private String email;
 
+	@NotNull
+	@Size(min = 6, max = 20)
 	private String isikukood;
 
+	@Size(min = 0, max = 255)
 	private String kommentaar;
 
 	private String modifiedby;
@@ -52,12 +64,20 @@ public class Piirivalvur implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date modifiedon;
 
+	@NotNull
+	@Size(min = 2, max = 255)
 	private String perekonnanimi;
 
+	@NotNull
+	@Size(min = 4, max = 40)
 	private String sodurikood;
 
+	@NotNull
+	@Range(min = 0, max = 1)
 	private int sugu;
 
+	@NotNull
+	@Size(min = 3, max = 255)
 	private String telefon;
 
 	private int version;

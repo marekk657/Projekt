@@ -1,25 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Welcome</title>
+<title><spring:message code="entity.nav.menu" /></title>
 </head>
 <body>
 <div style="float:left; border:1px solid grey; padding-right:15px;">
 <ul>
-<li><a href="Piirivalvur">Piirivalvuri vorm</a></li>
-<li><a href="Piirivalvurid">Kõik piirivalvurid</a></li>
-<li><a href="Vaeosa">Väeosa vorm</a></li>
-<li><a href="Vaeosad">Kõik väeosad</a></li>
-<li><a href="Amet">Ameti vorm</a></li>
-<li><a href="Ametid">Kõik ametid</a></li>
-<li><a href="AmetVaeosas">Amet väeosas</a></li>
-<li><a href="AmetidVaeosas">Kõik ametid väeosades</a></li>
-<li><a href="PiirivalvurVaeosas">Piirivalvur väeosas</a></li>
-<li><a href="PiirivalvuridVaeosades">Kõik piirivalvurid väeosades</a></li>
-<li><a href="j_spring_security_logout">Välju</a></li>
+<li><a href="Piirivalvur"><spring:message code="nav.link.piirivalvur" /></a></li>
+<li><a href="Piirivalvurid"><spring:message code="nav.link.plural.piirivalvur" /></a></li>
+<li><a href="Vaeosa"><spring:message code="nav.link.vaeosa" /></a></li>
+<li><a href="Vaeosad"><spring:message code="nav.link.plural.vaeosa" /></a></li>
+<li><a href="Amet"><spring:message code="nav.link.amet" /></a></li>
+<li><a href="Ametid"><spring:message code="nav.link.plural.amet" /></a></li>
+<li><a href="AmetVaeosas"><spring:message code="nav.link.ametvaeosas" /></a></li>
+<li><a href="AmetidVaeosas"><spring:message code="nav.link.plural.ametvaeosas" /></a></li>
+<li><a href="PiirivalvurVaeosas"><spring:message code="nav.link.piirivalvurvaeosas" /></a></li>
+<li><a href="PiirivalvuridVaeosades"><spring:message code="nav.link.plural.piirivalvurvaeosas" /></a></li>
+<li><a href="j_spring_security_logout"><spring:message code="nav.link.logout" /></a></li>
 </ul>
 </div>
 </body>

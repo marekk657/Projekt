@@ -2,6 +2,8 @@ package i377.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -28,6 +30,7 @@ public class AmetVaeosas implements Serializable {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private long id;
 
+	@NotNull
 	private Timestamp alates;
 
 	private String closedby;
@@ -40,8 +43,10 @@ public class AmetVaeosas implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date createdon;
 
+	@Size(min = 0, max = 255)
 	private String kommentaar;
 
+	@NotNull
 	private Timestamp kuni;
 
 	private String modifiedby;
@@ -53,10 +58,12 @@ public class AmetVaeosas implements Serializable {
 
 	//bi-directional many-to-one association to Amet
 	@ManyToOne
+	@NotNull
 	private Amet amet;
 
 	//bi-directional many-to-one association to Vaeosa
 	@ManyToOne
+	@NotNull
 	private Vaeosa vaeosa;
 
 	//bi-directional many-to-one association to PiirivalvurVaeosas

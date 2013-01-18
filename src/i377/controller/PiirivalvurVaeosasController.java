@@ -3,6 +3,7 @@ package i377.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
 import i377.entities.Amet;
 import i377.entities.AmetVaeosas;
@@ -13,6 +14,7 @@ import i377.repo.PiirivalvurVaeosasDaoImpl;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -63,7 +65,14 @@ public class PiirivalvurVaeosasController {
 	}
 	
 	@RequestMapping(value="/AddPiirivalvurVaeosas", method = RequestMethod.POST)
-	public String addPiirivalvurVaeosas(@ModelAttribute PiirivalvurVaeosas pva, Model model) {
+	public String addPiirivalvurVaeosas(@ModelAttribute @Valid PiirivalvurVaeosas pva, Model model, BindingResult result) {
+		
+		if (result.hasErrors()){
+			model.addAttribute("errors", true);
+			model.addAttribute("piirivalvurvaeosasform", pva);
+			return "PiirivalvurVaeosas";
+		}
+		
 		model.addAttribute("piirivalvurvaeosasform", pva);
 		// here comes logic
 		model.addAttribute("piirivalvurVaeosasAdded", true);
@@ -71,7 +80,14 @@ public class PiirivalvurVaeosasController {
 	}
 	
 	@RequestMapping(value="/ModifyPiirivalvurVaeosas", method = RequestMethod.POST)
-	public String modifyPiirivalvurVaeosas(@ModelAttribute PiirivalvurVaeosas pva, Model model) {
+	public String modifyPiirivalvurVaeosas(@ModelAttribute @Valid PiirivalvurVaeosas pva, Model model, BindingResult result) {
+		
+		if (result.hasErrors()){
+			model.addAttribute("errors", true);
+			model.addAttribute("piirivalvurvaeosasform", pva);
+			return "PiirivalvurVaeosas";
+		}
+		
 		model.addAttribute("piirivalvurvaeosasform", pva);
 		// here comes logic
 		model.addAttribute("piirivalvurvaeosastModified", true);

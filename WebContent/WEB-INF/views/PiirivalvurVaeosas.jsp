@@ -3,6 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -19,24 +20,24 @@ td {
 </style>
 <script type="text/javascript">
 function deleteRecord() {
-	document.piirivalvurvaeosas.action="<%=request.getContextPath()%>/DeletePiirivalvurVaeosas";  
+	document.piirivalvurvaeosas.action="<c:url value="/DeletePiirivalvurVaeosas" />";  
 	document.piirivalvurvaeosas.method="POST";  
 	document.piirivalvurvaeosas.submit();
 }
 function addRecord(id) {
 	if (id != -1) {
-		document.piirivalvurvaeosas.action="<%=request.getContextPath()%>/ModifyPiirivalvurVaeosas";
+		document.piirivalvurvaeosas.action="<c:url value="/ModifyPiirivalvurVaeosas" />";
 		document.piirivalvurvaeosas.method="POST";
 		document.piirivalvurvaeosas.submit();
 	} else {
-		document.piirivalvurvaeosas.action="<%=request.getContextPath()%>/AddPiirivalvurVaeosas";  
+		document.piirivalvurvaeosas.action="<c:url value="/AddPiirivalvurVaeosas" />";  
 		document.piirivalvurvaeosas.method="POST";  
 		document.piirivalvurvaeosas.submit();
 	}
 }
 </script>
 
-<title>Piirivalvur väeosas</title>
+<title><spring:message code="piirivalvurVaeosas.title" /></title>
 </head>
 <body>
 	<form:form name="piirivalvurvaeosas" method="POST"
@@ -45,8 +46,12 @@ function addRecord(id) {
 			style="margin-left: 50px;">
 
 			<tr>
-				<td><form:label path="piirivalvur">Piirivalvur:</form:label></td>
-				<td><form:label path="">Alates:</form:label></td>
+				<td><form:label path="piirivalvur">
+						<spring:message code="piirivalvurVaeosas.field.piirivalvur" />
+					</form:label></td>
+				<td><form:label path="">
+						<spring:message code="piirivalvurVaeosas.field.alates" />
+					</form:label></td>
 			</tr>
 
 			<tr>
@@ -58,8 +63,12 @@ function addRecord(id) {
 			</tr>
 
 			<tr>
-				<td><form:label path="vaeosa">Väeosa:</form:label></td>
-				<td><form:label path="">Kuni:</form:label></td>
+				<td><form:label path="vaeosa">
+						<spring:message code="piirivalvurVaeosas.field.vaeosa" />
+					</form:label></td>
+				<td><form:label path="">
+						<spring:message code="piirivalvurVaeosas.field.kuni" />
+					</form:label></td>
 			</tr>
 
 			<tr>
@@ -72,41 +81,48 @@ function addRecord(id) {
 
 
 			<tr>
-				<td><form:label path="ametvaeosa">Amet:</form:label></td>
-				<td></td>
+				<td><form:label path="ametvaeosa">
+						<spring:message code="piirivalvurVaeosas.field.ametvaeosa" />
+					</form:label></td>
+				<td>
+					<form:label path="koormus"><spring:message code="piirivalvurVaeosas.field.koormus" /></form:label>
+				</td>
 			</tr>
 
 			<tr>
-				<td colspan="2"><form:select path="ametvaeosa">
+				<td><form:select path="ametvaeosa">
 						<!-- Testandmete jaoks 
 						<form:option value="ametvaeosa" label="${piirivalvurvaeosasform.ametvaeosa.amet.nimetus}"></form:option>-->
 					</form:select></td>
+				<td>
+					<form:input path="koormus" />
+				</td>
 			</tr>
 
 			<tr>
-				<td><form:label path="kommentaar">Kommentaar:</form:label></td>
+				<td><form:label path="kommentaar">
+						<spring:message code="entity.field.kommentaar" />
+					</form:label></td>
 				<td></td>
 			</tr>
 			<tr>
 				<td colspan="2"><form:textarea path="kommentaar" /></td>
 			</tr>
 
-
-
 			<tr>
-				<td><input name="Salvesta"
-					onclick="addRecord(${piirivalvurvaeosasform.id})" type="button"
-					value="Salvesta" class="buttons"> <input name="Katkesta"
-					type="button" value="Katkesta" class="buttons"> <input
-					name="Kustuta" onclick="deleteRecord()" type="button"
-					value="Kustuta" class="buttons"></td>
+				<td><input onclick="addRecord(${piirivalvurvaeosasform.id})"
+					type="button" value="<spring:message code="entity.btn.save" />"
+					class="buttons"> <input type="button"
+					value="<spring:message code="entity.btn.cancel" />" class="buttons">
+					<input onclick="deleteRecord()" type="button"
+					value="<spring:message code="entity.btn.delete" />" class="buttons"></td>
 			</tr>
 		</table>
 
 
-		<br /><br />
 		<div>
-			<a href="<%=request.getContextPath()%>/Navigation">Menüü</a>
+			<a href="<c:url value="/Navigation" />"><spring:message
+					code="entity.nav.menu" /></a>
 		</div>
 
 
@@ -116,16 +132,16 @@ function addRecord(id) {
 		<br />
 		<br />
 		<div>
-			Uus piirivalvur väeosas on lisatud. Vaata <a
-				href="PiirivalvuridVaeosades">kõiki Piirivalvuri väeosasi</a>
+			<spring:message code="piirivalvurVaeosas.notif.added" /> 
+			<a href="<c:url value="/PiirivalvuridVaeosades" />"><spring:message code="nav.link.plural.piirivalvurvaeosas" /></a>
 		</div>
 	</c:if>
 	<c:if test="${piirivalvurvaeosastModified == true }">
 		<br />
 		<br />
 		<div>
-			Piirivalvur väeosas on muudetud. Vaata <a
-				href="PiirivalvuridVaeosades">kõiki Piirivalvureid väeosades</a>
+			<spring:message code="piirivalvurVaeosas.notif.modified" /> 
+			<a href="<c:url value="/PiirivalvuridVaeosades" />"><spring:message code="nav.link.plural.piirivalvurvaeosas" /></a>
 		</div>
 	</c:if>
 	<c:if test="${deletePiirivalvurVaeosas == true }">

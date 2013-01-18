@@ -39,5 +39,6 @@
  		<!-- JPA -->
 		<dependency name="hsqldb" rev="1.8.0.10" org="hsqldb" conf="runtime->default" />
 		<dependency name="hibernate-entitymanager" rev="4.1.7.Final" org="org.hibernate" conf="runtime->default" />
+		<dependency org="org.hibernate" name="hibernate-validator" rev="4.3.0.Final" conf="runtime->default"/>
 	</dependencies>
 </ivy-module>

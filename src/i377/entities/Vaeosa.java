@@ -2,6 +2,8 @@ package i377.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -37,8 +39,11 @@ public class Vaeosa implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date createdon;
 
+	@Size(min = 0, max = 255)
 	private String kommentaar;
 
+	@NotNull
+	@Size(min = 3, max = 255)
 	private String kood;
 
 	private String modifiedby;
@@ -46,6 +51,8 @@ public class Vaeosa implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date modifiedon;
 
+	@NotNull
+	@Size(min = 3, max = 255)
 	private String nimetus;
 
 	private int version;

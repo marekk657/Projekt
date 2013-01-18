@@ -3,9 +3,11 @@ package i377.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,7 +42,14 @@ public class AmetController {
 	}
 	
 	@RequestMapping(value = "/ModifyAmet", method = RequestMethod.POST)
-	public String ModifyAmet(@ModelAttribute Amet amet, Model model) {
+	public String ModifyAmet(@ModelAttribute @Valid Amet amet, Model model, BindingResult result) {
+		
+		if (result.hasErrors()){
+			model.addAttribute("errors", true);
+			model.addAttribute("ametform", amet);
+			return "Amet";
+		}
+		
 		model.addAttribute("ametform", amet);
 		ametDao.modifyRecord(amet);
 		model.addAttribute("ametModified", true);
@@ -48,7 +57,14 @@ public class AmetController {
 	}
 	
 	@RequestMapping(value = "/AddAmet", method = RequestMethod.POST)
-	public String LisaAmet(@ModelAttribute Amet amet, Model model) {
+	public String LisaAmet(@ModelAttribute @Valid Amet amet, Model model, BindingResult result) {
+		
+		if (result.hasErrors()){
+			model.addAttribute("errors", true);
+			model.addAttribute("ametform", amet);
+			return "Amet";
+		}
+		
 		model.addAttribute("ametform", ametDao.addRecord(amet));
 		model.addAttribute("ametAdded", true);
 		return "Amet";

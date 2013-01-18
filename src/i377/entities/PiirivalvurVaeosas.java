@@ -2,7 +2,10 @@ package i377.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Range;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -36,8 +39,11 @@ public class PiirivalvurVaeosas implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date createdon;
 
+	@Size(min = 0, max = 255)
 	private String kommentaar;
 
+	@NotNull
+	@Range(min = 0, max = 1)
 	private double koormus;
 
 	private String modifiedby;
@@ -50,14 +56,17 @@ public class PiirivalvurVaeosas implements Serializable {
 	//bi-directional many-to-one association to AmetVaeosas
 	@ManyToOne
 	@JoinColumn(name="AMETVAEOSAS_ID")
+	@NotNull
 	private AmetVaeosas ametvaeosa;
 
 	//bi-directional many-to-one association to Piirivalvur
 	@ManyToOne
+	@NotNull
 	private Piirivalvur piirivalvur;
 
 	//bi-directional many-to-one association to Vaeosa
 	@ManyToOne
+	@NotNull
 	private Vaeosa vaeosa;
 
 	public PiirivalvurVaeosas() {
