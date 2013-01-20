@@ -8,6 +8,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script type="text/javascript" src="./js/bootstrap-datepicker.js"></script> 
+<script type="text/javascript" src="./js/date.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.js"></script>
 <style>
 td {
 	text-align: left;
@@ -55,7 +58,7 @@ function addRecord(id) {
 						<!-- Testandmete jaoks -->
 						<form:option value="amet" label="${ametvaeosasform.amet.nimetus}"></form:option>
 					</form:select></td>
-				<td><form:input path="alates" /></td>
+				<td><form:input type="date" path="alates" class="datepick" /></td>
 			</tr>
 
 			<tr>
@@ -69,7 +72,7 @@ function addRecord(id) {
 						<form:option value="amet"
 							label="${ametvaeosasform.vaeosa.nimetus}"></form:option>
 					</form:select></td>
-				<td><form:input path="kuni" /></td>
+				<td><form:input type="date" path="kuni" class="datepick" /></td>
 			</tr>
 
 			<tr>
