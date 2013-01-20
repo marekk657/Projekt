@@ -19,13 +19,17 @@ http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 		<security:intercept-url pattern="/Navigation" access="hasRole('ROLE_USER')" />
 		<security:intercept-url pattern="/Amet" access="hasRole('ROLE_EDIT') or hasRole('ROLE_ADD') or hasRole('ROLE_DEL')" />
 		<security:intercept-url pattern="/AmetVaeosas" access="hasRole('ROLE_EDIT') or hasRole('ROLE_ADD') or hasRole('ROLE_DEL')" />
-		<security:intercept-url pattern="/Piirivalvur" access="hasRole('ROLE_EDIT') or hasRole('ROLE_ADD') or hasRole('ROLE_DEL')" />
-		<security:intercept-url pattern="/Vaeosa" access="hasRole('ROLE_EDIT') or hasRole('ROLE_ADD') or hasRole('ROLE_DEL')" />		
-		<security:intercept-url pattern="/PiirivalvurVaeosas" access="hasRole('ROLE_EDIT') or hasRole('ROLE_ADD') or hasRole('ROLE_DEL')" />
-		<security:intercept-url pattern="/AddAmet" access="hasRole('ROLE_ADD')" />
-		<security:intercept-url pattern="/DeleteAmet" access="hasRole('ROLE_DEL')" />
-		<security:intercept-url pattern="/ModifyAmet" access="hasRole('ROLE_EDIT')" />
 		<security:intercept-url pattern="/Ametid" access="hasRole('ROLE_VIEW') or hasRole('ROLE_USER')" />
+		<security:intercept-url pattern="/AmetidVaeosas" access="hasRole('ROLE_VIEW') or hasRole('ROLE_USER')" />
+		<security:intercept-url pattern="/Piirivalvur" access="hasRole('ROLE_EDIT') or hasRole('ROLE_ADD') or hasRole('ROLE_DEL')" />
+		<security:intercept-url pattern="/PiirivalvurVaeosas" access="hasRole('ROLE_EDIT') or hasRole('ROLE_ADD') or hasRole('ROLE_DEL')" />
+		<security:intercept-url pattern="/Piirivalvurid" access="hasRole('ROLE_VIEW') or hasRole('ROLE_USER')" />
+		<security:intercept-url pattern="/PiirivalvuridVaeosades" access="hasRole('ROLE_VIEW') or hasRole('ROLE_USER')" />
+		<security:intercept-url pattern="/Vaeosa" access="hasRole('ROLE_EDIT') or hasRole('ROLE_ADD') or hasRole('ROLE_DEL')" />		
+		<security:intercept-url pattern="/Vaeosad" access="hasRole('ROLE_VIEW') or hasRole('ROLE_USER')" />
+		<security:intercept-url pattern="/Add*" access="hasRole('ROLE_ADD')" />
+		<security:intercept-url pattern="/Delete*" access="hasRole('ROLE_DEL')" />
+		<security:intercept-url pattern="/Modify*" access="hasRole('ROLE_EDIT')" />
 		<security:logout/>
 	</security:http>
 
