@@ -3,6 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -79,11 +80,19 @@ function addRecord(id) {
 			</tr>
 
 			<tr>
-				<td><input onclick="addRecord(${piirivalvurform.id})" type="submit"
-					value="<spring:message code="entity.btn.save" />" class="buttons" style="float: right;"></td>
-				<td><input type="reset" value="<spring:message code="entity.btn.cancel" />"
-					class="buttons"> <input onclick="deleteRecord()" type="button" value="<spring:message code="entity.btn.delete" />"
-					class="buttons"></td>
+				<td>
+					<sec:authorize access="hasRole('ROLE_EDIT') or hasRole('ROLE_ADD')">
+						<input onclick="addRecord(${piirivalvurform.id})" type="submit" value="<spring:message code="entity.btn.save" />" class="buttons" style="float: right;">
+					</sec:authorize>
+				</td>
+				<td>
+					<sec:authorize access="hasRole('ROLE_EDIT') or hasRole('ROLE_ADD')">
+						<input type="reset" value="<spring:message code="entity.btn.cancel" />"	class="buttons">
+					</sec:authorize>
+					<sec:authorize access="hasRole('ROLE_DEL')">
+							<input onclick="deleteRecord()" type="button" value="<spring:message code="entity.btn.delete" />" class="buttons">
+					</sec:authorize>
+				</td>
 			</tr>
 		</table>
 	</form:form>

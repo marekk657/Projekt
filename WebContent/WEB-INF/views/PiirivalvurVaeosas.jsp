@@ -4,12 +4,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<script type="text/javascript" src="./js/bootstrap-datepicker.js"></script>
-<script type="text/javascript" src="./js/date.js"></script>
 <style>
 td {
 	text-align: left;
@@ -53,11 +52,7 @@ function addRecord(id) {
 					</form:label></td>
 				<td><form:label path="">
 						<spring:message code="piirivalvurVaeosas.field.alates" />
-					</form:label>
-					
-					
-					
-					</td>
+					</form:label></td>
 			</tr>
 
 			<tr>
@@ -65,7 +60,7 @@ function addRecord(id) {
 						<!-- Testandmete jaoks 
 						<form:option value="piirivalvur" label="${piirivalvurvaeosasform.piirivalvur.eesnimi}"></form:option>-->
 					</form:select></td>
-				<td><form:input type="date" class="datepick" path="" /></td>
+				<td><form:input path="" /></td>
 			</tr>
 
 			<tr>
@@ -74,10 +69,7 @@ function addRecord(id) {
 					</form:label></td>
 				<td><form:label path="">
 						<spring:message code="piirivalvurVaeosas.field.kuni" />
-					</form:label>
-					
-					
-					</td>
+					</form:label></td>
 			</tr>
 
 			<tr>
@@ -85,7 +77,7 @@ function addRecord(id) {
 						<!-- Testandmete jaoks 
 						<form:option  value="vaeosa" label="${piirivalvurvaeosasform.vaeosa.nimetus}"></form:option>-->
 					</form:select></td>
-				<td><form:input type="date" class="datepick" path="" /></td>
+				<td><form:input path="" /></td>
 			</tr>
 
 
@@ -119,12 +111,17 @@ function addRecord(id) {
 			</tr>
 
 			<tr>
-				<td><input onclick="addRecord(${piirivalvurvaeosasform.id})"
-					type="button" value="<spring:message code="entity.btn.save" />"
-					class="buttons"> <input type="button"
-					value="<spring:message code="entity.btn.cancel" />" class="buttons">
-					<input onclick="deleteRecord()" type="button"
-					value="<spring:message code="entity.btn.delete" />" class="buttons"></td>
+				<td>
+					<sec:authorize access="hasRole('ROLE_EDIT') or hasRole('ROLE_ADD')">
+						<input onclick="addRecord(${piirivalvurvaeosasform.id})" type="button" value="<spring:message code="entity.btn.save" />" class="buttons">
+					</sec:authorize>
+					<sec:authorize access="hasRole('ROLE_EDIT') or hasRole('ROLE_ADD')">
+						<input type="button" value="<spring:message code="entity.btn.cancel" />" class="buttons">
+					</sec:authorize>
+					<sec:authorize access="hasRole('ROLE_DEL')">
+						<input onclick="deleteRecord()" type="button" value="<spring:message code="entity.btn.delete" />" class="buttons">
+					</sec:authorize>
+				</td>
 			</tr>
 		</table>
 

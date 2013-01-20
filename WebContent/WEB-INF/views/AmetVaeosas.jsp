@@ -3,17 +3,11 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-
-
-
-
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<script type="text/javascript" src="./js/bootstrap-datepicker.js"></script>
-<script type="text/javascript" src="./js/date.js"></script>
-
 <style>
 td {
 	text-align: left;
@@ -61,7 +55,7 @@ function addRecord(id) {
 						<!-- Testandmete jaoks -->
 						<form:option value="amet" label="${ametvaeosasform.amet.nimetus}"></form:option>
 					</form:select></td>
-				<td><form:input type="date" path="alates" class="datepick" /></td>
+				<td><form:input path="alates" /></td>
 			</tr>
 
 			<tr>
@@ -75,7 +69,7 @@ function addRecord(id) {
 						<form:option value="amet"
 							label="${ametvaeosasform.vaeosa.nimetus}"></form:option>
 					</form:select></td>
-				<td><form:input type="date" path="kuni" class="datepick" /></td>
+				<td><form:input path="kuni" /></td>
 			</tr>
 
 			<tr>
@@ -87,10 +81,16 @@ function addRecord(id) {
 			</tr>
 
 			<tr>
-				<td><input onclick="addRecord(${ametvaeosasform.id})" type="button" value="<spring:message code="entity.btn.save" />" class="buttons">
-					<input name="Katkesta" type="reset" value="<spring:message code="entity.btn.cancel" />"
-					class="buttons"> <input onclick="deleteRecord()"
-					name="Kustuta" type="button" value="<spring:message code="entity.btn.delete" />" class="buttons">
+				<td>
+					<sec:authorize access="hasRole('ROLE_EDIT') or hasRole('ROLE_ADD')">
+						<input onclick="addRecord(${ametvaeosasform.id})" type="button" value="<spring:message code="entity.btn.save" />" class="buttons">
+					</sec:authorize>
+					<sec:authorize access="hasRole('ROLE_EDIT') or hasRole('ROLE_ADD')">
+						<input name="Katkesta" type="reset" value="<spring:message code="entity.btn.cancel" />" class="buttons">
+					</sec:authorize>
+					<sec:authorize access="hasRole('ROLE_DEL')">
+						<input onclick="deleteRecord()" name="Kustuta" type="button" value="<spring:message code="entity.btn.delete" />" class="buttons">
+					</sec:authorize>
 				</td>
 			</tr>
 		</table>

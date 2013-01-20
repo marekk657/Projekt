@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,11 +11,13 @@
 </head>
 <body>
 	<a href="<c:url value="/Navigation" />"><spring:message code="entity.nav.menu" /></a><br />
-	<a href="<c:url value="/AmetVaeosas" />"><spring:message code="ametvaeosas.add" /></a><br /><br /><br />
+	<sec:authorize access="hasRole('ROLE_ADD')">
+		<a href="<c:url value="/AmetVaeosas" />"><spring:message code="ametvaeosas.add" /></a><br /><br /><br />
+	</sec:authorize>
 	
 	<c:if test="${not empty AmetidVaeosas}">
 
-		<table> 
+		<table>
 			<tr>
 				<!-- <th>ID</th> -->
 				<th><spring:message code="ametvaeosas.field.amet" /></th>
@@ -44,8 +47,12 @@
 					<td>${ametvaeosas.closedby}</td>
 					<td>${ametvaeosas.closedon}</td>
 					<c:if test="${empty ametvaeosas.closedon}">
-						<td><a href="<c:url value="/AmetVaeosas/${ametvaeosas.id}/" />"><spring:message code="entity.btn.modify" /></a></td>
-						<td><a href="<c:url value="/AmetVaeosas/${ametvaeosas.id}/" />"><spring:message code="entity.btn.delete" /></a></td>
+						<sec:authorize access="hasRole('ROLE_EDIT')">
+							<td><a href="<c:url value="/AmetVaeosas/${ametvaeosas.id}/" />"><spring:message code="entity.btn.modify" /></a></td>
+						</sec:authorize>
+						<sec:authorize access="hasRole('ROLE_DEL')">
+							<td><a href="<c:url value="/AmetVaeosas/${ametvaeosas.id}/" />"><spring:message code="entity.btn.delete" /></a></td>
+						</sec:authorize>
 					</c:if>
 				</tr>
 			</c:forEach>
