@@ -8,6 +8,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script type="text/javascript" src="./js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="./js/date.js"></script>
 <style>
 td {
 	text-align: left;
@@ -51,7 +53,11 @@ function addRecord(id) {
 					</form:label></td>
 				<td><form:label path="">
 						<spring:message code="piirivalvurVaeosas.field.alates" />
-					</form:label></td>
+					</form:label>
+					
+					
+					
+					</td>
 			</tr>
 
 			<tr>
@@ -59,7 +65,7 @@ function addRecord(id) {
 						<!-- Testandmete jaoks 
 						<form:option value="piirivalvur" label="${piirivalvurvaeosasform.piirivalvur.eesnimi}"></form:option>-->
 					</form:select></td>
-				<td><form:input path="" /></td>
+				<td><form:input type="date" class="datepick" path="" /></td>
 			</tr>
 
 			<tr>
@@ -68,7 +74,10 @@ function addRecord(id) {
 					</form:label></td>
 				<td><form:label path="">
 						<spring:message code="piirivalvurVaeosas.field.kuni" />
-					</form:label></td>
+					</form:label>
+					
+					
+					</td>
 			</tr>
 
 			<tr>
@@ -76,7 +85,7 @@ function addRecord(id) {
 						<!-- Testandmete jaoks 
 						<form:option  value="vaeosa" label="${piirivalvurvaeosasform.vaeosa.nimetus}"></form:option>-->
 					</form:select></td>
-				<td><form:input path="" /></td>
+				<td><form:input type="date" class="datepick" path="" /></td>
 			</tr>
 
 
