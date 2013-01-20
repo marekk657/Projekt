@@ -8,7 +8,7 @@ import org.springframework.web.servlet.view.*;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages={"i377"})
-@ImportResource("/WEB-INF/security-context.xml")
+@ImportResource("/WEB-INF/applicationContext.xml")
 public class DispatcherConfig extends WebMvcConfigurerAdapter{
 	
 	@Bean

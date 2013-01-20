@@ -36,6 +36,7 @@
  		<dependency org="org.springframework.security" name="spring-security-taglibs" rev="3.1.2.RELEASE" conf="runtime->default" />
  		<dependency org="org.springframework.security" name="spring-security-core" rev="3.1.2.RELEASE" conf="source,runtime->default"/>
  		
+ 		
  		<!-- JPA -->
 		<dependency name="hsqldb" rev="1.8.0.10" org="hsqldb" conf="runtime->default" />
 		<dependency name="hibernate-entitymanager" rev="4.1.7.Final" org="org.hibernate" conf="runtime->default" />

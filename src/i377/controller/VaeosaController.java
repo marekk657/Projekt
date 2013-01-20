@@ -47,10 +47,13 @@ public class VaeosaController {
 	@RequestMapping(value="/AddVaeosa", method = RequestMethod.POST)
 	public String addVaeosa(@ModelAttribute @Valid Vaeosa vo, Model model, BindingResult result) {
 		
-		if (result.hasErrors()){
+		if (result.hasFieldErrors()){
 			model.addAttribute("errors", true);
+//			model.addAttribute("vaeosaform", vo);
+//			vaeosa(model);
+
 			return "Vaeosa";
-		}
+		}			
 		
 		model.addAttribute("vaeosaform", voDao.addRecord(vo));
 		model.addAttribute("VaeosaAdded", true);

@@ -9,9 +9,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link href="./css/datepicker.css" rel="stylesheet">
+<link href="./css/bootstrap.min.css" rel="stylesheet">
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.js"></script>
 <script type="text/javascript" src="./js/bootstrap-datepicker.js"></script> 
 <script type="text/javascript" src="./js/date.js"></script>
+
 <style>
 td {
 	text-align: left;
