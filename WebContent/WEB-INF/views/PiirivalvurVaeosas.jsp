@@ -5,16 +5,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link href="./css/datepicker.css" rel="stylesheet">
-<link href="./css/bootstrap.min.css" rel="stylesheet">
+<link href="<c:url value="/css/datepicker.css" />" rel="stylesheet">
+<link href="<c:url value="/css/bootstrap.min.css" />" rel="stylesheet">
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.js"></script>
-<script type="text/javascript" src="./js/bootstrap-datepicker.js"></script> 
-<script type="text/javascript" src="./js/date.js"></script>
-
+<script type="text/javascript" src="<c:url value="/js/bootstrap-datepicker.js" />"></script> 
+<script type="text/javascript" src="<c:url value="/js/date.js" />"></script>
 <style>
 td {
 	text-align: left;
@@ -56,7 +55,7 @@ function addRecord(id) {
 				<td><form:label path="piirivalvur">
 						<spring:message code="piirivalvurVaeosas.field.piirivalvur" />
 					</form:label></td>
-				<td><form:label path="">
+				<td><form:label path="alates">
 						<spring:message code="piirivalvurVaeosas.field.alates" />
 					</form:label></td>
 			</tr>
@@ -66,14 +65,14 @@ function addRecord(id) {
 						<!-- Testandmete jaoks 
 						<form:option value="piirivalvur" label="${piirivalvurvaeosasform.piirivalvur.eesnimi}"></form:option>-->
 					</form:select></td>
-				<td><form:input type="date" class="datepick" path=""  /></td>
+				<td><form:input type="date" class="datepick" path="alates"  /></td>
 			</tr>
 
 			<tr>
 				<td><form:label path="vaeosa">
 						<spring:message code="piirivalvurVaeosas.field.vaeosa" />
 					</form:label></td>
-				<td><form:label path="">
+				<td><form:label path="kuni">
 						<spring:message code="piirivalvurVaeosas.field.kuni" />
 					</form:label></td>
 			</tr>
@@ -83,7 +82,7 @@ function addRecord(id) {
 						<!-- Testandmete jaoks 
 						<form:option  value="vaeosa" label="${piirivalvurvaeosasform.vaeosa.nimetus}"></form:option>-->
 					</form:select></td>
-				<td><form:input type="date" class="datepick" path=""  /></td>
+				<td><form:input type="date" class="datepick" path="kuni"  /></td>
 			</tr>
 
 
