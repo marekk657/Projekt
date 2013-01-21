@@ -40,6 +40,7 @@ function addRecord(id) {
 		    <td>
 		    	<form:label path="iscokood" ><spring:message code="amet.field.iscokood" /></form:label>
 		      	<form:input path="iscokood" />
+		      	<br />
 		        <form:label path="nimetus" ><spring:message code="amet.field.nimetus" /></form:label>
 		      	<form:input path="nimetus" />
 		      	<form:input type="hidden" path="id"  />
