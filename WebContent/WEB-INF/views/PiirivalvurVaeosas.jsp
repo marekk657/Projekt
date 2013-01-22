@@ -14,16 +14,7 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.js"></script>
 <script type="text/javascript" src="<c:url value="/js/bootstrap-datepicker.js" />"></script> 
 <script type="text/javascript" src="<c:url value="/js/date.js" />"></script>
-<style>
-td {
-	text-align: left;
-}
 
-.buttons {
-	margin-top: 30px;
-	height: 35px;
-}
-</style>
 <script type="text/javascript">
 function deleteRecord() {
 	document.piirivalvurvaeosas.action="<c:url value="/DeletePiirivalvurVaeosas" />";  
@@ -48,7 +39,7 @@ function addRecord(id) {
 <body>
 	<form:form name="piirivalvurvaeosas" method="POST"
 		modelAttribute="piirivalvurvaeosasform">
-		<table width="400" border="0" cellspacing="0" cellpadding="0"
+		<table id="formtable" width="400" border="0" cellspacing="0" cellpadding="0"
 			style="margin-left: 50px;">
 
 			<tr>
@@ -116,7 +107,28 @@ function addRecord(id) {
 			</tr>
 
 			<tr>
-				<td>
+				<td colspan="2">
+					<c:if test="${piirivalvurVaeosasPiirivalvurNotNull == true }">
+						<span id="veateade"><spring:message code="NotNull.PiirivalvurVaeosas.piirivalvur" /></span><br />
+					</c:if>
+					<c:if test="${piirivalvurVaeosasVaeosaNotNull == true }">
+						<span id="veateade"><spring:message code="NotNull.PiirivalvurVaeosas.vaeosa" /></span><br />
+					</c:if>
+					<c:if test="${piirivalvurVaeosasAmetVaeosaNotNull == true }">
+						<span id="veateade"><spring:message code="NotNull.PiirivalvurVaeosas.ametvaeosa" /></span><br />
+					</c:if>
+					<c:if test="${piirivalvurVaeosasAlatesNotNull == true }">
+						<span id="veateade"><spring:message code="NotNull.PiirivalvurVaeosas.alates" /></span><br />
+					</c:if>
+					<c:if test="${piirivalvurVaeosasKuniNotNull == true }">
+						<span id="veateade"><spring:message code="NotNull.PiirivalvurVaeosas.kuni" /></span><br />
+					</c:if>
+					<c:if test="${piirivalvurVaeosasKoormusNotNull == true }">
+						<span id="veateade"><spring:message code="NotNull.PiirivalvurVaeosas.koormus" /></span><br />
+					</c:if>
+					<c:if test="${piirivalvurVaeosasKoormusRange == true }">
+						<span id="veateade"><spring:message code="Range.PiirivalvurVaeosas.koormus" /></span><br />
+					</c:if>
 					<sec:authorize access="hasRole('ROLE_EDIT') or hasRole('ROLE_ADD')">
 						<input onclick="addRecord(${piirivalvurvaeosasform.id})" type="button" value="<spring:message code="entity.btn.save" />" class="buttons">
 					</sec:authorize>

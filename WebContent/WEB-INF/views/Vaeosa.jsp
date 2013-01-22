@@ -9,10 +9,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<style>
-td {text-align:left;}
-.buttons {margin-top:30px; height: 35px;}
-</style>
+<link href="<c:url value="/css/bootstrap.min.css" />" rel="stylesheet">
 
 <script type="text/javascript" >
 function deleteRecord() {
@@ -50,32 +47,41 @@ function addRecord(id) {
 	</c:if>
 
 	<form:form name="vaeosa" method="POST" modelAttribute="vaeosaform">
-		<table width="400" border="0" cellspacing="0" cellpadding="0"
+		<table id="formtable" width="400" border="0" cellspacing="0" cellpadding="0"
 			style="margin-left: 50px;">
 			<form:input type="hidden" path="id" />
 			<tr>
 				<td>
-					<form:label path="kood"><spring:message code="vaeosa.field.kood" /></form:label><br />
+					<form:label path="kood"><spring:message code="vaeosa.field.kood" /></form:label>
 				 	<form:input path="kood" /> <br />
-					<form:label path="nimetus"><spring:message code="vaeosa.field.nimetus" /></form:label><br />
+					<form:label path="nimetus"><spring:message code="vaeosa.field.nimetus" /></form:label>
 					<form:input path="nimetus" />
 				</td>
 				<td>
 					<p>
 						<form:label path="kommentaar"><spring:message code="entity.field.kommentaar" /></form:label>
-						<br>
 						<form:textarea path="kommentaar" />
 					</p>
 				</td>
 			</tr>
 
 			<tr>
-				<td>
+				<td colspan="2">
+					<c:if test="${vaeosaKoodNotNull == true }">
+						<span id="veateade"><spring:message code="NotNull.Vaeosa.kood" /></span><br />
+					</c:if>
+					<c:if test="${vaeosaKoodSize == true }">
+						<span id="veateade"><spring:message code="Size.Vaeosa.kood" /></span><br />
+					</c:if>
+					<c:if test="${vaeosaNimetusNotNull == true }">
+						<span id="veateade"><spring:message code="NotNull.Vaeosa.nimetus" /></span><br />
+					</c:if>
+					<c:if test="${vaeosaNimetusSize == true }">
+						<span id="veateade"><spring:message code="Size.Vaeosa.nimetus" /></span><br />
+					</c:if>
 					<sec:authorize access="hasRole('ROLE_EDIT') or hasRole('ROLE_ADD')">
-						<input onclick="addRecord(${vaeosaform.id})" type="submit" value="<spring:message code="entity.btn.save" />" class="buttons" style="float: right;">
+						<input onclick="addRecord(${vaeosaform.id})" type="submit" value="<spring:message code="entity.btn.save" />" class="buttons">
 					</sec:authorize>
-				</td>
-				<td>
 					<sec:authorize access="hasRole('ROLE_EDIT') or hasRole('ROLE_ADD')">
 						<input type="reset" value="<spring:message code="entity.btn.cancel" />"	class="buttons">
 					</sec:authorize>

@@ -13,16 +13,7 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.js"></script>
 <script type="text/javascript" src="<c:url value="/js/bootstrap-datepicker.js" />"></script> 
 <script type="text/javascript" src="<c:url value="/js/date.js" />"></script>
-<style>
-td {
-	text-align: left;
-}
 
-.buttons {
-	margin-top: 30px;
-	height: 35px;
-}
-</style>
 <script type="text/javascript">
 function deleteRecord() {
 	document.ametvaeosas.action="<c:url value="/DeleteAmetVaeosas" />";  
@@ -47,7 +38,7 @@ function addRecord(id) {
 	<form:form name="ametvaeosas" method="POST"
 		modelAttribute="ametvaeosasform">
 
-		<table width="400" border="0" cellspacing="0" cellpadding="0"
+		<table id="formtable" width="400" border="0" cellspacing="0" cellpadding="0"
 			style="margin-left: 50px;">
 
 			<tr>
@@ -86,7 +77,19 @@ function addRecord(id) {
 			</tr>
 
 			<tr>
-				<td>
+				<td colspan="2">
+					<c:if test="${ametVaeosasAmetNotNull == true }">
+						<span id="veateade"><spring:message code="NotNull.AmetVaeosas.amet" /></span><br />
+					</c:if>
+					<c:if test="${ametVaeosasVaeosaNotNull == true }">
+						<span id="veateade"><spring:message code="NotNull.AmetVaeosas.vaeosa" /></span><br />
+					</c:if>
+					<c:if test="${ametVaeosasAlatesNotNull == true }">
+						<span id="veateade"><spring:message code="NotNull.AmetVaeosas.alates" /></span><br />
+					</c:if>
+					<c:if test="${ametVaeosasKuniNotNull == true }">
+						<span id="veateade"><spring:message code="NotNull.AmetVaeosas.kuni" /></span><br />
+					</c:if>
 					<sec:authorize access="hasRole('ROLE_EDIT') or hasRole('ROLE_ADD')">
 						<input onclick="addRecord(${ametvaeosasform.id})" type="button" value="<spring:message code="entity.btn.save" />" class="buttons">
 					</sec:authorize>

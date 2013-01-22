@@ -8,10 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<style>
-td {text-align:left;}
-.buttons {margin-top:30px; height: 35px;}
-</style>
+<link href="<c:url value="/css/bootstrap.min.css" />" rel="stylesheet">
 <script type="text/javascript" >
 function deleteRecord() {
 	document.amet.action="<c:url value="/DeleteAmet" />";  
@@ -34,7 +31,7 @@ function addRecord(id) {
 </head>
 <body>
 	<form:form name="amet" method="POST" modelAttribute="ametform">
-		<table width="400" border="0" cellspacing="0" cellpadding="0" style="margin-left:50px;">
+		<table id="formtable" width="400" border="0" cellspacing="0" cellpadding="0" style="margin-left:50px;">
 	  
 		  <tr>
 		    <td>
@@ -46,19 +43,28 @@ function addRecord(id) {
 		      	<form:input type="hidden" path="id"  />
 		    </td>
 		    <td>
-		    	<p>
-		    		<form:label path="kommentaar" ><spring:message code="entity.field.kommentaar" /></form:label>
-		        	<form:textarea path="kommentaar" />
-		      	</p>
+	    		<form:label path="kommentaar" ><spring:message code="entity.field.kommentaar" /></form:label>
+	        	<form:textarea path="kommentaar" />
 		    </td>
 		  </tr>
 		   
 		  <tr>
-		    <td>
-			    <sec:authorize access="hasRole('ROLE_EDIT') or hasRole('ROLE_ADD')">
-			    	<input onclick="addRecord(${ametform.id})" type="submit" value="<spring:message code="entity.btn.save" />" class="buttons" style="float:right;"></td>
+		    <td colspan="2">
+				<c:if test="${ametIscokoodNotNull == true }">
+					<span id="veateade"><spring:message code="NotNull.Amet.iscokood" /></span><br />
+				</c:if>
+				<c:if test="${ametIscokoodSize == true }">
+					<span id="veateade"><spring:message code="Size.Amet.iscokood" /></span><br />
+				</c:if>
+				<c:if test="${ametNimetusNotNull == true }">
+					<span id="veateade"><spring:message code="NotNull.Amet.nimetus" /></span><br />
+				</c:if>
+				<c:if test="${ametNimetusSize == true }">
+					<span id="veateade"><spring:message code="Size.Amet.nimetus" /></span><br />
+				</c:if>
+				<sec:authorize access="hasRole('ROLE_EDIT') or hasRole('ROLE_ADD')">
+			    	<input onclick="addRecord(${ametform.id})" type="submit" value="<spring:message code="entity.btn.save" />" class="buttons">
 			    </sec:authorize>
-		    <td>
 			    <sec:authorize access="hasRole('ROLE_EDIT') or hasRole('ROLE_ADD')">
 			    	<input type="reset" value="<spring:message code="entity.btn.cancel" />" class="buttons">
 			 	</sec:authorize>
