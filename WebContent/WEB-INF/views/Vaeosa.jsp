@@ -10,7 +10,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link href="<c:url value="/css/bootstrap.min.css" />" rel="stylesheet">
-
 <script type="text/javascript" >
 function deleteRecord() {
 	document.vaeosa.action="<c:url value="/DeleteVaeosa" />";  
@@ -47,7 +46,7 @@ function addRecord(id) {
 	</c:if>
 
 	<form:form name="vaeosa" method="POST" modelAttribute="vaeosaform">
-		<table id="formtable" width="400" border="0" cellspacing="0" cellpadding="0"
+		<table  id="formtable" width="400" border="0" cellspacing="0" cellpadding="0"
 			style="margin-left: 50px;">
 			<form:input type="hidden" path="id" />
 			<tr>
@@ -65,7 +64,7 @@ function addRecord(id) {
 				</td>
 			</tr>
 
-			<tr>
+				<tr>
 				<td colspan="2">
 					<c:if test="${vaeosaKoodNotNull == true }">
 						<span id="veateade"><spring:message code="NotNull.Vaeosa.kood" /></span><br />

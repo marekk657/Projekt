@@ -3,6 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
@@ -13,7 +14,6 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.js"></script>
 <script type="text/javascript" src="<c:url value="/js/bootstrap-datepicker.js" />"></script> 
 <script type="text/javascript" src="<c:url value="/js/date.js" />"></script>
-
 <script type="text/javascript">
 function deleteRecord() {
 	document.ametvaeosas.action="<c:url value="/DeleteAmetVaeosas" />";  
@@ -38,34 +38,43 @@ function addRecord(id) {
 	<form:form name="ametvaeosas" method="POST"
 		modelAttribute="ametvaeosasform">
 
-		<table id="formtable" width="400" border="0" cellspacing="0" cellpadding="0"
-			style="margin-left: 50px;">
+		<table id="formtable" style="margin-left: 50px; width: 650px; border-spacing: 0; padding:0;">
 
 			<tr>
-				<td><form:label path="amet"><spring:message code="ametvaeosas.field.amet" /></form:label></td>
+				<td><form:input type="hidden" path="id"  /></td>
+			</tr>
+			<tr>
+				<td><form:label path="amet.id"><spring:message code="ametvaeosas.field.amet" /></form:label></td>
 				<td><form:label path="alates"><spring:message code="ametvaeosas.field.alates" /></form:label></td>
 			</tr>
 
 			<tr>
-				<td><form:select path="amet">
-						<!-- Testandmete jaoks -->
-						<form:option value="amet" label="${ametvaeosasform.amet.nimetus}"></form:option>
+				<td><form:select path="amet.id">
+						<c:forEach items="${ametid}" var="amet">
+							<c:set var="ametId" value="${amet.id}" />
+							<form:option value="${ametId}">
+								<c:out value="${amet.nimetus }"></c:out>
+							</form:option>
+						</c:forEach>
 					</form:select></td>
-				<td><form:input type="date" path="alates" class="datepick" /></td>
+				<td><form:input path="alates" class="datepick" /></td>
 			</tr>
 
 			<tr>
-				<td><form:label path="vaeosa"><spring:message code="ametvaeosas.field.vaeosa" /></form:label></td>
+				<td><form:label path="vaeosa.id"><spring:message code="ametvaeosas.field.vaeosa" /></form:label></td>
 				<td><form:label path="kuni"><spring:message code="ametvaeosas.field.kuni" /></form:label></td>
 			</tr>
 
 			<tr>
-				<td><form:select path="vaeosa">
-						<!-- Testandmete jaoks -->
-						<form:option value="amet"
-							label="${ametvaeosasform.vaeosa.nimetus}"></form:option>
+				<td><form:select path="vaeosa.id">
+						<c:forEach items="${vaeosad}" var="vaeosa">
+							<c:set  var="vaeosaId" value="${vaeosa.id}" />
+							<form:option value="${vaeosaId}">
+								<c:out value="${vaeosa.nimetus}" />
+							</form:option>
+						</c:forEach>
 					</form:select></td>
-				<td><form:input type="date" path="kuni" class="datepick" /></td>
+				<td><form:input path="kuni" class="datepick" /></td>
 			</tr>
 
 			<tr>
@@ -102,6 +111,7 @@ function addRecord(id) {
 				</td>
 			</tr>
 		</table>
+		
 	</form:form>
 
 	<div>

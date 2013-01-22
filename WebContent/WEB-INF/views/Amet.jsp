@@ -9,6 +9,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link href="<c:url value="/css/bootstrap.min.css" />" rel="stylesheet">
+
 <script type="text/javascript" >
 function deleteRecord() {
 	document.amet.action="<c:url value="/DeleteAmet" />";  
@@ -32,7 +33,7 @@ function addRecord(id) {
 <body>
 	<form:form name="amet" method="POST" modelAttribute="ametform">
 		<table id="formtable" width="400" border="0" cellspacing="0" cellpadding="0" style="margin-left:50px;">
-	  
+			  
 		  <tr>
 		    <td>
 		    	<form:label path="iscokood" ><spring:message code="amet.field.iscokood" /></form:label>
@@ -43,9 +44,9 @@ function addRecord(id) {
 		      	<form:input type="hidden" path="id"  />
 		    </td>
 		    <td>
-	    		<form:label path="kommentaar" ><spring:message code="entity.field.kommentaar" /></form:label>
-	        	<form:textarea path="kommentaar" />
-		    </td>
+		    	<form:label path="kommentaar">
+						<spring:message code="entity.field.kommentaar" />
+				</form:label> <form:textarea path="kommentaar" /></td>
 		  </tr>
 		   
 		  <tr>

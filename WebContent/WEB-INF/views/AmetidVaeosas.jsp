@@ -35,8 +35,12 @@
 			
 			<c:forEach items="${AmetidVaeosas}" var="ametvaeosas"> 
 				<tr>
-					<td><a href="Piirivalvur/${ametvaeosas.piirivalvur.id}/">${ametvaeosas.Piirivalvur}</a></td>
-					<td>${ametvaeosas.vaeosa}</td>
+					<td>
+						<a href="<c:url value="/Amet/${ametvaeosas.amet.id}/" />">${ametvaeosas.amet.nimetus}</a>
+					</td>
+					<td>
+						<a href="<c:url value="/Vaeosa/${ametvaeosas.vaeosa.id}/" />">${ametvaeosas.vaeosa.nimetus}</a>
+					</td>
 					<td>${ametvaeosas.alates}</td>
 					<td>${ametvaeosas.kuni}</td>
 					<td>${ametvaeosas.kommentaar}</td>

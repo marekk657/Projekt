@@ -30,7 +30,7 @@ http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 		<security:intercept-url pattern="/Add*" access="hasRole('ROLE_ADD')" />
 		<security:intercept-url pattern="/Delete*" access="hasRole('ROLE_DEL')" />
 		<security:intercept-url pattern="/Modify*" access="hasRole('ROLE_EDIT')" />
-		<security:logout/>
+		<security:logout />
 	</security:http>
 
 

@@ -38,11 +38,11 @@
 			<c:forEach items="${PiirivalvuridVaeosades}" var="piirivalvurvaeosas"> 
 				<tr>
 					<!-- <td>${piirivalvurvaeosas.id}</td> -->
-					<td>${piirivalvurvaeosas.piirivalvur}</td>
+					<td>${piirivalvurvaeosas.piirivalvur.eesnimi} ${piirivalvurvaeosas.piirivalvur.perekonnanimi}</td>
 					<td>${piirivalvurvaeosas.alates}</td>
 					<td>${piirivalvurvaeosas.kuni}</td>
-					<td>${piirivalvurvaeosas.vaeosa}</td>
-					<td>${piirivalvurvaeosas.ametvaeosa}</td>
+					<td>${piirivalvurvaeosas.vaeosa.nimetus}</td>
+					<td>${piirivalvurvaeosas.ametvaeosa.amet.nimetus}</td>
 					<td>${piirivalvurvaeosas.koormus}</td>
 					<td>${piirivalvurvaeosas.kommentaar}</td>
 					<td>${piirivalvurvaeosas.createdby}</td>

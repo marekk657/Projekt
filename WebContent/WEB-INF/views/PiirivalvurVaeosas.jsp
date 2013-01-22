@@ -14,7 +14,6 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.js"></script>
 <script type="text/javascript" src="<c:url value="/js/bootstrap-datepicker.js" />"></script> 
 <script type="text/javascript" src="<c:url value="/js/date.js" />"></script>
-
 <script type="text/javascript">
 function deleteRecord() {
 	document.piirivalvurvaeosas.action="<c:url value="/DeletePiirivalvurVaeosas" />";  
@@ -39,11 +38,14 @@ function addRecord(id) {
 <body>
 	<form:form name="piirivalvurvaeosas" method="POST"
 		modelAttribute="piirivalvurvaeosasform">
-		<table id="formtable" width="400" border="0" cellspacing="0" cellpadding="0"
-			style="margin-left: 50px;">
+		<table id="formtable" style="margin-left: 50px; width: 650px; border-spacing: 0; padding:0;">
 
 			<tr>
-				<td><form:label path="piirivalvur">
+				<td><form:input type="hidden" path="id"  /></td>
+			</tr>
+
+			<tr>
+				<td><form:label path="piirivalvur.id">
 						<spring:message code="piirivalvurVaeosas.field.piirivalvur" />
 					</form:label></td>
 				<td><form:label path="alates">
@@ -52,15 +54,23 @@ function addRecord(id) {
 			</tr>
 
 			<tr>
-				<td><form:select path="piirivalvur">
-						<!-- Testandmete jaoks 
-						<form:option value="piirivalvur" label="${piirivalvurvaeosasform.piirivalvur.eesnimi}"></form:option>-->
-					</form:select></td>
-				<td><form:input type="date" class="datepick" path="alates"  /></td>
+				<td>
+					<form:select path="piirivalvur.id">
+						<c:forEach items="${piirivalvurid}" var="piirivalvur">
+							<c:set var="valvurId" value="${piirivalvur.id}"/>
+							<form:option value="${valvurId}">
+								<c:out value="${piirivalvur.eesnimi}"/>
+								<c:out value=" "/>
+								<c:out value="${piirivalvur.perekonnanimi}"/>
+							</form:option>
+						</c:forEach>
+					</form:select>
+				</td>
+				<td><form:input class="datepick" path="alates"  /></td>
 			</tr>
 
 			<tr>
-				<td><form:label path="vaeosa">
+				<td><form:label path="vaeosa.id">
 						<spring:message code="piirivalvurVaeosas.field.vaeosa" />
 					</form:label></td>
 				<td><form:label path="kuni">
@@ -69,27 +79,34 @@ function addRecord(id) {
 			</tr>
 
 			<tr>
-				<td><form:select path="vaeosa">
-						<!-- Testandmete jaoks 
-						<form:option  value="vaeosa" label="${piirivalvurvaeosasform.vaeosa.nimetus}"></form:option>-->
+				<td>
+					<form:select path="vaeosa.id">
+						<c:forEach items="${vaeosad}" var="vaeosa">
+							<c:set var="vaeosaId" value="${vaeosa.id}"/>
+							<form:option value="${vaeosaId}">
+								<c:out value="${vaeosa.nimetus}" />
+							</form:option>
+						</c:forEach>
 					</form:select></td>
-				<td><form:input type="date" class="datepick" path="kuni"  /></td>
+				<td><form:input class="datepick" path="kuni"  /></td>
 			</tr>
 
 
 			<tr>
-				<td><form:label path="ametvaeosa">
+				<td>
+					<form:label path="ametvaeosa.id">
 						<spring:message code="piirivalvurVaeosas.field.ametvaeosa" />
-					</form:label></td>
+					</form:label>
+				</td>
 				<td>
 					<form:label path="koormus"><spring:message code="piirivalvurVaeosas.field.koormus" /></form:label>
 				</td>
 			</tr>
 
 			<tr>
-				<td><form:select path="ametvaeosa">
-						<!-- Testandmete jaoks 
-						<form:option value="ametvaeosa" label="${piirivalvurvaeosasform.ametvaeosa.amet.nimetus}"></form:option>-->
+				<td><form:select path="ametvaeosa.id">
+						<form:options items="${ametid}" var="amet" itemLabel="amet.nimetus" itemValue="id"/>
+							
 					</form:select></td>
 				<td>
 					<form:input path="koormus" />
