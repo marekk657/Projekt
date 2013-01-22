@@ -68,7 +68,7 @@ public class PiirivalvurVaeosasController {
 		
 		if (result.hasErrors()){
 			model.addAttribute("errors", true);
-			model.addAttribute("piirivalvurvaeosasform", pva);
+//			model.addAttribute("piirivalvurvaeosasform", pva);
 			return "PiirivalvurVaeosas";
 		}
 		
@@ -85,7 +85,7 @@ public class PiirivalvurVaeosasController {
 		
 		if (result.hasErrors()){
 			model.addAttribute("errors", true);
-			model.addAttribute("piirivalvurvaeosasform", pva);
+//			model.addAttribute("piirivalvurvaeosasform", pva);
 			return "PiirivalvurVaeosas";
 		}
 		

@@ -35,8 +35,6 @@ public class AmetVaeosasController {
 
 		AmetVaeosas av = new AmetVaeosas();
 		av.setId(-1);
-//		av.setAmet(null);
-//		av.setVaeosa(null);
 		
 		model.addAttribute("ametid", aDao.activeRecords());
 		model.addAttribute("vaeosad", voDao.activeRecords());
@@ -64,7 +62,7 @@ public class AmetVaeosasController {
 		
 		if (result.hasErrors()){
 			model.addAttribute("errors", true);
-			model.addAttribute("ametvaeosasform", av);
+//			model.addAttribute("ametvaeosasform", av);
 			return "AmetVaeosas";
 		}
 		
@@ -83,7 +81,7 @@ public class AmetVaeosasController {
 		
 		if (result.hasErrors()){
 			model.addAttribute("errors", true);
-			model.addAttribute("ametvaeosasform", av);
+//			model.addAttribute("ametvaeosasform", av);
 			return "AmetVaeosas";
 		}
 		

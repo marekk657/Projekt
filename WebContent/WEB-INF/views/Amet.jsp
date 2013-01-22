@@ -31,7 +31,7 @@ function addRecord(id) {
 <title><spring:message code="amet.title" /></title>
 </head>
 <body>
-	<form:form commandName="amet" name="amet" method="POST" modelAttribute="ametform">
+	<form:form name="amet" method="POST" modelAttribute="ametform">
 		<table id="formtable" width="400" border="0" cellspacing="0" cellpadding="0" style="margin-left:50px;">
 			  
 		  <tr>
@@ -48,27 +48,27 @@ function addRecord(id) {
 						<spring:message code="entity.field.kommentaar" />
 				</form:label> <form:textarea path="kommentaar" /></td>
 		  </tr>
-		   
-		  <tr>
-				<c:if test="${errors == true}">
-					<span id="veateade"><form:errors path="iscokood"></form:errors></span>
-					<span id="veateade"><form:errors path="nimetus"></form:errors></span>
-				</c:if>
-			</tr>
-		   
-		  <tr>
+
+			<c:if test="${errors == true}">
+				<tr>
+					<form:errors id="veateade" path="iscokood" />
+					<form:errors id="veateade" path="nimetus" />
+				</tr>
+			</c:if>
+			
+			<tr><!-- Alternatiiv -->
 		    <td colspan="2">
 				<c:if test="${ametIscokoodNotNull == true }">
-					<span id="veateade"><spring:message code="NotNull.Amet.iscokood" /></span><br />
+					<span id="veateade"><spring:message code="NotNull.amet.iscokood" /></span><br />
 				</c:if>
 				<c:if test="${ametIscokoodSize == true }">
-					<span id="veateade"><spring:message code="Size.Amet.iscokood" /></span><br />
+					<span id="veateade"><spring:message code="Size.amet.iscokood" /></span><br />
 				</c:if>
 				<c:if test="${ametNimetusNotNull == true }">
-					<span id="veateade"><spring:message code="NotNull.Amet.nimetus" /></span><br />
+					<span id="veateade"><spring:message code="NotNull.amet.nimetus" /></span><br />
 				</c:if>
 				<c:if test="${ametNimetusSize == true }">
-					<span id="veateade"><spring:message code="Size.Amet.nimetus" /></span><br />
+					<span id="veateade"><spring:message code="Size.amet.nimetus" /></span><br />
 				</c:if>
 				<sec:authorize access="hasRole('ROLE_EDIT') or hasRole('ROLE_ADD')">
 			    	<input onclick="addRecord(${ametform.id})" type="submit" value="<spring:message code="entity.btn.save" />" class="buttons">

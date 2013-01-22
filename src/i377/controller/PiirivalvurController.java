@@ -48,7 +48,7 @@ public class PiirivalvurController {
 		
 		if (result.hasErrors()){
 			model.addAttribute("errors", true);
-			model.addAttribute("piirivalvurform", valvur);
+//			model.addAttribute("piirivalvurform", valvur);
 			return "Piirivalvur";
 		}
 		
@@ -62,7 +62,7 @@ public class PiirivalvurController {
 		
 		if (result.hasErrors()){
 			model.addAttribute("errors", true);
-			model.addAttribute("piirivalvurform", valvur);
+//			model.addAttribute("piirivalvurform", valvur);
 			return "Piirivalvur";
 		}
 		

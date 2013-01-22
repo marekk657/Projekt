@@ -35,7 +35,7 @@ function addRecord(id) {
 <title><spring:message code="ametvaeosas.title" /></title>
 </head>
 <body>
-	<form:form name="ametvaeosas" method="POST"
+	<form:form commandName="ametVaeosas" name="ametvaeosas" method="POST"
 		modelAttribute="ametvaeosasform">
 
 		<table id="formtable" style="margin-left: 50px; width: 650px; border-spacing: 0; padding:0;">
@@ -84,20 +84,30 @@ function addRecord(id) {
 			<tr>
 				<td colspan="2"><form:textarea path="kommentaar" /></td>
 			</tr>
+			
+			
+			<c:if test="${errors == true}">
+				<tr>
+					<form:errors id="veateade" path="amet.id" />
+					<form:errors id="veateade" path="vaeosa.id" />
+					<form:errors id="veateade" path="alates" />
+					<form:errors id="veateade" path="kuni" />
+				</tr>
+			</c:if>
 
-			<tr>
+			<tr><!-- Alternatiiv -->
 				<td colspan="2">
 					<c:if test="${ametVaeosasAmetNotNull == true }">
-						<span id="veateade"><spring:message code="NotNull.AmetVaeosas.amet" /></span><br />
+						<span id="veateade"><spring:message code="NotNull.ametVaeosas.amet" /></span><br />
 					</c:if>
 					<c:if test="${ametVaeosasVaeosaNotNull == true }">
-						<span id="veateade"><spring:message code="NotNull.AmetVaeosas.vaeosa" /></span><br />
+						<span id="veateade"><spring:message code="NotNull.ametVaeosas.vaeosa" /></span><br />
 					</c:if>
 					<c:if test="${ametVaeosasAlatesNotNull == true }">
-						<span id="veateade"><spring:message code="NotNull.AmetVaeosas.alates" /></span><br />
+						<span id="veateade"><spring:message code="NotNull.ametVaeosas.alates" /></span><br />
 					</c:if>
 					<c:if test="${ametVaeosasKuniNotNull == true }">
-						<span id="veateade"><spring:message code="NotNull.AmetVaeosas.kuni" /></span><br />
+						<span id="veateade"><spring:message code="NotNull.ametVaeosas.kuni" /></span><br />
 					</c:if>
 					<sec:authorize access="hasRole('ROLE_EDIT') or hasRole('ROLE_ADD')">
 						<input onclick="addRecord(${ametvaeosasform.id})" type="button" value="<spring:message code="entity.btn.save" />" class="buttons">

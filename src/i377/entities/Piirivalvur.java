@@ -237,14 +237,20 @@ public class Piirivalvur implements Serializable {
 	public void recordCreated() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-		setCreatedby(auth.getName());
+		String name = null;
+		if (auth == null || auth.getName() == null) 
+			name = "TEST";
+		else
+			name = auth.getName();
+
+		setCreatedby(name);
 		setCreatedon(new Date());
 	}
 	
 	@PreUpdate
 	public void recordModified() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		
+
 		setModifiedby(auth.getName());
 		setModifiedon(new Date());
 	}

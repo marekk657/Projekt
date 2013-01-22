@@ -122,5 +122,4 @@ public class AmetVaeosasDaoImpl implements RecordDao<AmetVaeosas> {
 			em.close();
 		}		
 	}
-
 }

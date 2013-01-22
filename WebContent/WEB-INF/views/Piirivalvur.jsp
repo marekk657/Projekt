@@ -31,7 +31,7 @@ function addRecord(id) {
 <title><spring:message code="piirivalvur.title" /></title>
 </head>
 <body>
-	<form:form name="piirivalvur" method="POST"
+	<form:form commandName="piirivalvur" name="piirivalvur" method="POST"
 		modelAttribute="piirivalvurform">
 
 		<table id="formtable" width="400" border="0" cellspacing="0" cellpadding="0"
@@ -74,55 +74,68 @@ function addRecord(id) {
 				</td>
 			</tr>
 
-			<tr>
+			<c:if test="${errors == true}">
+				<tr>
+					<form:errors id="veateade" path="sodurikood" />
+					<form:errors id="veateade" path="isikukood" />
+					<form:errors id="veateade" path="eesnimi" />
+					<form:errors id="veateade" path="perekonnanimi" />
+					<form:errors id="veateade" path="sugu" />
+					<form:errors id="veateade" path="email" />
+					<form:errors id="veateade" path="telefon" />
+					<form:errors id="veateade" path="aadress" />
+				</tr>
+			</c:if>
+
+			<tr><!-- Alternatiiv -->
 				<td colspan="2">
 					<c:if test="${piirivalvurSodurikoodNotNull == true }">
-						<span id="veateade"><spring:message code="NotNull.Piirivalvur.sodurikood" /></span><br />
+						<span id="veateade"><spring:message code="NotNull.piirivalvur.sodurikood" /></span><br />
 					</c:if>
 					<c:if test="${piirivalvurSodurikoodSize == true }">
-						<span id="veateade"><spring:message code="Size.Piirivalvur.sodurikood" /></span><br />
+						<span id="veateade"><spring:message code="Size.piirivalvur.sodurikood" /></span><br />
 					</c:if>
 					<c:if test="${piirivalvurIsikukoodNotNull == true }">
-						<span id="veateade"><spring:message code="NotNull.Piirivalvur.isikukood" /></span><br />
+						<span id="veateade"><spring:message code="NotNull.piirivalvur.isikukood" /></span><br />
 					</c:if>
 					<c:if test="${piirivalvurIsikukoodSize == true }">
-						<span id="veateade"><spring:message code="Size.Piirivalvur.isikukood" /></span><br />
+						<span id="veateade"><spring:message code="Size.piirivalvur.isikukood" /></span><br />
 					</c:if>
 					<c:if test="${piirivalvurEesnimiNotNull == true }">
-						<span id="veateade"><spring:message code="NotNull.Piirivalvur.eesnimi" /></span><br />
+						<span id="veateade"><spring:message code="NotNull.piirivalvur.eesnimi" /></span><br />
 					</c:if>
 					<c:if test="${piirivalvurEesnimiSize == true }">
-						<span id="veateade"><spring:message code="Size.Piirivalvur.eesnimi" /></span><br />
+						<span id="veateade"><spring:message code="Size.piirivalvur.eesnimi" /></span><br />
 					</c:if>
 					<c:if test="${piirivalvurPerekonnanimiNotNull == true }">
-						<span id="veateade"><spring:message code="NotNull.Piirivalvur.perekonnanimi" /></span><br />
+						<span id="veateade"><spring:message code="NotNull.piirivalvur.perekonnanimi" /></span><br />
 					</c:if>
 					<c:if test="${piirivalvurPerekonnanimiSize == true }">
-						<span id="veateade"><spring:message code="Size.Piirivalvur.perekonnanimi" /></span><br />
+						<span id="veateade"><spring:message code="Size.piirivalvur.perekonnanimi" /></span><br />
 					</c:if>
 					<c:if test="${piirivalvurSuguNotNull == true }">
-						<span id="veateade"><spring:message code="NotNull.Piirivalvur.sugu" /></span><br />
+						<span id="veateade"><spring:message code="NotNull.piirivalvur.sugu" /></span><br />
 					</c:if>
 					<c:if test="${piirivalvurSuguRange == true }">
-						<span id="veateade"><spring:message code="Range.Piirivalvur.sugu" /></span><br />
+						<span id="veateade"><spring:message code="Range.piirivalvur.sugu" /></span><br />
 					</c:if>
 					<c:if test="${piirivalvurEmailNotNull == true }">
-						<span id="veateade"><spring:message code="NotNull.Piirivalvur.email" /></span><br />
+						<span id="veateade"><spring:message code="NotNull.piirivalvur.email" /></span><br />
 					</c:if>
 					<c:if test="${piirivalvurEmailSize == true }">
-						<span id="veateade"><spring:message code="Size.Piirivalvur.email" /></span><br />
+						<span id="veateade"><spring:message code="Size.piirivalvur.email" /></span><br />
 					</c:if>
 					<c:if test="${piirivalvurTelefonNotNull == true }">
-						<span id="veateade"><spring:message code="NotNull.Piirivalvur.telefon" /></span><br />
+						<span id="veateade"><spring:message code="NotNull.piirivalvur.telefon" /></span><br />
 					</c:if>
 					<c:if test="${piirivalvurTelefonSize == true }">
-						<span id="veateade"><spring:message code="Size.Piirivalvur.telefon" /></span><br />
+						<span id="veateade"><spring:message code="Size.piirivalvur.telefon" /></span><br />
 					</c:if>
 					<c:if test="${piirivalvurAadressNotNull == true }">
-						<span id="veateade"><spring:message code="NotNull.Piirivalvur.aadress" /></span><br />
+						<span id="veateade"><spring:message code="NotNull.piirivalvur.aadress" /></span><br />
 					</c:if>
 					<c:if test="${piirivalvurAadressSize == true }">
-						<span id="veateade"><spring:message code="Size.Piirivalvur.aadress" /></span><br />
+						<span id="veateade"><spring:message code="Size.piirivalvur.aadress" /></span><br />
 					</c:if>
 					<sec:authorize access="hasRole('ROLE_EDIT') or hasRole('ROLE_ADD')">
 						<input onclick="addRecord(${piirivalvurform.id})" type="submit" value="<spring:message code="entity.btn.save" />" class="buttons">

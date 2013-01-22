@@ -46,7 +46,7 @@ public class AmetController {
 		
 		if (result.hasErrors()){
 			model.addAttribute("errors", true);
-			model.addAttribute("ametform", amet);
+			
 			return "Amet";
 		}
 		
@@ -61,7 +61,7 @@ public class AmetController {
 		
 		if (result.hasErrors()){
 			model.addAttribute("errors", true);
-			model.addAttribute("ametform", amet);
+			
 			return "Amet";
 		}
 		

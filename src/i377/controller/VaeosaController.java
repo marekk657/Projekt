@@ -65,7 +65,7 @@ public class VaeosaController {
 		
 		if (result.hasErrors()){
 			model.addAttribute("errors", true);
-			model.addAttribute("vaeosaform", vo);
+//			model.addAttribute("vaeosaform", vo);
 			return "Vaeosa";
 		}
 		

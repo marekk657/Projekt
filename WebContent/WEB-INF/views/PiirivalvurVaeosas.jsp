@@ -36,7 +36,7 @@ function addRecord(id) {
 <title><spring:message code="piirivalvurVaeosas.title" /></title>
 </head>
 <body>
-	<form:form name="piirivalvurvaeosas" method="POST"
+	<form:form commandName="piirivalvurVaeosas" name="piirivalvurvaeosas" method="POST"
 		modelAttribute="piirivalvurvaeosasform">
 		<table id="formtable" style="margin-left: 50px; width: 650px; border-spacing: 0; padding:0;">
 
@@ -123,28 +123,39 @@ function addRecord(id) {
 				<td colspan="2"><form:textarea path="kommentaar" /></td>
 			</tr>
 
-			<tr>
+			<c:if test="${errors == true}">
+				<tr>
+					<form:errors id="veateade" path="koormus" />
+					<form:errors id="veateade" path="piirivalvur.id" />
+					<form:errors id="veateade" path="vaeosa.id" />
+					<form:errors id="veateade" path="ametvaeosa.id" />
+					<form:errors id="veateade" path="alates" />
+					<form:errors id="veateade" path="kuni" />
+				</tr>
+			</c:if>
+
+			<tr><!-- Alternatiiv -->
 				<td colspan="2">
 					<c:if test="${piirivalvurVaeosasPiirivalvurNotNull == true }">
-						<span id="veateade"><spring:message code="NotNull.PiirivalvurVaeosas.piirivalvur" /></span><br />
+						<span id="veateade"><spring:message code="NotNull.piirivalvurVaeosas.piirivalvur" /></span><br />
 					</c:if>
 					<c:if test="${piirivalvurVaeosasVaeosaNotNull == true }">
-						<span id="veateade"><spring:message code="NotNull.PiirivalvurVaeosas.vaeosa" /></span><br />
+						<span id="veateade"><spring:message code="NotNull.piirivalvurVaeosas.vaeosa" /></span><br />
 					</c:if>
 					<c:if test="${piirivalvurVaeosasAmetVaeosaNotNull == true }">
-						<span id="veateade"><spring:message code="NotNull.PiirivalvurVaeosas.ametvaeosa" /></span><br />
+						<span id="veateade"><spring:message code="NotNull.piirivalvurVaeosas.ametvaeosa" /></span><br />
 					</c:if>
 					<c:if test="${piirivalvurVaeosasAlatesNotNull == true }">
-						<span id="veateade"><spring:message code="NotNull.PiirivalvurVaeosas.alates" /></span><br />
+						<span id="veateade"><spring:message code="NotNull.piirivalvurVaeosas.alates" /></span><br />
 					</c:if>
 					<c:if test="${piirivalvurVaeosasKuniNotNull == true }">
-						<span id="veateade"><spring:message code="NotNull.PiirivalvurVaeosas.kuni" /></span><br />
+						<span id="veateade"><spring:message code="NotNull.piirivalvurVaeosas.kuni" /></span><br />
 					</c:if>
 					<c:if test="${piirivalvurVaeosasKoormusNotNull == true }">
-						<span id="veateade"><spring:message code="NotNull.PiirivalvurVaeosas.koormus" /></span><br />
+						<span id="veateade"><spring:message code="NotNull.piirivalvurVaeosas.koormus" /></span><br />
 					</c:if>
 					<c:if test="${piirivalvurVaeosasKoormusRange == true }">
-						<span id="veateade"><spring:message code="Range.PiirivalvurVaeosas.koormus" /></span><br />
+						<span id="veateade"><spring:message code="Range.piirivalvurVaeosas.koormus" /></span><br />
 					</c:if>
 					<sec:authorize access="hasRole('ROLE_EDIT') or hasRole('ROLE_ADD')">
 						<input onclick="addRecord(${piirivalvurvaeosasform.id})" type="button" value="<spring:message code="entity.btn.save" />" class="buttons">

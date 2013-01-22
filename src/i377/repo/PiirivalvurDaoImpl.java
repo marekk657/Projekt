@@ -126,5 +126,4 @@ public class PiirivalvurDaoImpl implements RecordDao<Piirivalvur> {
 			em.close();
 		}
 	}
-
 }

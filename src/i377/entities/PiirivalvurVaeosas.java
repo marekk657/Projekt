@@ -210,7 +210,13 @@ public class PiirivalvurVaeosas implements Serializable {
 	public void recordCreated() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-		setCreatedby(auth.getName());
+		String name = null;
+		if (auth == null || auth.getName() == null) 
+			name = "TEST";
+		else
+			name = auth.getName();
+
+		setCreatedby(name);
 		setCreatedon(new Date());
 	}
 	

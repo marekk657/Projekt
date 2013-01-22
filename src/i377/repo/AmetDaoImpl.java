@@ -124,5 +124,5 @@ public class AmetDaoImpl implements RecordDao<Amet>{
 		} finally {
 			em.close();
 		}
-	}	
+	}
 }

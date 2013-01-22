@@ -163,8 +163,14 @@ public class Amet implements Serializable {
 	@PrePersist
 	public void recordCreated() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		
+		String name = null;
+		if (auth == null || auth.getName() == null) 
+			name = "TEST";
+		else
+			name = auth.getName();
 
-		setCreatedby(auth.getName());
+		setCreatedby(name);
 		setCreatedon(new Date());
 	}
 	

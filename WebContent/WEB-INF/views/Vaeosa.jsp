@@ -45,7 +45,7 @@ function addRecord(id) {
 		</div>
 	</c:if>
 
-	<form:form name="vaeosa" method="POST" modelAttribute="vaeosaform">
+	<form:form commandName="vaeosa" name="vaeosa" method="POST" modelAttribute="vaeosaform">
 		<table  id="formtable" width="400" border="0" cellspacing="0" cellpadding="0"
 			style="margin-left: 50px;">
 			<form:input type="hidden" path="id" />
@@ -64,19 +64,26 @@ function addRecord(id) {
 				</td>
 			</tr>
 
+			<c:if test="${errors == true}">
 				<tr>
+					<form:errors id="veateade" path="kood" />
+					<form:errors id="veateade" path="nimetus" />
+				</tr>
+			</c:if>
+
+			<tr><!-- Alternatiiv -->
 				<td colspan="2">
 					<c:if test="${vaeosaKoodNotNull == true }">
-						<span id="veateade"><spring:message code="NotNull.Vaeosa.kood" /></span><br />
+						<span id="veateade"><spring:message code="NotNull.vaeosa.kood" /></span><br />
 					</c:if>
 					<c:if test="${vaeosaKoodSize == true }">
-						<span id="veateade"><spring:message code="Size.Vaeosa.kood" /></span><br />
+						<span id="veateade"><spring:message code="Size.vaeosa.kood" /></span><br />
 					</c:if>
 					<c:if test="${vaeosaNimetusNotNull == true }">
-						<span id="veateade"><spring:message code="NotNull.Vaeosa.nimetus" /></span><br />
+						<span id="veateade"><spring:message code="NotNull.vaeosa.nimetus" /></span><br />
 					</c:if>
 					<c:if test="${vaeosaNimetusSize == true }">
-						<span id="veateade"><spring:message code="Size.Vaeosa.nimetus" /></span><br />
+						<span id="veateade"><spring:message code="Size.vaeosa.nimetus" /></span><br />
 					</c:if>
 					<sec:authorize access="hasRole('ROLE_EDIT') or hasRole('ROLE_ADD')">
 						<input onclick="addRecord(${vaeosaform.id})" type="submit" value="<spring:message code="entity.btn.save" />" class="buttons">
