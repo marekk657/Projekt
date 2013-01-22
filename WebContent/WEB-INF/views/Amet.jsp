@@ -31,7 +31,7 @@ function addRecord(id) {
 <title><spring:message code="amet.title" /></title>
 </head>
 <body>
-	<form:form name="amet" method="POST" modelAttribute="ametform">
+	<form:form commandName="amet" name="amet" method="POST" modelAttribute="ametform">
 		<table id="formtable" width="400" border="0" cellspacing="0" cellpadding="0" style="margin-left:50px;">
 			  
 		  <tr>
@@ -48,6 +48,13 @@ function addRecord(id) {
 						<spring:message code="entity.field.kommentaar" />
 				</form:label> <form:textarea path="kommentaar" /></td>
 		  </tr>
+		   
+		  <tr>
+				<c:if test="${errors == true}">
+					<span id="veateade"><form:errors path="iscokood"></form:errors></span>
+					<span id="veateade"><form:errors path="nimetus"></form:errors></span>
+				</c:if>
+			</tr>
 		   
 		  <tr>
 		    <td colspan="2">
