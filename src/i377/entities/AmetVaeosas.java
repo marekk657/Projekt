@@ -5,17 +5,18 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
 @NamedQueries({
     @NamedQuery(name="AmetVaeosas.findAll", query="SELECT avs FROM AmetVaeosas avs"),
     @NamedQuery(name="AmetVaeosas.findActiveRecords", query="SELECT avs FROM AmetVaeosas avs WHERE avs.closedon IS NULL"),
-    @NamedQuery(name="AmetVaeosas.findById", query="SELECT amv FROM AmetVaeosas amv WHERE amv.id = :id")
+    @NamedQuery(name="AmetVaeosas.findById", query="SELECT amv FROM AmetVaeosas amv WHERE amv.id = :id"),
+    @NamedQuery(name="AmetVaeosas.findByVaeosa", query="SELECT amv FROM AmetVaeosas amv WHERE amv.vaeosa.id = :id")
 })
 
 /**
@@ -30,8 +31,10 @@ public class AmetVaeosas implements Serializable {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private long id;
 
+	@Column(name = "Alates")
 	@NotNull
-	private Timestamp alates;
+	@DateTimeFormat(pattern="dd/MM/yyyy")
+	private Date alates;
 
 	private String closedby;
 
@@ -46,8 +49,10 @@ public class AmetVaeosas implements Serializable {
 	@Size(min = 0, max = 255)
 	private String kommentaar;
 
+	@Column(name = "Kuni")
 	@NotNull
-	private Timestamp kuni;
+	@DateTimeFormat(pattern="dd/MM/yyyy")
+	private Date kuni;
 
 	private String modifiedby;
 
@@ -58,11 +63,13 @@ public class AmetVaeosas implements Serializable {
 
 	//bi-directional many-to-one association to Amet
 	@ManyToOne
+	@JoinColumn(name = "AMET_ID")
 	@NotNull
 	private Amet amet;
 
 	//bi-directional many-to-one association to Vaeosa
 	@ManyToOne
+	@JoinColumn(name = "VAEOSA_ID")
 	@NotNull
 	private Vaeosa vaeosa;
 
@@ -81,11 +88,11 @@ public class AmetVaeosas implements Serializable {
 		this.id = id;
 	}
 
-	public Timestamp getAlates() {
+	public Date getAlates() {
 		return this.alates;
 	}
 
-	public void setAlates(Timestamp alates) {
+	public void setAlates(Date alates) {
 		this.alates = alates;
 	}
 
@@ -129,11 +136,11 @@ public class AmetVaeosas implements Serializable {
 		this.kommentaar = kommentaar;
 	}
 
-	public Timestamp getKuni() {
+	public Date getKuni() {
 		return this.kuni;
 	}
 
-	public void setKuni(Timestamp kuni) {
+	public void setKuni(Date kuni) {
 		this.kuni = kuni;
 	}
 

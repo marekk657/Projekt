@@ -15,7 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class AmetDaoImpl implements RecordDao<Amet> {
+public class AmetDaoImpl implements RecordDao<Amet>{
 
 	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("Projekt");
 
@@ -102,7 +102,6 @@ public class AmetDaoImpl implements RecordDao<Amet> {
 		} finally {
 			em.close();
 		}
-
 	}
 
 	@Override

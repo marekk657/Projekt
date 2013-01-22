@@ -5,10 +5,10 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
-import i377.entities.Amet;
 import i377.entities.AmetVaeosas;
-import i377.entities.Vaeosa;
+import i377.repo.AmetDaoImpl;
 import i377.repo.AmetVaeosasDaoImpl;
+import i377.repo.VaeosaDaoImpl;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,24 +23,23 @@ public class AmetVaeosasController {
 	
 	@Resource
 	private AmetVaeosasDaoImpl amvDao;
+	
+	@Resource
+	private AmetDaoImpl aDao;
+	
+	@Resource
+	private VaeosaDaoImpl voDao;
 
 	@RequestMapping(value="/AmetVaeosas")
 	public String AmetVaeosas(Model model) {
-		
-		// TODO: TESTDATA
-		
+
 		AmetVaeosas av = new AmetVaeosas();
 		av.setId(-1);
-		Vaeosa vo = new Vaeosa();
-		vo.setNimetus("TestVAeosa");
-		av.setVaeosa(vo);
+//		av.setAmet(null);
+//		av.setVaeosa(null);
 		
-		Amet a = new Amet();
-		a.setNimetus("Kokk");
-		a.setId(15);
-		
-		av.setAmet(a);
-		
+		model.addAttribute("ametid", aDao.activeRecords());
+		model.addAttribute("vaeosad", voDao.activeRecords());
 		model.addAttribute("ametvaeosasform", av);
 		return "AmetVaeosas";
 	}
@@ -54,6 +53,9 @@ public class AmetVaeosasController {
 		else
 			model.addAttribute("ametvaeosasform", new AmetVaeosas());
 		
+		model.addAttribute("ametid", aDao.activeRecords());
+		model.addAttribute("vaeosad", voDao.activeRecords());
+		
 		return "AmetVaeosas";
 	}
 	
@@ -66,8 +68,12 @@ public class AmetVaeosasController {
 			return "AmetVaeosas";
 		}
 		
-		model.addAttribute("ametvaeosasform", av);
-		// here comes logic
+		av.setAmet(aDao.getRecordById(av.getAmet().getId()));
+		av.setVaeosa(voDao.getRecordById(av.getVaeosa().getId()));
+		
+		model.addAttribute("ametid", aDao.activeRecords());
+		model.addAttribute("vaeosad", voDao.activeRecords());
+		model.addAttribute("ametvaeosasform", amvDao.addRecord(av));
 		model.addAttribute("ametvaeosaAdded", true);
 		return "AmetVaeosas";
 	}
@@ -81,8 +87,11 @@ public class AmetVaeosasController {
 			return "AmetVaeosas";
 		}
 		
+		
+		model.addAttribute("ametid", aDao.activeRecords());
+		model.addAttribute("vaeosad", voDao.activeRecords());
 		model.addAttribute("ametvaeosasform", av);
-		// here comes logic
+		amvDao.modifyRecord(av);
 		model.addAttribute("ametvaeosaModified", true);
 		return "AmetVaeosas";
 	}
@@ -90,7 +99,7 @@ public class AmetVaeosasController {
 	@RequestMapping(value="/DeleteAmetVaeosas", method = RequestMethod.POST)
 	public String deleteAmetVaeosas(@ModelAttribute AmetVaeosas av, Model model) {
 		model.addAttribute("ametvaeosasform", av);
-		// here comes logic
+		amvDao.deleteRecord(av);
 		model.addAttribute("deleteametvaeosas", true);
 		return "AmetVaeosas";
 	}

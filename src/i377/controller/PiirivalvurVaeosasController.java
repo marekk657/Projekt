@@ -5,12 +5,12 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
-import i377.entities.Amet;
-import i377.entities.AmetVaeosas;
-import i377.entities.Piirivalvur;
+
 import i377.entities.PiirivalvurVaeosas;
-import i377.entities.Vaeosa;
+import i377.repo.AmetVaeosasDaoImpl;
+import i377.repo.PiirivalvurDaoImpl;
 import i377.repo.PiirivalvurVaeosasDaoImpl;
+import i377.repo.VaeosaDaoImpl;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,28 +26,23 @@ public class PiirivalvurVaeosasController {
 	@Resource
 	private PiirivalvurVaeosasDaoImpl pvvDao;
 	
+	@Resource
+	private AmetVaeosasDaoImpl amvoDao;
+	
+	@Resource
+	private VaeosaDaoImpl voDao;
+	
+	@Resource 
+	private PiirivalvurDaoImpl pvDao;
+	
 	@RequestMapping(value="/PiirivalvurVaeosas")
-	public String piirivalvurVaeosas(Model model) {
-		
-		// TODO: TESTDATA
-		
+	public String piirivalvurVaeosas(Model model) {	
 		PiirivalvurVaeosas pva = new PiirivalvurVaeosas();
 		pva.setId(-1);
 		
-		Piirivalvur pv = new Piirivalvur();
-		pv.setEesnimi("Marek");
-		pva.setPiirivalvur(pv);
-		
-		Vaeosa vo = new Vaeosa();
-		vo.setNimetus("TestVaeosa");
-		pva.setVaeosa(vo);
-		
-		AmetVaeosas amv = new AmetVaeosas();
-		Amet a = new Amet();
-		a.setNimetus("Jälle kokk");
-		amv.setAmet(a);
-		pva.setAmetvaeosa(amv);
-		
+		model.addAttribute("ametid", amvoDao.activeRecords());
+		model.addAttribute("vaeosad", voDao.activeRecords());
+		model.addAttribute("piirivalvurid", pvDao.activeRecords());
 		model.addAttribute("piirivalvurvaeosasform", pva);
 		return "PiirivalvurVaeosas";
 	}
@@ -61,6 +56,10 @@ public class PiirivalvurVaeosasController {
 		else
 			model.addAttribute("piirivalvurvaeosasform", new PiirivalvurVaeosas());
 		
+		model.addAttribute("ametid", amvoDao.activeRecords());
+		model.addAttribute("vaeosad", voDao.activeRecords());
+		model.addAttribute("piirivalvurid", pvDao.activeRecords());
+		
 		return "PiirivalvurVaeosas";
 	}
 	
@@ -73,8 +72,10 @@ public class PiirivalvurVaeosasController {
 			return "PiirivalvurVaeosas";
 		}
 		
-		model.addAttribute("piirivalvurvaeosasform", pva);
-		// here comes logic
+		model.addAttribute("ametid", amvoDao.activeRecords());
+		model.addAttribute("vaeosad", voDao.activeRecords());
+		model.addAttribute("piirivalvurid", pvDao.activeRecords());
+		model.addAttribute("piirivalvurvaeosasform", pvvDao.addRecord(pva));
 		model.addAttribute("piirivalvurVaeosasAdded", true);
 		return "PiirivalvurVaeosas";
 	}
@@ -88,8 +89,11 @@ public class PiirivalvurVaeosasController {
 			return "PiirivalvurVaeosas";
 		}
 		
+		model.addAttribute("ametid", amvoDao.activeRecords());
+		model.addAttribute("vaeosad", voDao.activeRecords());
+		model.addAttribute("piirivalvurid", pvDao.activeRecords());
 		model.addAttribute("piirivalvurvaeosasform", pva);
-		// here comes logic
+		pvvDao.modifyRecord(pva);
 		model.addAttribute("piirivalvurvaeosastModified", true);
 		return "PiirivalvurVaeosas";
 	}
@@ -97,7 +101,7 @@ public class PiirivalvurVaeosasController {
 	@RequestMapping(value="/DeletePiirivalvurVaeosas", method = RequestMethod.POST)
 	public String deletePiirivalvurVaeosas(@ModelAttribute PiirivalvurVaeosas pva, Model model) {
 		model.addAttribute("piirivalvurvaeosasform", pva);
-		// here comes logic
+		pvvDao.deleteRecord(pva);
 		model.addAttribute("deletePiirivalvurVaeosas", true);
 		return "PiirivalvurVaeosas";
 	}

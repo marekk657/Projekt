@@ -6,9 +6,11 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Range;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+//import java.sql.Timestamp;
 import java.util.Date;
 
 @NamedQueries({
@@ -29,6 +31,11 @@ public class PiirivalvurVaeosas implements Serializable {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private long id;
 
+	@Column (name = "Alates")
+	@NotNull
+	@DateTimeFormat(pattern="dd/MM/yyyy")
+	private Date alates;
+
 	private String closedby;
 
 	@Temporal(TemporalType.DATE)
@@ -46,6 +53,11 @@ public class PiirivalvurVaeosas implements Serializable {
 	@Range(min = 0, max = 1)
 	private double koormus;
 
+	@Column (name = "Kuni")
+	@NotNull
+	@DateTimeFormat(pattern="dd/MM/yyyy")
+	private Date kuni;
+
 	private String modifiedby;
 
 	@Temporal(TemporalType.DATE)
@@ -61,11 +73,13 @@ public class PiirivalvurVaeosas implements Serializable {
 
 	//bi-directional many-to-one association to Piirivalvur
 	@ManyToOne
+	@JoinColumn(name="PIIRIVALVUR_ID")
 	@NotNull
 	private Piirivalvur piirivalvur;
 
 	//bi-directional many-to-one association to Vaeosa
 	@ManyToOne
+	@JoinColumn(name="VAEOSA_ID")
 	@NotNull
 	private Vaeosa vaeosa;
 
@@ -78,6 +92,14 @@ public class PiirivalvurVaeosas implements Serializable {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public Date getAlates() {
+		return this.alates;
+	}
+
+	public void setAlates(Date alates) {
+		this.alates = alates;
 	}
 
 	public String getClosedby() {
@@ -128,6 +150,14 @@ public class PiirivalvurVaeosas implements Serializable {
 		this.koormus = koormus;
 	}
 
+	public Date getKuni() {
+		return this.kuni;
+	}
+
+	public void setKuni(Date kuni) {
+		this.kuni = kuni;
+	}
+
 	public String getModifiedby() {
 		return this.modifiedby;
 	}
@@ -175,7 +205,7 @@ public class PiirivalvurVaeosas implements Serializable {
 	public void setVaeosa(Vaeosa vaeosa) {
 		this.vaeosa = vaeosa;
 	}
-	
+
 	@PrePersist
 	public void recordCreated() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
