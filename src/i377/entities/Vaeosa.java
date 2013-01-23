@@ -5,6 +5,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -43,6 +44,7 @@ public class Vaeosa implements Serializable {
 	private String kommentaar;
 
 	@NotNull
+	@NotEmpty
 	@Size(min = 3, max = 255)
 	private String kood;
 
@@ -52,6 +54,7 @@ public class Vaeosa implements Serializable {
 	private Date modifiedon;
 
 	@NotNull
+	@NotEmpty
 	@Size(min = 3, max = 255)
 	private String nimetus;
 

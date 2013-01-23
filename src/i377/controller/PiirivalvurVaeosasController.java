@@ -43,7 +43,7 @@ public class PiirivalvurVaeosasController {
 		model.addAttribute("ametid", amvoDao.activeRecords());
 		model.addAttribute("vaeosad", voDao.activeRecords());
 		model.addAttribute("piirivalvurid", pvDao.activeRecords());
-		model.addAttribute("piirivalvurvaeosasform", pva);
+		model.addAttribute("piirivalvurVaeosas", pva);
 		return "PiirivalvurVaeosas";
 	}
 	
@@ -52,9 +52,9 @@ public class PiirivalvurVaeosasController {
 		PiirivalvurVaeosas pvv = pvvDao.getRecordById(id);
 		
 		if (pvv != null)
-			model.addAttribute("piirivalvurvaeosasform", pvv);
+			model.addAttribute("piirivalvurVaeosas", pvv);
 		else
-			model.addAttribute("piirivalvurvaeosasform", new PiirivalvurVaeosas());
+			model.addAttribute("piirivalvurVaeosas", new PiirivalvurVaeosas());
 		
 		model.addAttribute("ametid", amvoDao.activeRecords());
 		model.addAttribute("vaeosad", voDao.activeRecords());
@@ -64,35 +64,35 @@ public class PiirivalvurVaeosasController {
 	}
 	
 	@RequestMapping(value="/AddPiirivalvurVaeosas", method = RequestMethod.POST)
-	public String addPiirivalvurVaeosas(@ModelAttribute @Valid PiirivalvurVaeosas pva, Model model, BindingResult result) {
+	public String addPiirivalvurVaeosas(@ModelAttribute @Valid PiirivalvurVaeosas pva, BindingResult result, Model model) {
 		
 		if (result.hasErrors()){
 			model.addAttribute("errors", true);
-//			model.addAttribute("piirivalvurvaeosasform", pva);
+
 			return "PiirivalvurVaeosas";
 		}
 		
 		model.addAttribute("ametid", amvoDao.activeRecords());
 		model.addAttribute("vaeosad", voDao.activeRecords());
 		model.addAttribute("piirivalvurid", pvDao.activeRecords());
-		model.addAttribute("piirivalvurvaeosasform", pvvDao.addRecord(pva));
+		model.addAttribute("piirivalvurVaeosas", pvvDao.addRecord(pva));
 		model.addAttribute("piirivalvurVaeosasAdded", true);
 		return "PiirivalvurVaeosas";
 	}
 	
 	@RequestMapping(value="/ModifyPiirivalvurVaeosas", method = RequestMethod.POST)
-	public String modifyPiirivalvurVaeosas(@ModelAttribute @Valid PiirivalvurVaeosas pva, Model model, BindingResult result) {
+	public String modifyPiirivalvurVaeosas(@ModelAttribute @Valid PiirivalvurVaeosas pva, BindingResult result, Model model) {
 		
 		if (result.hasErrors()){
 			model.addAttribute("errors", true);
-//			model.addAttribute("piirivalvurvaeosasform", pva);
+
 			return "PiirivalvurVaeosas";
 		}
 		
 		model.addAttribute("ametid", amvoDao.activeRecords());
 		model.addAttribute("vaeosad", voDao.activeRecords());
 		model.addAttribute("piirivalvurid", pvDao.activeRecords());
-		model.addAttribute("piirivalvurvaeosasform", pva);
+		model.addAttribute("piirivalvurVaeosas", pva);
 		pvvDao.modifyRecord(pva);
 		model.addAttribute("piirivalvurvaeosastModified", true);
 		return "PiirivalvurVaeosas";
@@ -100,7 +100,7 @@ public class PiirivalvurVaeosasController {
 	
 	@RequestMapping(value="/DeletePiirivalvurVaeosas", method = RequestMethod.POST)
 	public String deletePiirivalvurVaeosas(@ModelAttribute PiirivalvurVaeosas pva, Model model) {
-		model.addAttribute("piirivalvurvaeosasform", pva);
+		model.addAttribute("piirivalvurVaeosas", pva);
 		pvvDao.deleteRecord(pva);
 		model.addAttribute("deletePiirivalvurVaeosas", true);
 		return "PiirivalvurVaeosas";

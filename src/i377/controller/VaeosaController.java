@@ -27,7 +27,7 @@ public class VaeosaController {
 				
 		Vaeosa vo = new Vaeosa();
 		vo.setId(-1);
-		model.addAttribute("vaeosaform", vo);
+		model.addAttribute("vaeosa", vo);
 		
 		return "Vaeosa";
 	}
@@ -37,39 +37,37 @@ public class VaeosaController {
 		Vaeosa vo = voDao.getRecordById(id);
 		
 		if (vo != null)
-			model.addAttribute("vaeosaform", vo);
+			model.addAttribute("vaeosa", vo);
 		else
-			model.addAttribute("vaeosaform", new Vaeosa());
+			model.addAttribute("vaeosa", new Vaeosa());
 		
 		return "Vaeosa";
 	}
 	
 	@RequestMapping(value="/AddVaeosa", method = RequestMethod.POST)
-	public String addVaeosa(@ModelAttribute @Valid Vaeosa vo, Model model, BindingResult result) {
+	public String addVaeosa(@ModelAttribute @Valid Vaeosa vo, BindingResult result, Model model) {
 		
 		if (result.hasFieldErrors()){
 			model.addAttribute("errors", true);
-//			model.addAttribute("vaeosaform", vo);
-//			vaeosa(model);
 
 			return "Vaeosa";
 		}			
 		
-		model.addAttribute("vaeosaform", voDao.addRecord(vo));
+		model.addAttribute("vaeosa", voDao.addRecord(vo));
 		model.addAttribute("VaeosaAdded", true);
 		return "Vaeosa";
 	}
 	
 	@RequestMapping(value="/ModifyVaeosa", method = RequestMethod.POST)
-	public String modifyVaeosa(@ModelAttribute @Valid Vaeosa vo, Model model, BindingResult result) {
+	public String modifyVaeosa(@ModelAttribute @Valid Vaeosa vo, BindingResult result, Model model) {
 		
 		if (result.hasErrors()){
 			model.addAttribute("errors", true);
-//			model.addAttribute("vaeosaform", vo);
+
 			return "Vaeosa";
 		}
 		
-		model.addAttribute("vaeosaform", vo);
+		model.addAttribute("vaeosa", vo);
 		voDao.modifyRecord(vo);
 		model.addAttribute("VaeosaModified", true);
 		return "Vaeosa";
@@ -77,7 +75,7 @@ public class VaeosaController {
 	
 	@RequestMapping(value="/DeleteVaeosa", method = RequestMethod.POST)
 	public String deleteVaeosa(@ModelAttribute Vaeosa vo, Model model) {
-		model.addAttribute("vaeosaform", vo);
+		model.addAttribute("vaeosa", vo);
 		voDao.deleteRecord(vo);
 		model.addAttribute("deleteVaeosa", true);
 		return "Vaeosa";

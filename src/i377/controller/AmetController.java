@@ -26,7 +26,7 @@ public class AmetController {
 	public String NewAmet(Model model) {
 		Amet a = new Amet();
 		a.setId(-1);
-		model.addAttribute("ametform", a);
+		model.addAttribute("amet", a);
 		return "Amet";
 	}
 	
@@ -34,15 +34,15 @@ public class AmetController {
 	public String AmetById(@PathVariable("userId") long id, Model model) {
 		Amet a = ametDao.getRecordById(id);
 		if (a != null)
-			model.addAttribute("ametform", a);
+			model.addAttribute("amet", a);
 		else
-			model.addAttribute("ametform", new Amet());
+			model.addAttribute("amet", new Amet());
 		
 		return "Amet";
 	}
 	
 	@RequestMapping(value = "/ModifyAmet", method = RequestMethod.POST)
-	public String ModifyAmet(@ModelAttribute @Valid Amet amet, Model model, BindingResult result) {
+	public String ModifyAmet(@ModelAttribute @Valid Amet amet, BindingResult result, Model model) {
 		
 		if (result.hasErrors()){
 			model.addAttribute("errors", true);
@@ -50,14 +50,14 @@ public class AmetController {
 			return "Amet";
 		}
 		
-		model.addAttribute("ametform", amet);
+		model.addAttribute("amet", amet);
 		ametDao.modifyRecord(amet);
 		model.addAttribute("ametModified", true);
 		return "Amet";
 	}
 	
 	@RequestMapping(value = "/AddAmet", method = RequestMethod.POST)
-	public String LisaAmet(@ModelAttribute @Valid Amet amet, Model model, BindingResult result) {
+	public String LisaAmet(@ModelAttribute @Valid Amet amet, BindingResult result, Model model) {
 		
 		if (result.hasErrors()){
 			model.addAttribute("errors", true);
@@ -65,14 +65,14 @@ public class AmetController {
 			return "Amet";
 		}
 		
-		model.addAttribute("ametform", ametDao.addRecord(amet));
+		model.addAttribute("amet", ametDao.addRecord(amet));
 		model.addAttribute("ametAdded", true);
 		return "Amet";
 	}
 	
 	@RequestMapping(value = "/DeleteAmet", method = RequestMethod.POST)
 	public String DeleteAmet(@ModelAttribute Amet amet, Model model) {
-		model.addAttribute("ametform", amet);
+		model.addAttribute("amet", amet);
 		model.addAttribute("deleteAmet", true);
 		ametDao.deleteRecord(amet);
 		return "Amet";

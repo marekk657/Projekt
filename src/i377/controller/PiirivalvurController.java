@@ -27,7 +27,7 @@ public class PiirivalvurController {
 		Piirivalvur pv = new Piirivalvur();
 		pv.setId(-1);
 		pv.setSugu(-1);
-		model.addAttribute("piirivalvurform", pv);
+		model.addAttribute("piirivalvur", pv);
 		return "Piirivalvur";
 	}
 	
@@ -36,29 +36,29 @@ public class PiirivalvurController {
 		Piirivalvur pv = pvDao.getRecordById(id);
 		
 		if (pv != null)
-			model.addAttribute("piirivalvurform", pv);
+			model.addAttribute("piirivalvur", pv);
 		else
-			model.addAttribute("piirivalvurform", new Piirivalvur());
+			model.addAttribute("piirivalvur", new Piirivalvur());
 		
 		return "Piirivalvur";
 	}
 	
 	@RequestMapping(value="/AddPiirivalvur", method = RequestMethod.POST)
-	public String addPiirivalvur(@ModelAttribute @Valid Piirivalvur valvur, Model model, BindingResult result) {
+	public String addPiirivalvur(@ModelAttribute @Valid Piirivalvur valvur, BindingResult result, Model model) {
 		
 		if (result.hasErrors()){
 			model.addAttribute("errors", true);
-//			model.addAttribute("piirivalvurform", valvur);
+
 			return "Piirivalvur";
 		}
 		
-		model.addAttribute("piirivalvurform", pvDao.addRecord(valvur));
+		model.addAttribute("piirivalvur", pvDao.addRecord(valvur));
 		model.addAttribute("piirivalvurAdded", true);
 		return "Piirivalvur";
 	}
 	
 	@RequestMapping(value="/ModifyPiirivalvur", method = RequestMethod.POST)
-	public String modifyPiirivalvur(@ModelAttribute @Valid Piirivalvur valvur, Model model, BindingResult result) {
+	public String modifyPiirivalvur(@ModelAttribute @Valid Piirivalvur valvur, BindingResult result, Model model) {
 		
 		if (result.hasErrors()){
 			model.addAttribute("errors", true);
@@ -66,7 +66,7 @@ public class PiirivalvurController {
 			return "Piirivalvur";
 		}
 		
-		model.addAttribute("piirivalvurform", valvur);
+		model.addAttribute("piirivalvur", valvur);
 		pvDao.modifyRecord(valvur);
 		model.addAttribute("piirivalvurModified", true);
 		return "Piirivalvur";
@@ -74,7 +74,7 @@ public class PiirivalvurController {
 	
 	@RequestMapping(value="/DeletePiirivalvur", method = RequestMethod.POST)
 	public String deletePiirivalvur(@ModelAttribute Piirivalvur valvur, Model model) {
-		model.addAttribute("piirivalvurform", valvur);
+		model.addAttribute("piirivalvur", valvur);
 		pvDao.deleteRecord(valvur);
 		model.addAttribute("deletePiirivalvur", true);
 		return "Piirivalvur";

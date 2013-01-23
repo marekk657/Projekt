@@ -32,20 +32,7 @@ function addRecord(id) {
 <title><spring:message code="vaeosa.title" /></title>
 </head>
 <body>
-	<c:if test="${errors == true }">
-		<div>
-			<table>
-				<tr>
-					<td><form:errors path="kood"/></td>
-				</tr>
-				<tr>
-					<td><form:errors path="nimetus" /></td>
-				</tr>
-			</table>
-		</div>
-	</c:if>
-
-	<form:form commandName="vaeosa" name="vaeosa" method="POST" modelAttribute="vaeosaform">
+	<form:form commandName="vaeosa" name="vaeosa" method="POST" modelAttribute="vaeosa">
 		<table  id="formtable" width="400" border="0" cellspacing="0" cellpadding="0"
 			style="margin-left: 50px;">
 			<form:input type="hidden" path="id" />
@@ -65,28 +52,15 @@ function addRecord(id) {
 			</tr>
 
 			<c:if test="${errors == true}">
-				<tr>
-					<form:errors id="veateade" path="kood" />
-					<form:errors id="veateade" path="nimetus" />
-				</tr>
+				<div>
+					<form:errors id="veateade" path="*" />
+				</div>
 			</c:if>
 
-			<tr><!-- Alternatiiv -->
+			<tr>
 				<td colspan="2">
-					<c:if test="${vaeosaKoodNotNull == true }">
-						<span id="veateade"><spring:message code="NotNull.vaeosa.kood" /></span><br />
-					</c:if>
-					<c:if test="${vaeosaKoodSize == true }">
-						<span id="veateade"><spring:message code="Size.vaeosa.kood" /></span><br />
-					</c:if>
-					<c:if test="${vaeosaNimetusNotNull == true }">
-						<span id="veateade"><spring:message code="NotNull.vaeosa.nimetus" /></span><br />
-					</c:if>
-					<c:if test="${vaeosaNimetusSize == true }">
-						<span id="veateade"><spring:message code="Size.vaeosa.nimetus" /></span><br />
-					</c:if>
 					<sec:authorize access="hasRole('ROLE_EDIT') or hasRole('ROLE_ADD')">
-						<input onclick="addRecord(${vaeosaform.id})" type="submit" value="<spring:message code="entity.btn.save" />" class="buttons">
+						<input onclick="addRecord(${vaeosa.id})" type="submit" value="<spring:message code="entity.btn.save" />" class="buttons">
 					</sec:authorize>
 					<sec:authorize access="hasRole('ROLE_EDIT') or hasRole('ROLE_ADD')">
 						<input type="reset" value="<spring:message code="entity.btn.cancel" />"	class="buttons">
@@ -97,7 +71,6 @@ function addRecord(id) {
 				</td>
 			</tr>
 		</table>
-
 
 		<div>
 			<a href="<c:url value="/Navigation" />"><spring:message code="entity.nav.menu" /></a>

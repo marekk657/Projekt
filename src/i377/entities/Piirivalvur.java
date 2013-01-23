@@ -5,6 +5,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -31,6 +32,7 @@ public class Piirivalvur implements Serializable {
 	private long id;
 
 	@NotNull
+	@NotEmpty
 	@Size(min = 5, max = 25)
 	private String aadress;
 
@@ -45,6 +47,7 @@ public class Piirivalvur implements Serializable {
 	private Date createdon;
 
 	@NotNull
+	@NotEmpty
 	@Size(min = 2, max = 255)
 	private String eesnimi;
 
@@ -53,6 +56,7 @@ public class Piirivalvur implements Serializable {
 	private String email;
 
 	@NotNull
+	@NotEmpty
 	@Size(min = 6, max = 20)
 	private String isikukood;
 
@@ -65,10 +69,12 @@ public class Piirivalvur implements Serializable {
 	private Date modifiedon;
 
 	@NotNull
+	@NotEmpty
 	@Size(min = 2, max = 255)
 	private String perekonnanimi;
 
 	@NotNull
+	@NotEmpty
 	@Size(min = 4, max = 40)
 	private String sodurikood;
 
@@ -77,6 +83,7 @@ public class Piirivalvur implements Serializable {
 	private int sugu;
 
 	@NotNull
+	@NotEmpty
 	@Size(min = 3, max = 255)
 	private String telefon;
 

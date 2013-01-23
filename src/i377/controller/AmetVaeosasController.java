@@ -38,7 +38,7 @@ public class AmetVaeosasController {
 		
 		model.addAttribute("ametid", aDao.activeRecords());
 		model.addAttribute("vaeosad", voDao.activeRecords());
-		model.addAttribute("ametvaeosasform", av);
+		model.addAttribute("ametVaeosas", av);
 		return "AmetVaeosas";
 	}
 	
@@ -47,9 +47,9 @@ public class AmetVaeosasController {
 		AmetVaeosas amv = amvDao.getRecordById(id);
 		
 		if (amv != null)
-			model.addAttribute("ametvaeosasform", amv);
+			model.addAttribute("ametVaeosas", amv);
 		else
-			model.addAttribute("ametvaeosasform", new AmetVaeosas());
+			model.addAttribute("ametVaeosas", new AmetVaeosas());
 		
 		model.addAttribute("ametid", aDao.activeRecords());
 		model.addAttribute("vaeosad", voDao.activeRecords());
@@ -58,37 +58,38 @@ public class AmetVaeosasController {
 	}
 	
 	@RequestMapping(value="/AddAmetVaeosas", method = RequestMethod.POST)
-	public String AddAmetVaeosas(@ModelAttribute @Valid AmetVaeosas av, Model model, BindingResult result) {
+	public String AddAmetVaeosas(@ModelAttribute @Valid AmetVaeosas av, BindingResult result, Model model) {
+		
+		model.addAttribute("ametid", aDao.activeRecords());
+		model.addAttribute("vaeosad", voDao.activeRecords());
 		
 		if (result.hasErrors()){
 			model.addAttribute("errors", true);
-//			model.addAttribute("ametvaeosasform", av);
+
 			return "AmetVaeosas";
 		}
 		
 		av.setAmet(aDao.getRecordById(av.getAmet().getId()));
 		av.setVaeosa(voDao.getRecordById(av.getVaeosa().getId()));
-		
-		model.addAttribute("ametid", aDao.activeRecords());
-		model.addAttribute("vaeosad", voDao.activeRecords());
-		model.addAttribute("ametvaeosasform", amvDao.addRecord(av));
+	
+		model.addAttribute("ametVaeosas", amvDao.addRecord(av));
 		model.addAttribute("ametvaeosaAdded", true);
 		return "AmetVaeosas";
 	}
 	
 	@RequestMapping(value="/ModifyAmetVaeosas", method = RequestMethod.POST)
-	public String modifyAmetVaeosas(@ModelAttribute @Valid AmetVaeosas av, Model model, BindingResult result) {
-		
-		if (result.hasErrors()){
-			model.addAttribute("errors", true);
-//			model.addAttribute("ametvaeosasform", av);
-			return "AmetVaeosas";
-		}
-		
+	public String modifyAmetVaeosas(@ModelAttribute @Valid AmetVaeosas av, BindingResult result, Model model) {
 		
 		model.addAttribute("ametid", aDao.activeRecords());
 		model.addAttribute("vaeosad", voDao.activeRecords());
-		model.addAttribute("ametvaeosasform", av);
+		
+		if (result.hasErrors()){
+			model.addAttribute("errors", true);
+
+			return "AmetVaeosas";
+		}
+		
+		model.addAttribute("ametVaeosas", av);
 		amvDao.modifyRecord(av);
 		model.addAttribute("ametvaeosaModified", true);
 		return "AmetVaeosas";
@@ -96,7 +97,7 @@ public class AmetVaeosasController {
 	
 	@RequestMapping(value="/DeleteAmetVaeosas", method = RequestMethod.POST)
 	public String deleteAmetVaeosas(@ModelAttribute AmetVaeosas av, Model model) {
-		model.addAttribute("ametvaeosasform", av);
+		model.addAttribute("ametVaeosas", av);
 		amvDao.deleteRecord(av);
 		model.addAttribute("deleteametvaeosas", true);
 		return "AmetVaeosas";

@@ -36,7 +36,7 @@ function addRecord(id) {
 </head>
 <body>
 	<form:form commandName="ametVaeosas" name="ametvaeosas" method="POST"
-		modelAttribute="ametvaeosasform">
+		modelAttribute="ametVaeosas">
 
 		<table id="formtable" style="margin-left: 50px; width: 650px; border-spacing: 0; padding:0;">
 
@@ -87,30 +87,15 @@ function addRecord(id) {
 			
 			
 			<c:if test="${errors == true}">
-				<tr>
-					<form:errors id="veateade" path="amet.id" />
-					<form:errors id="veateade" path="vaeosa.id" />
-					<form:errors id="veateade" path="alates" />
-					<form:errors id="veateade" path="kuni" />
-				</tr>
+				<div>
+					<form:errors id="veateade" path="*" />
+				</div>
 			</c:if>
 
-			<tr><!-- Alternatiiv -->
+			<tr>
 				<td colspan="2">
-					<c:if test="${ametVaeosasAmetNotNull == true }">
-						<span id="veateade"><spring:message code="NotNull.ametVaeosas.amet" /></span><br />
-					</c:if>
-					<c:if test="${ametVaeosasVaeosaNotNull == true }">
-						<span id="veateade"><spring:message code="NotNull.ametVaeosas.vaeosa" /></span><br />
-					</c:if>
-					<c:if test="${ametVaeosasAlatesNotNull == true }">
-						<span id="veateade"><spring:message code="NotNull.ametVaeosas.alates" /></span><br />
-					</c:if>
-					<c:if test="${ametVaeosasKuniNotNull == true }">
-						<span id="veateade"><spring:message code="NotNull.ametVaeosas.kuni" /></span><br />
-					</c:if>
 					<sec:authorize access="hasRole('ROLE_EDIT') or hasRole('ROLE_ADD')">
-						<input onclick="addRecord(${ametvaeosasform.id})" type="button" value="<spring:message code="entity.btn.save" />" class="buttons">
+						<input onclick="addRecord(${ametVaeosas.id})" type="button" value="<spring:message code="entity.btn.save" />" class="buttons">
 					</sec:authorize>
 					<sec:authorize access="hasRole('ROLE_EDIT') or hasRole('ROLE_ADD')">
 						<input name="Katkesta" type="reset" value="<spring:message code="entity.btn.cancel" />" class="buttons">

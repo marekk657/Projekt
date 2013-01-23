@@ -31,7 +31,7 @@ function addRecord(id) {
 <title><spring:message code="amet.title" /></title>
 </head>
 <body>
-	<form:form name="amet" method="POST" modelAttribute="ametform">
+	<form:form name="amet" method="POST" modelAttribute="amet">
 		<table id="formtable" width="400" border="0" cellspacing="0" cellpadding="0" style="margin-left:50px;">
 			  
 		  <tr>
@@ -50,28 +50,15 @@ function addRecord(id) {
 		  </tr>
 
 			<c:if test="${errors == true}">
-				<tr>
-					<form:errors id="veateade" path="iscokood" />
-					<form:errors id="veateade" path="nimetus" />
-				</tr>
+				<div>
+					<form:errors id="veateade" path="*" />
+				</div>
 			</c:if>
 			
-			<tr><!-- Alternatiiv -->
+			<tr>
 		    <td colspan="2">
-				<c:if test="${ametIscokoodNotNull == true }">
-					<span id="veateade"><spring:message code="NotNull.amet.iscokood" /></span><br />
-				</c:if>
-				<c:if test="${ametIscokoodSize == true }">
-					<span id="veateade"><spring:message code="Size.amet.iscokood" /></span><br />
-				</c:if>
-				<c:if test="${ametNimetusNotNull == true }">
-					<span id="veateade"><spring:message code="NotNull.amet.nimetus" /></span><br />
-				</c:if>
-				<c:if test="${ametNimetusSize == true }">
-					<span id="veateade"><spring:message code="Size.amet.nimetus" /></span><br />
-				</c:if>
 				<sec:authorize access="hasRole('ROLE_EDIT') or hasRole('ROLE_ADD')">
-			    	<input onclick="addRecord(${ametform.id})" type="submit" value="<spring:message code="entity.btn.save" />" class="buttons">
+			    	<input onclick="addRecord(${amet.id})" type="submit" value="<spring:message code="entity.btn.save" />" class="buttons">
 			    </sec:authorize>
 			    <sec:authorize access="hasRole('ROLE_EDIT') or hasRole('ROLE_ADD')">
 			    	<input type="reset" value="<spring:message code="entity.btn.cancel" />" class="buttons">
