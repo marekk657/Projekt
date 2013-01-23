@@ -5,7 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import i377.entities.Piirivalvur;
-import i377.repo.PiirivalvurDaoImpl;
+import i377.repo.PiirivalvurDao;
 
 import org.springframework.stereotype.Component;
 
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 public class PiirivalvurTestData {
 
 	@Resource
-	PiirivalvurDaoImpl pvDao;
+	PiirivalvurDao pvDao;
 	
 	private final String testUser = "TEST";
 	

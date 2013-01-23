@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import i377.entities.Amet;
-import i377.repo.AmetDaoImpl;
+import i377.repo.AmetDao;
 
 @Controller
 public class AmetController {
 
 	@Resource
-	private AmetDaoImpl ametDao;
+	private AmetDao ametDao;
 	
 	@RequestMapping(value = "/Amet")
 	public String NewAmet(Model model) {

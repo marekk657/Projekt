@@ -1,4 +1,4 @@
-package i377.repo;
+package i377.repo.impl;
 
 import java.util.Date;
 import java.util.List;
@@ -12,57 +12,56 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
 
-import i377.entities.Piirivalvur;
+import i377.entities.PiirivalvurVaeosas;
+import i377.repo.PiirivalvurVaeosasDao;
 
 @Repository
-public class PiirivalvurDaoImpl implements RecordDao<Piirivalvur> {
+public class PiirivalvurVaeosasDaoImpl implements PiirivalvurVaeosasDao {
 
 	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("Projekt");
 	
 	@Override
-	public Piirivalvur addRecord(Piirivalvur record) {
+	public PiirivalvurVaeosas addRecord(PiirivalvurVaeosas record) {
 		EntityManager em = emf.createEntityManager();
-
+		
 		try {
-			Piirivalvur pv = em.merge(record);
+			PiirivalvurVaeosas pva = em.merge(record);
 			em.getTransaction().begin();			
-			em.persist(pv);
+			em.persist(pva);
 			em.getTransaction().commit();
-			return pv;
+			return pva;
 		} finally {
 			em.close();
-		}
+		}		
 	}
 
 	@Override
-	public List<Piirivalvur> records() {
+	public List<PiirivalvurVaeosas> records() {
 		EntityManager entityManager = emf.createEntityManager();
 		
 		try {
-			TypedQuery<Piirivalvur> q = entityManager.createNamedQuery("Piirivalvur.findAll", Piirivalvur.class);
-			List<Piirivalvur> piirivalvurid = q.getResultList();
-			return piirivalvurid;
+			TypedQuery<PiirivalvurVaeosas> q = entityManager.createNamedQuery("PiirivalvurVaeosas.findAll", PiirivalvurVaeosas.class);
+			List<PiirivalvurVaeosas> piirivalvuridVaeosades = q.getResultList();
+			return piirivalvuridVaeosades;
 		} finally {
 			entityManager.close();
 		}
 	}
 
 	@Override
-	public void deleteRecord(Piirivalvur record) {
+	public void deleteRecord(PiirivalvurVaeosas record) {
 		EntityManager em = emf.createEntityManager();
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		
 		try {
-			Piirivalvur a = getRecordById(record.getId());
+			PiirivalvurVaeosas pva = getRecordById(record.getId());
 			
-			record.setCloseddby(auth.getName());
+			record.setClosedby(auth.getName());
 			record.setClosedon(new Date());
-			record.setCreatedby(a.getCreatedby());
-			record.setCreatedon(a.getCreatedon());
-			record.setVersion(a.getVersion());
-			record.setPiirivalvurvaeosas(a.getPiirivalvurvaeosas());
-
+			record.setCreatedby(pva.getCreatedby());
+			record.setCreatedon(pva.getCreatedon());
+			record.setVersion(pva.getVersion());
 			
 			em.getTransaction().begin();
 			em.persist(em.merge(record));
@@ -73,31 +72,29 @@ public class PiirivalvurDaoImpl implements RecordDao<Piirivalvur> {
 	}
 
 	@Override
-	public List<Piirivalvur> activeRecords() {
+	public List<PiirivalvurVaeosas> activeRecords() {
 		EntityManager entityManager = emf.createEntityManager();
 		
 		try {
-			TypedQuery<Piirivalvur> q = entityManager.createNamedQuery("Piirivalvur.findActiveRecords", Piirivalvur.class);
-			
-			List<Piirivalvur> actives = q.getResultList();
-			
-			return actives;
+			TypedQuery<PiirivalvurVaeosas> q = entityManager.createNamedQuery("PiirivalvurVaeosas.findActiveRecords", PiirivalvurVaeosas.class);
+			List<PiirivalvurVaeosas> piirivalvuridVaeosades = q.getResultList();
+			return piirivalvuridVaeosades;
 		} finally {
 			entityManager.close();
 		}
 	}
 
 	@Override
-	public Piirivalvur getRecordById(long id) {
+	public PiirivalvurVaeosas getRecordById(long id) {
 		EntityManager em = emf.createEntityManager();
 		
 		try {
 			
-			TypedQuery<Piirivalvur> q = em.createNamedQuery("Piirivalvur.findById", Piirivalvur.class);
+			TypedQuery<PiirivalvurVaeosas> q = em.createNamedQuery("PiirivalvurVaeosas.findById", PiirivalvurVaeosas.class);
 			q.setParameter("id", id);
-			Piirivalvur pv = q.getSingleResult();
+			PiirivalvurVaeosas pva = q.getSingleResult();
 			
-			return pv;
+			return pva;
 		} catch (Exception ex) {
 			return null;
 		} finally {
@@ -106,16 +103,15 @@ public class PiirivalvurDaoImpl implements RecordDao<Piirivalvur> {
 	}
 
 	@Override
-	public void modifyRecord(Piirivalvur record) {
+	public void modifyRecord(PiirivalvurVaeosas record) {
 		EntityManager em = emf.createEntityManager();
 		
 		try {
-			Piirivalvur a = getRecordById(record.getId());
+			PiirivalvurVaeosas pva = getRecordById(record.getId());
 
-			record.setCreatedby(a.getCreatedby());
-			record.setCreatedon(a.getCreatedon());
-			record.setVersion(a.getVersion());
-			record.setPiirivalvurvaeosas(a.getPiirivalvurvaeosas());
+			record.setCreatedby(pva.getCreatedby());
+			record.setCreatedon(pva.getCreatedon());
+			record.setVersion(pva.getVersion());
 			
 			em.getTransaction().begin();
 			

@@ -5,7 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import i377.entities.Vaeosa;
-import i377.repo.VaeosaDaoImpl;
+import i377.repo.VaeosaDao;
 
 import org.springframework.stereotype.Component;
 
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 public class VaeosaTestData {
 	
 	@Resource
-	VaeosaDaoImpl voDao;
+	VaeosaDao voDao;
 	
 	private final String testUser = "TEST";
 	

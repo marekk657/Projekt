@@ -7,10 +7,10 @@ import javax.validation.Valid;
 
 
 import i377.entities.PiirivalvurVaeosas;
-import i377.repo.AmetVaeosasDaoImpl;
-import i377.repo.PiirivalvurDaoImpl;
-import i377.repo.PiirivalvurVaeosasDaoImpl;
-import i377.repo.VaeosaDaoImpl;
+import i377.repo.AmetVaeosasDao;
+import i377.repo.PiirivalvurDao;
+import i377.repo.PiirivalvurVaeosasDao;
+import i377.repo.VaeosaDao;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,16 +24,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class PiirivalvurVaeosasController {
 
 	@Resource
-	private PiirivalvurVaeosasDaoImpl pvvDao;
+	private PiirivalvurVaeosasDao pvvDao;
 	
 	@Resource
-	private AmetVaeosasDaoImpl amvoDao;
+	private AmetVaeosasDao amvoDao;
 	
 	@Resource
-	private VaeosaDaoImpl voDao;
+	private VaeosaDao voDao;
 	
 	@Resource 
-	private PiirivalvurDaoImpl pvDao;
+	private PiirivalvurDao pvDao;
 	
 	@RequestMapping(value="/PiirivalvurVaeosas")
 	public String piirivalvurVaeosas(Model model) {	

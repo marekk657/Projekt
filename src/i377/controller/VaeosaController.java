@@ -6,7 +6,7 @@ import javax.annotation.Resource;
 import javax.validation.Valid;
 
 import i377.entities.Vaeosa;
-import i377.repo.VaeosaDaoImpl;
+import i377.repo.VaeosaDao;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class VaeosaController {
 	
 	@Resource
-	private VaeosaDaoImpl voDao;
+	private VaeosaDao voDao;
 
 	@RequestMapping(value="/Vaeosa")
 	public String vaeosa(Model model) {

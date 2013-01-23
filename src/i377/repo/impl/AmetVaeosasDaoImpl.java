@@ -1,4 +1,4 @@
-package i377.repo;
+package i377.repo.impl;
 
 import java.util.Date;
 import java.util.List;
@@ -9,13 +9,14 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
 import i377.entities.AmetVaeosas;
+import i377.repo.AmetVaeosasDao;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class AmetVaeosasDaoImpl implements RecordDao<AmetVaeosas> {
+public class AmetVaeosasDaoImpl implements AmetVaeosasDao {
 	
 	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("Projekt");
 

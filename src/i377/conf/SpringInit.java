@@ -29,7 +29,6 @@ public class SpringInit implements WebApplicationInitializer{
         dispatcher.setLoadOnStartup(1);
         dispatcher.addMapping("/");
 
-
         arg0.addListener(new ContextLoaderListener(rootContext));
         
         // Spring Security

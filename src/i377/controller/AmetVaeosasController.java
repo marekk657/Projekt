@@ -6,9 +6,9 @@ import javax.annotation.Resource;
 import javax.validation.Valid;
 
 import i377.entities.AmetVaeosas;
-import i377.repo.AmetDaoImpl;
-import i377.repo.AmetVaeosasDaoImpl;
-import i377.repo.VaeosaDaoImpl;
+import i377.repo.AmetDao;
+import i377.repo.AmetVaeosasDao;
+import i377.repo.VaeosaDao;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,13 +22,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class AmetVaeosasController {
 	
 	@Resource
-	private AmetVaeosasDaoImpl amvDao;
+	private AmetVaeosasDao amvDao;
 	
 	@Resource
-	private AmetDaoImpl aDao;
+	private AmetDao aDao;
 	
 	@Resource
-	private VaeosaDaoImpl voDao;
+	private VaeosaDao voDao;
 
 	@RequestMapping(value="/AmetVaeosas")
 	public String AmetVaeosas(Model model) {

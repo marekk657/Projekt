@@ -6,7 +6,7 @@ import javax.annotation.Resource;
 import javax.validation.Valid;
 
 import i377.entities.Piirivalvur;
-import i377.repo.PiirivalvurDaoImpl;
+import i377.repo.PiirivalvurDao;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class PiirivalvurController {
 	
 	@Resource
-	private PiirivalvurDaoImpl pvDao;
+	private PiirivalvurDao pvDao;
 
 	@RequestMapping(value="/Piirivalvur")
 	public String Piirivalvur(Model model) {

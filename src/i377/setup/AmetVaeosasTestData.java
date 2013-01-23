@@ -6,9 +6,9 @@ import java.util.Date;
 import java.util.List;
 
 import i377.entities.AmetVaeosas;
-import i377.repo.AmetDaoImpl;
-import i377.repo.AmetVaeosasDaoImpl;
-import i377.repo.VaeosaDaoImpl;
+import i377.repo.AmetDao;
+import i377.repo.AmetVaeosasDao;
+import i377.repo.VaeosaDao;
 
 import javax.annotation.Resource;
 
@@ -18,13 +18,13 @@ import org.springframework.stereotype.Component;
 public class AmetVaeosasTestData {
 
 	@Resource
-	AmetVaeosasDaoImpl avoDao;
+	AmetVaeosasDao avoDao;
 	
 	@Resource
-	AmetDaoImpl aDao;
+	AmetDao aDao;
 	
 	@Resource
-	VaeosaDaoImpl voDao;
+	VaeosaDao voDao;
 	
 	private final String testUser = "TEST";
 	

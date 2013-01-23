@@ -1,6 +1,4 @@
-package i377.repo;
-
-import i377.entities.Amet;
+package i377.repo.impl;
 
 import java.util.Date;
 import java.util.List;
@@ -14,69 +12,58 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
 
+import i377.entities.Piirivalvur;
+import i377.repo.PiirivalvurDao;
+
 @Repository
-public class AmetDaoImpl implements RecordDao<Amet>{
+public class PiirivalvurDaoImpl implements PiirivalvurDao {
 
 	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("Projekt");
-
+	
 	@Override
-	public Amet addRecord(Amet record) {
+	public Piirivalvur addRecord(Piirivalvur record) {
 		EntityManager em = emf.createEntityManager();
-		
+
 		try {
-			Amet a = em.merge(record);
+			Piirivalvur pv = em.merge(record);
 			em.getTransaction().begin();			
-			em.persist(a);
+			em.persist(pv);
 			em.getTransaction().commit();
-			return a;
+			return pv;
 		} finally {
 			em.close();
 		}
 	}
 
 	@Override
-	public List<Amet> records() {
+	public List<Piirivalvur> records() {
 		EntityManager entityManager = emf.createEntityManager();
 		
 		try {
-			TypedQuery<Amet> q = entityManager.createNamedQuery("Amet.findAll", Amet.class);
-			List<Amet> ametid = q.getResultList();
-			return ametid;
+			TypedQuery<Piirivalvur> q = entityManager.createNamedQuery("Piirivalvur.findAll", Piirivalvur.class);
+			List<Piirivalvur> piirivalvurid = q.getResultList();
+			return piirivalvurid;
 		} finally {
 			entityManager.close();
 		}
 	}
 
 	@Override
-	public List<Amet> activeRecords() {
-		EntityManager entityManager = emf.createEntityManager();
-		
-		try {
-			TypedQuery<Amet> q = entityManager.createNamedQuery("Amet.findActiveRecords", Amet.class);
-			
-			List<Amet> actives = q.getResultList();
-			
-			return actives;
-		} finally {
-			entityManager.close();
-		}
-	}
-
-	@Override
-	public void deleteRecord(Amet record) {
+	public void deleteRecord(Piirivalvur record) {
 		EntityManager em = emf.createEntityManager();
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		
 		try {
-			Amet a = getRecordById(record.getId());
+			Piirivalvur a = getRecordById(record.getId());
 			
-			record.setClosedby(auth.getName());
+			record.setCloseddby(auth.getName());
 			record.setClosedon(new Date());
 			record.setCreatedby(a.getCreatedby());
 			record.setCreatedon(a.getCreatedon());
 			record.setVersion(a.getVersion());
-			record.setAmetvaeosas(a.getAmetvaeosas());
+			record.setPiirivalvurvaeosas(a.getPiirivalvurvaeosas());
+
 			
 			em.getTransaction().begin();
 			em.persist(em.merge(record));
@@ -87,16 +74,31 @@ public class AmetDaoImpl implements RecordDao<Amet>{
 	}
 
 	@Override
-	public Amet getRecordById(long id) {
+	public List<Piirivalvur> activeRecords() {
+		EntityManager entityManager = emf.createEntityManager();
+		
+		try {
+			TypedQuery<Piirivalvur> q = entityManager.createNamedQuery("Piirivalvur.findActiveRecords", Piirivalvur.class);
+			
+			List<Piirivalvur> actives = q.getResultList();
+			
+			return actives;
+		} finally {
+			entityManager.close();
+		}
+	}
+
+	@Override
+	public Piirivalvur getRecordById(long id) {
 		EntityManager em = emf.createEntityManager();
 		
 		try {
 			
-			TypedQuery<Amet> q = em.createNamedQuery("Amet.findById", Amet.class);
+			TypedQuery<Piirivalvur> q = em.createNamedQuery("Piirivalvur.findById", Piirivalvur.class);
 			q.setParameter("id", id);
-			Amet a = q.getSingleResult();
+			Piirivalvur pv = q.getSingleResult();
 			
-			return a;
+			return pv;
 		} catch (Exception ex) {
 			return null;
 		} finally {
@@ -105,16 +107,16 @@ public class AmetDaoImpl implements RecordDao<Amet>{
 	}
 
 	@Override
-	public void modifyRecord(Amet record) {
+	public void modifyRecord(Piirivalvur record) {
 		EntityManager em = emf.createEntityManager();
 		
 		try {
-			Amet a = getRecordById(record.getId());
+			Piirivalvur a = getRecordById(record.getId());
 
 			record.setCreatedby(a.getCreatedby());
 			record.setCreatedon(a.getCreatedon());
 			record.setVersion(a.getVersion());
-			record.setAmetvaeosas(a.getAmetvaeosas());
+			record.setPiirivalvurvaeosas(a.getPiirivalvurvaeosas());
 			
 			em.getTransaction().begin();
 			

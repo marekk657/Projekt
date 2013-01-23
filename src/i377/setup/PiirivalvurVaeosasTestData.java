@@ -7,9 +7,9 @@ import java.util.List;
 
 import i377.entities.AmetVaeosas;
 import i377.entities.PiirivalvurVaeosas;
-import i377.repo.AmetVaeosasDaoImpl;
-import i377.repo.PiirivalvurDaoImpl;
-import i377.repo.PiirivalvurVaeosasDaoImpl;
+import i377.repo.AmetVaeosasDao;
+import i377.repo.PiirivalvurDao;
+import i377.repo.PiirivalvurVaeosasDao;
 
 import javax.annotation.Resource;
 
@@ -19,13 +19,13 @@ import org.springframework.stereotype.Component;
 public class PiirivalvurVaeosasTestData {
 
 	@Resource
-	PiirivalvurVaeosasDaoImpl pvvDao;
+	PiirivalvurVaeosasDao pvvDao;
 	
 	@Resource
-	PiirivalvurDaoImpl pvDao;
+	PiirivalvurDao pvDao;
 	
 	@Resource
-	AmetVaeosasDaoImpl amvDao;
+	AmetVaeosasDao amvDao;
 	
 	private final String testUser = "TEST";
 	

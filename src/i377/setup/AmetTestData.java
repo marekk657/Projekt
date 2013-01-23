@@ -5,7 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import i377.entities.Amet;
-import i377.repo.AmetDaoImpl;
+import i377.repo.AmetDao;
 
 import org.springframework.stereotype.Component;
 
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 public class AmetTestData {
 
 	@Resource
-	private AmetDaoImpl aDao;
+	private AmetDao aDao;
 	
 	private final String testUser = "TEST";
 	

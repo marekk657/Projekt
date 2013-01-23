@@ -1,6 +1,7 @@
-package i377.repo;
+package i377.repo.impl;
 
 import i377.entities.Vaeosa;
+import i377.repo.VaeosaDao;
 
 import java.util.Date;
 import java.util.List;
@@ -15,7 +16,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class VaeosaDaoImpl implements RecordDao<Vaeosa> {
+public class VaeosaDaoImpl implements VaeosaDao {
 	
 	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("Projekt");
 
