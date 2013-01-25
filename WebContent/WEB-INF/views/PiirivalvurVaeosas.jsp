@@ -56,7 +56,6 @@ function addRecord(id) {
 			<tr>
 				<td>
 					<form:select path="piirivalvur.id">
-						<form:option value="-1"><spring:message code="piirivalvurVaeosas.field.piirivalvur.value.default" /></form:option>
 						<c:forEach items="${piirivalvurid}" var="piirivalvur">
 							<c:set var="valvurId" value="${piirivalvur.id}"/>
 							<form:option value="${valvurId}">
@@ -82,7 +81,6 @@ function addRecord(id) {
 			<tr>
 				<td>
 					<form:select path="vaeosa.id">
-						<form:option value="-1"><spring:message code="piirivalvurVaeosas.field.vaeosa.value.default" /></form:option>
 						<c:forEach items="${vaeosad}" var="vaeosa">
 							<c:set var="vaeosaId" value="${vaeosa.id}"/>
 							<form:option value="${vaeosaId}">
@@ -107,7 +105,6 @@ function addRecord(id) {
 
 			<tr>
 				<td><form:select path="ametvaeosa.id">
-						<form:option value="-1"><spring:message code="piirivalvurVaeosas.field.ametvaeosa.value.default" /></form:option>
 						<form:options items="${ametid}" var="amet" itemLabel="amet.nimetus" itemValue="id"/>
 							
 					</form:select></td>
